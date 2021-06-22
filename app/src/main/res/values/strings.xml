@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CodechefEventsApp</string>
+    <string name="longString">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec tempus mi. Integer eu pretium libero, porttitor egestas est. Quisque accumsan sodales nisl, semper consectetur justo accumsan vel. Morbi a lacus erat. Cras suscipit, nisl eget malesuada rutrum, dolor mauris ullamcorper nibh, fringilla placerat ligula eros sit amet lacus. Integer ac lacus ut mauris viverra pulvinar eget et metus. Duis quis felis ante. Etiam turpis erat, tincidunt quis faucibus sed, ultricies eget tellus. Integer mauris justo, efficitur at faucibus non, porttitor et lorem. Pellentesque pulvinar augue ac nibh porttitor varius. Maecenas consectetur sem quis libero venenatis semper. Integer tincidunt finibus mi congue efficitur. Pellentesque vel est nisi. Nam elit urna, rhoncus quis suscipit in, ullamcorper vel est.
+
+Quisque in ipsum vitae elit semper aliquam sed a dolor. Vivamus vitae vestibulum augue. Phasellus vehicula, quam in luctus pellentesque, arcu nisi blandit lorem, nec accumsan lectus dolor vitae urna. Vestibulum eu velit viverra, gravida felis non, venenatis eros. Ut venenatis risus at pretium feugiat. Etiam ac eros nisl. Suspendisse ut dolor iaculis, vulputate purus ut, pharetra leo. Vivamus lacinia eu diam vitae malesuada.
+
+Vestibulum lacus risus, lobortis ac ante et, imperdiet scelerisque lectus. Mauris interdum consequat convallis. Cras id purus tellus. Suspendisse ac condimentum sem. Aenean ut elementum ligula, non venenatis metus. Sed fringilla, sapien eu feugiat auctor, mi est pharetra ipsum, sed ornare orci leo in sem. Sed risus libero, aliquam eu fermentum a, bibendum et sem.
+
+In justo eros, fermentum sed justo a, maximus condimentum nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam magna mauris, convallis vel ligula vel, ultrices sollicitudin est. Sed ultricies porttitor semper. Proin placerat urna in metus feugiat, et pellentesque augue efficitur. Proin et nibh ornare, convallis purus et, consectetur erat. Curabitur in scelerisque neque, vel varius elit. Etiam convallis at ante ac tincidunt.
+
+Sed non ornare risus, id tincidunt nisl. Proin eu urna orci. Sed posuere fermentum dignissim. Etiam a ultrices libero, a bibendum nunc. Pellentesque eleifend lectus lobortis pellentesque congue. Morbi metus ante, porta vel diam malesuada, ullamcorper fermentum nibh. Integer nec velit dui. Suspendisse et finibus justo, id convallis leo.</string>
 </resources>

@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
 
         eventList = new ArrayList<>();
-        eventList.add(new Event("Tomorrowland", "", "APR", "25", R.drawable.dj_image));
-        eventList.add(new Event("Tomorrowland", "", "APR", "25", R.drawable.dj_image));
-        eventList.add(new Event("Tomorrowland", "", "APR", "25", R.drawable.dj_image));
-        eventList.add(new Event("Tomorrowland", "", "APR", "25", R.drawable.dj_image));
-        eventList.add(new Event("Tomorrowland", "", "APR", "25", R.drawable.dj_image));
+        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
+        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
+        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
+        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
+        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
 
         viewPager.setAdapter(new EventAdapter(eventList, this));
 //        viewPager.setPadding(130, 10, 130, 0);
