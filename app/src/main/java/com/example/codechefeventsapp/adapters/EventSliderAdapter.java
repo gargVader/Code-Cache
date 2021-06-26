@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp;
+package com.example.codechefeventsapp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.model.Event;
 
 import java.util.List;
 

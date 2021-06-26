@@ -9,4 +9,6 @@ Vestibulum lacus risus, lobortis ac ante et, imperdiet scelerisque lectus. Mauri
 In justo eros, fermentum sed justo a, maximus condimentum nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam magna mauris, convallis vel ligula vel, ultrices sollicitudin est. Sed ultricies porttitor semper. Proin placerat urna in metus feugiat, et pellentesque augue efficitur. Proin et nibh ornare, convallis purus et, consectetur erat. Curabitur in scelerisque neque, vel varius elit. Etiam convallis at ante ac tincidunt.
 
 Sed non ornare risus, id tincidunt nisl. Proin eu urna orci. Sed posuere fermentum dignissim. Etiam a ultrices libero, a bibendum nunc. Pellentesque eleifend lectus lobortis pellentesque congue. Morbi metus ante, porta vel diam malesuada, ullamcorper fermentum nibh. Integer nec velit dui. Suspendisse et finibus justo, id convallis leo.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

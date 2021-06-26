@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp;
+package com.example.codechefeventsapp.model;
 
 public class Event {
 

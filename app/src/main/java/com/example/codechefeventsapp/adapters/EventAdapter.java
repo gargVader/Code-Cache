@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp;
+package com.example.codechefeventsapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.model.Event;
 
 import java.util.List;
 
