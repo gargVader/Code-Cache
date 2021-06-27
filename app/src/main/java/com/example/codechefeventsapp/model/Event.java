@@ -1,5 +1,8 @@
 package com.example.codechefeventsapp.model;
 
+/**
+ * Model Class for an Event
+ */
 public class Event {
 
     String eventTitle;

@@ -18,21 +18,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/my_nav"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        />
 
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@drawable/rounded"
         app:backgroundColor="#2F3A4B"
         app:cornerRadius="@dimen/_20sdp"
-        app:iconSize="24dp"
-        app:itemPadding="10dp"
+        app:iconSize="@dimen/_17sdp"
+        app:itemPadding="@dimen/_9sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_bottom"
-        app:textSize="@dimen/_10ssp" />
+        app:iconTintActive="@color/white"
+        app:textSize="@dimen/_10ssp"
+        />
 
 
 

@@ -31,21 +31,15 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         eventList = new ArrayList<>();
         eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
         eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
         eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
         eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
         eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//
-//        viewPager.setAdapter(new EventAdapter(eventList, getContext()));
-//        viewPager.setPadding(130, 10, 130, 0);
-
     }
 
     @Override
@@ -60,6 +54,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewPager = getView().findViewById(R.id.viewPager);
         viewPager.setAdapter(new EventAdapter(eventList, getContext()));
-        viewPager.setPadding(130, 10, 130, 0);
+//        viewPager.setPadding(130, 10, 130, 0);
     }
 }

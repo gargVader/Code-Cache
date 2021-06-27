@@ -26,35 +26,19 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "Codechef";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupBottomNavBar();
+    }
 
+    private void setupBottomNavBar() {
         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController,
-//                new AppBarConfiguration.Builder(
-//                        R.id.homeFragment, R.id.contestFragment, R.id.profileFragment
-//                ).build()
-//        );
-
         SmoothBottomBar bottomBar = findViewById(R.id.bottomBar);
         PopupMenu popupMenu = new PopupMenu(this, null);
         popupMenu.inflate(R.menu.menu_bottom);
         bottomBar.setupWithNavController(popupMenu.getMenu(), navController);
-
-//        viewPager = findViewById(R.id.viewPager);
-//
-//        eventList = new ArrayList<>();
-//        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//        eventList.add(new Event("Coding", "", "APR", "25", R.drawable.laptop));
-//
-//        viewPager.setAdapter(new EventAdapter(eventList, this));
-//        viewPager.setPadding(130, 10, 130, 0);
     }
 
 }
