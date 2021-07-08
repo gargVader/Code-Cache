@@ -1,6 +1,6 @@
-package com.example.codechefeventsapp.Api;
+package com.example.codechefeventsapp.data.api;
 
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.models.Contest;
 
 import java.util.List;
 

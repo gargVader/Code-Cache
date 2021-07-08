@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.Dao;
+package com.example.codechefeventsapp.data.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -8,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.models.Contest;
 
 import java.util.List;
 

@@ -4,21 +4,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.models.Contest;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.codechefeventsapp.fragments.ContestFragment.TAG;
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestViewHolder> {
 
@@ -32,7 +28,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
     @NonNull
     @Override
     public ContestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contest_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.contest_item, parent, false);
         return new ContestViewHolder(view);
     }
 

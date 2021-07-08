@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.ViewModel;
+package com.example.codechefeventsapp.view_models;
 
 import android.app.Application;
 import android.util.Log;
@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.Repository.ContestRepository;
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.repositories.ContestRepository;
+import com.example.codechefeventsapp.data.models.Contest;
 
 import java.util.List;
 

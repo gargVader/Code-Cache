@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.Database;
+package com.example.codechefeventsapp.data.database;
 
 import android.content.Context;
 
@@ -6,10 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.codechefeventsapp.Dao.ContestDao;
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.dao.ContestDao;
+import com.example.codechefeventsapp.data.models.Contest;
 
-@Database(entities = {Contest.class}, version = 1)
+@Database(entities = {Contest.class}, version = 1, exportSchema = false)
 public abstract class ContestDatabase extends RoomDatabase {
 
     private static ContestDatabase instance;

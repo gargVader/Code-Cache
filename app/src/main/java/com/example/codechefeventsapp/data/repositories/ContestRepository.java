@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.Repository;
+package com.example.codechefeventsapp.data.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
@@ -6,11 +6,12 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.Api.ContestApi;
-import com.example.codechefeventsapp.Dao.ContestDao;
-import com.example.codechefeventsapp.Database.ContestDatabase;
-import com.example.codechefeventsapp.model.Contest;
-import static com.example.codechefeventsapp.fragments.ContestFragment.TAG;
+import com.example.codechefeventsapp.data.api.ContestApi;
+import com.example.codechefeventsapp.data.dao.ContestDao;
+import com.example.codechefeventsapp.data.database.ContestDatabase;
+import com.example.codechefeventsapp.data.models.Contest;
+
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 import java.util.List;
 
@@ -19,7 +20,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 
 
 public class ContestRepository {
@@ -93,8 +93,8 @@ public class ContestRepository {
                             contestDao.deleteAll();
                             contestDao.insertAll(response.body());
                             List<Contest> temp = response.body();
-                            Log.d(TAG, "run: tempSize="+temp.size());
-                            Log.d(TAG, "run: "+temp.get(0).toString());
+                            Log.d(TAG, "run: tempSize=" + temp.size());
+                            Log.d(TAG, "run: " + temp.get(0).toString());
                         }
                     });
                     thread.start();

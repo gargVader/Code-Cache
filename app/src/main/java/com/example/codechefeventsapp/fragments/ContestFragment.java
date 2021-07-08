@@ -15,35 +15,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.codechefeventsapp.Api.ContestApi;
-import com.example.codechefeventsapp.Dao.ContestDao;
 import com.example.codechefeventsapp.R;
-import com.example.codechefeventsapp.Repository.ContestRepository;
-import com.example.codechefeventsapp.ViewModel.ContestViewModel;
+import com.example.codechefeventsapp.view_models.ContestViewModel;
 import com.example.codechefeventsapp.adapters.ContestAdapter;
-import com.example.codechefeventsapp.model.Contest;
+import com.example.codechefeventsapp.data.models.Contest;
 
 import org.jetbrains.annotations.NotNull;
+
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-
 public class ContestFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ArrayList<Contest> dataHolder;
     ContestAdapter contestAdapter;
     ContestViewModel contestViewModel;
-
-    public static final String TAG = "Codechef";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contest,container,false);
+        return inflater.inflate(R.layout.fragment_contest, container, false);
     }
 
     @Override
@@ -52,15 +45,15 @@ public class ContestFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerview_contest);
 
-        initViewModel();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         contestAdapter = new ContestAdapter(new ArrayList<>());
         recyclerView.setAdapter(contestAdapter);
+        initViewModel();
     }
 
     private void initViewModel() {
         contestViewModel = new ViewModelProvider(this,
-                ViewModelProvider.AndroidViewModelFactory.getInstance(contestViewModel.getApplication()))
+                ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()))
                 .get(ContestViewModel.class);
 
         contestViewModel.getContestsFromAPIAndStore();
