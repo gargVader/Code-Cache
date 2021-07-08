@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.model;
+package com.example.codechefeventsapp.data.models;
 
 /**
  * Model Class for an Event

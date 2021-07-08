@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ContestFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_contest"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="contest" />
-
+        tools:listitem="@layout/contest_item"
+        />
 </FrameLayout>

@@ -13,7 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.adapters.EventAdapter;
-import com.example.codechefeventsapp.model.Event;
+import com.example.codechefeventsapp.data.models.Event;
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,8 +25,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     List<Event> eventList;
     ViewPager viewPager;
-
-    public static final String TAG = "Codechef";
 
     public HomeFragment() {
         // Required empty public constructor
