@@ -2,66 +2,75 @@ package com.example.codechefeventsapp.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ConcatAdapter;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.codechefeventsapp.Api.ContestApi;
+import com.example.codechefeventsapp.Dao.ContestDao;
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.Repository.ContestRepository;
+import com.example.codechefeventsapp.ViewModel.ContestViewModel;
 import com.example.codechefeventsapp.adapters.ContestAdapter;
-import com.example.codechefeventsapp.model.Contest_Model;
+import com.example.codechefeventsapp.model.Contest;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class ContestFragment extends Fragment {
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     RecyclerView recyclerView;
-    ArrayList<Contest_Model> dataHolder;
+    ArrayList<Contest> dataHolder;
+    ContestAdapter contestAdapter;
+    ContestViewModel contestViewModel;
 
-    public ContestFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    public static final String TAG = "Codechef";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_contest, container, false);
-        recyclerView=view.findViewById(R.id.recyclerview_contest);
+        return inflater.inflate(R.layout.fragment_contest,container,false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView = view.findViewById(R.id.recyclerview_contest);
+
+        initViewModel();
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        contestAdapter = new ContestAdapter(new ArrayList<>());
+        recyclerView.setAdapter(contestAdapter);
+    }
 
-        dataHolder=new ArrayList<>();
+    private void initViewModel() {
+        contestViewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(contestViewModel.getApplication()))
+                .get(ContestViewModel.class);
 
-        Contest_Model ob1=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Running",R.drawable.cc_icon);
-        dataHolder.add(ob1);
-        Contest_Model ob2=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Running",R.drawable.cc_icon);
-        dataHolder.add(ob2);
-        Contest_Model ob3=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Not Running",R.drawable.cc_icon);
-        dataHolder.add(ob3);
-        Contest_Model ob4=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Running",R.drawable.cc_icon);
-        dataHolder.add(ob4);
-        Contest_Model ob5=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Not Running",R.drawable.cc_icon);
-        dataHolder.add(ob5);
-        Contest_Model ob6=new Contest_Model("July Challenge 2021","www.codechef.com","13:00","15:00","2 hours","Yes","Running",R.drawable.cc_icon);
-        dataHolder.add(ob6);
-
-
-        recyclerView.setAdapter(new ContestAdapter(dataHolder));
-
-        return view;
+        contestViewModel.getContestsFromAPIAndStore();
+        contestViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Contest>>() {
+            @Override
+            public void onChanged(List<Contest> contestList) {
+                Log.d(TAG, "onChanged: ");
+                contestAdapter.setContestList(contestList);
+            }
+        });
     }
 }
 
