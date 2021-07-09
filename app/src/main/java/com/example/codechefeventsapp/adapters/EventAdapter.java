@@ -74,8 +74,8 @@ public class EventAdapter extends PagerAdapter {
         Event event = eventList.get(position);
         eventImage.setImageResource(event.getEventImage());
         eventTitle.setText(event.getEventTitle());
-        eventDay.setText("25");
-        eventMonth.setText("Mar");
+        eventDay.setText(event.getEventDate());
+        eventMonth.setText(event.getEventMonth());
     }
 
     @Override
