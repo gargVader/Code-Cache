@@ -1,6 +1,10 @@
 package com.example.codechefeventsapp.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,22 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.example.codechefeventsapp.R;
-import com.example.codechefeventsapp.view_models.ContestViewModel;
 import com.example.codechefeventsapp.adapters.ContestAdapter;
 import com.example.codechefeventsapp.data.models.Contest;
+import com.example.codechefeventsapp.view_models.ContestViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 public class ContestFragment extends Fragment {
 

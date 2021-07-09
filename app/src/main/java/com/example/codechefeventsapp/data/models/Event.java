@@ -1,5 +1,4 @@
 package com.example.codechefeventsapp.data.models;
-
 /**
  * Model Class for an Event
  */
@@ -7,15 +6,13 @@ public class Event {
 
     String eventTitle;
     String eventLocation;
-    String eventMonth;
-    String eventDate;
+    String eventTimeStamp;
     int eventImage;
 
-    public Event(String eventTitle, String eventLocation, String eventMonth, String eventDate, int eventImage) {
+    public Event(String eventTitle, String eventLocation, String eventTimeStamp, int eventImage) {
         this.eventTitle = eventTitle;
         this.eventLocation = eventLocation;
-        this.eventMonth = eventMonth;
-        this.eventDate = eventDate;
+        this.eventTimeStamp = eventTimeStamp;
         this.eventImage = eventImage;
     }
 
@@ -35,20 +32,12 @@ public class Event {
         this.eventLocation = eventLocation;
     }
 
-    public String getEventMonth() {
-        return eventMonth;
+    public String getEventTimeStamp() {
+        return eventTimeStamp;
     }
 
-    public void setEventMonth(String eventMonth) {
-        this.eventMonth = eventMonth;
-    }
-
-    public String getEventDate() {
-        return eventDate;
-    }
-
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
+    public void setEventTimeStamp(String eventTimeStamp) {
+        this.eventTimeStamp = eventTimeStamp;
     }
 
     public int getEventImage() {
@@ -58,4 +47,7 @@ public class Event {
     public void setEventImage(int eventImage) {
         this.eventImage = eventImage;
     }
+
+
+
 }

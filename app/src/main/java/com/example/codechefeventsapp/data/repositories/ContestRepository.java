@@ -11,8 +11,6 @@ import com.example.codechefeventsapp.data.dao.ContestDao;
 import com.example.codechefeventsapp.data.database.ContestDatabase;
 import com.example.codechefeventsapp.data.models.Contest;
 
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,6 +18,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 
 public class ContestRepository {
@@ -82,7 +82,7 @@ public class ContestRepository {
 
         contestApi = retrofit.create(ContestApi.class);
 
-        Call<List<Contest>> call = contestApi.getContests("all");
+        Call<List<Contest>> call = contestApi.getContests("codeforces");
         call.enqueue(new Callback<List<Contest>>() {
             @Override
             public void onResponse(Call<List<Contest>> call, Response<List<Contest>> response) {
@@ -93,8 +93,6 @@ public class ContestRepository {
                             contestDao.deleteAll();
                             contestDao.insertAll(response.body());
                             List<Contest> temp = response.body();
-                            Log.d(TAG, "run: tempSize=" + temp.size());
-                            Log.d(TAG, "run: " + temp.get(0).toString());
                         }
                     });
                     thread.start();

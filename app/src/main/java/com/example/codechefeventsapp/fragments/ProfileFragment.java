@@ -1,16 +1,16 @@
 package com.example.codechefeventsapp.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.codechefeventsapp.R;
+
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 public class ProfileFragment extends Fragment {
 
