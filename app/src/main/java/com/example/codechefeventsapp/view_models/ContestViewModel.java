@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.data.repositories.ContestRepository;
 import com.example.codechefeventsapp.data.models.Contest;
+import com.example.codechefeventsapp.data.repositories.ContestRepository;
 
 import java.util.List;
 

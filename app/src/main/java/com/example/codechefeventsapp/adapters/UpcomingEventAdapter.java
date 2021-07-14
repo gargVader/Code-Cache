@@ -13,22 +13,21 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
 
 import java.util.List;
 
-public class EventAdapter extends PagerAdapter {
+public class UpcomingEventAdapter extends PagerAdapter {
 
     private List<Event> eventList;
     private LayoutInflater layoutInflater;
     private Context context;
 
-    public static final String TAG = "Codechef";
-
     ImageView eventImage;
     TextView eventTitle, eventDay, eventMonth;
 
-    public EventAdapter(List<Event> eventList, Context context) {
+    public UpcomingEventAdapter(List<Event> eventList, Context context) {
         this.eventList = eventList;
         this.context = context;
     }
@@ -52,14 +51,12 @@ public class EventAdapter extends PagerAdapter {
         setView(position);
         container.addView(view, 0);
 
-        // Fix position of first element
         if (position == 0) {
             LinearLayout linearLayout = view.findViewById(R.id.eventCardLayout);
             CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) linearLayout.getLayoutParams();
             lp.leftMargin = 0;
             linearLayout.setLayoutParams(lp);
         }
-
         return view;
     }
 
@@ -74,8 +71,8 @@ public class EventAdapter extends PagerAdapter {
         Event event = eventList.get(position);
         eventImage.setImageResource(event.getEventImage());
         eventTitle.setText(event.getEventTitle());
-        eventDay.setText("25");
-        eventMonth.setText("Mar");
+        eventDay.setText(Utils.getDate(event.getEventTimeStamp()));
+        eventMonth.setText(Utils.getMonth(event.getEventTimeStamp()));
     }
 
     @Override

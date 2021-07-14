@@ -1,17 +1,13 @@
 package com.example.codechefeventsapp.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.viewpager.widget.ViewPager;
-
 import android.os.Bundle;
 import android.widget.PopupMenu;
 
-import com.example.codechefeventsapp.data.models.Event;
-import com.example.codechefeventsapp.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
-import java.util.List;
+import com.example.codechefeventsapp.R;
 
 import me.ibrahimsn.lib.SmoothBottomBar;
 
