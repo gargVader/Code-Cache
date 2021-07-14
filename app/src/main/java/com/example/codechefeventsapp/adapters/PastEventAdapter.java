@@ -37,7 +37,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
         holder.eventLocation.setText(eventList.get(position).getEventLocation());
         holder.eventDate.setText(Utils.getDate(eventList.get(position).getEventTimeStamp()));
         holder.eventMonth.setText(Utils.getMonth(eventList.get(position).getEventTimeStamp()));
-        holder.eventImage.setImageResource(eventList.get(position).getEventImage());
+        //holder.eventImage.setImageResource(eventList.get(position).getEventImage());
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
         TextView eventLocation;
         TextView eventMonth;
         TextView eventDate;
-        ImageView eventImage;
+        //ImageView eventImage;
 
         public pastEventViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -58,7 +58,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
             eventLocation = itemView.findViewById(R.id.pastEventLocation);
             eventMonth = itemView.findViewById(R.id.eventMonth);
             eventDate = itemView.findViewById(R.id.eventDay);
-            eventImage = itemView.findViewById(R.id.pastEventImage);
+            //eventImage = itemView.findViewById(R.id.pastEventImage);
         }
     }
 }
