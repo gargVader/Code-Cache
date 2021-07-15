@@ -9,13 +9,15 @@
     <color name="dark">#FF363994</color>
 
 
-
     <color name="colorPrimary">#1F2631</color>
     <color name="colorPrimaryDark">#1F2631</color>
+    <color name="colorDark">#181D25</color>
     <color name="colorAccent">#8251CA</color>
     <color name="colorSecondary">#2F3B49</color>
     <color name="colorTextWhite">#FFFFFFFF</color>
     <color name="colorTextDark">#959CA4</color>
+
+    <color name="bottomNavDefault">#99AAB5</color>
 
 
     <color name="smokyWhite">#fafafa</color>
@@ -36,7 +38,6 @@
     <color name="editTextBackground">#f7f7f8</color>
     <color name="registerBtn">#363994</color>
     <color name="editTextSubHeading">#1D1A2F</color>
-
 
 
     <color name="colorSearchIcon">#959CA4</color>

@@ -17,44 +17,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/heading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/inter_bold"
-                android:shadowColor="@color/white"
-                android:text="Codechef IEMK"
-                android:textColor="@color/colorTextWhite"
-                android:textSize="@dimen/_16ssp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/icon_notification"
-                android:layout_width="27dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:src="@drawable/ic_baseline_notifications_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/colorTextWhite" />
-
             <TextView
                 android:id="@+id/text_upcomingEvents"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/inter_medium"
                 android:text="Upcoming Events"
                 android:textColor="@color/colorTextWhite"
                 android:textSize="@dimen/_20ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/heading" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPager"

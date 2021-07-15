@@ -8,16 +8,16 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.codechefeventsapp.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="Codechef IEMK"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/contestFragment"
         android:name="com.example.codechefeventsapp.fragments.ContestFragment"
-        android:label="fragment_contest"
+        android:label="Contest"
         tools:layout="@layout/fragment_contest" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.codechefeventsapp.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

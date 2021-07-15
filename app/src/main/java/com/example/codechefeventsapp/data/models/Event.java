@@ -1,4 +1,5 @@
 package com.example.codechefeventsapp.data.models;
+
 /**
  * Model Class for an Event
  */
@@ -47,7 +48,6 @@ public class Event {
     public void setEventImage(int eventImage) {
         this.eventImage = eventImage;
     }
-
 
 
 }

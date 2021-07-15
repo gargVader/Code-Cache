@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/ic_baseline_notifications_24"
+        android:iconTint="@color/white"
+        android:title="notifications"
+        app:showAsAction="always" />
+</menu>

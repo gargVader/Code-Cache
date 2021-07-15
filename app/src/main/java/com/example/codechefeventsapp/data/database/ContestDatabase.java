@@ -13,10 +13,11 @@ import com.example.codechefeventsapp.data.models.Contest;
 public abstract class ContestDatabase extends RoomDatabase {
 
     private static ContestDatabase instance;
+
     public abstract ContestDao getContestDao();
 
-    public static synchronized ContestDatabase getInstance(Context context){
-        if (instance==null){
+    public static synchronized ContestDatabase getInstance(Context context) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context, ContestDatabase.class, "contest_database")
                     .fallbackToDestructiveMigration()
                     .build();
