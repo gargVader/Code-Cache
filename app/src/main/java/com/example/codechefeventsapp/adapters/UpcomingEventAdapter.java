@@ -32,6 +32,11 @@ public class UpcomingEventAdapter extends PagerAdapter {
         this.context = context;
     }
 
+    public void setEventList(List<Event> eventList){
+        this.eventList = eventList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return eventList.size();

@@ -60,4 +60,8 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
             //eventImage = itemView.findViewById(R.id.pastEventImage);
         }
     }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
+    }
 }

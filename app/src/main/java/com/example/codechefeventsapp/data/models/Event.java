@@ -1,13 +1,23 @@
 package com.example.codechefeventsapp.data.models;
 
-/**
- * Model Class for an Event
- */
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+import com.google.gson.annotations.SerializedName;
+
+@Entity(tableName = "event_table")
 public class Event {
 
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    @SerializedName("eventTitle")
     String eventTitle;
+    @SerializedName("eventLocation")
     String eventLocation;
+    @SerializedName("eventTimeStamp")
     String eventTimeStamp;
+    @SerializedName("eventImage")
     int eventImage;
 
     public Event(String eventTitle, String eventLocation, String eventTimeStamp, int eventImage) {
@@ -49,5 +59,22 @@ public class Event {
         this.eventImage = eventImage;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", eventTitle='" + eventTitle + '\'' +
+                ", eventLocation='" + eventLocation + '\'' +
+                ", eventTimeStamp='" + eventTimeStamp + '\'' +
+                ", eventImage=" + eventImage +
+                '}';
+    }
 }

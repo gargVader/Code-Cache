@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "963816998657",
+    "firebase_url": "https://codechefeventsapp-default-rtdb.firebaseio.com",
+    "project_id": "codechefeventsapp",
+    "storage_bucket": "codechefeventsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963816998657:android:92fb09fefe6ccffb007d00",
+        "android_client_info": {
+          "package_name": "com.example.codechefeventsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963816998657-eoahrjj6hsmi5l9incg7knurea5co2pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmeh4jFDihNhkzjdsm85fYR4pAH5QB9UQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963816998657-eoahrjj6hsmi5l9incg7knurea5co2pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
