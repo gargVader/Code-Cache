@@ -1,2 +1,3 @@
 rootProject.name = "CodechefEventsApp"
 include ':app'
+include ':admin'

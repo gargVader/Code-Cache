@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+    android:background="@color/colorPrimary"
+    tools:context=".AddEventFragment">
+
+    <!--  TODO(2):
+            - Add various input fields for Event class
+            - Add a menu item for save button
+     -->
 
 
 </FrameLayout>
