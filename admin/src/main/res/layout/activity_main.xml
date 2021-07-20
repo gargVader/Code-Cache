@@ -14,7 +14,28 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADMIN APP"
+            android:id="@+id/appTitle"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:layout_margin="@dimen/_18sdp"
+            android:drawableLeft="@drawable/ic_baseline_warning_24"/>
+    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:id="@+id/logout_button"
+        android:clickable="true"
+        android:src="@drawable/logout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:tint="@color/Yellow" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
