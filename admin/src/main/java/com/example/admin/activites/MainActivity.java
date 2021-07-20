@@ -1,4 +1,4 @@
-package com.example.admin;
+package com.example.admin.activites;
 
 import android.os.Bundle;
 
@@ -6,7 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
+
+import com.example.admin.R;
 
 public class MainActivity extends AppCompatActivity {
 

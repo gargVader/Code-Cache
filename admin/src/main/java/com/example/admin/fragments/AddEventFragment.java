@@ -1,12 +1,13 @@
-package com.example.admin;
+package com.example.admin.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+
+import com.example.admin.R;
 
 public class AddEventFragment extends Fragment {
 
