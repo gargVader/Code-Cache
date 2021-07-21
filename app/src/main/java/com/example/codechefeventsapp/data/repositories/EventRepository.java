@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.codechefeventsapp.FireStoreStorage.Storage;
 import com.example.codechefeventsapp.data.dao.EventDao;
 import com.example.codechefeventsapp.data.database.EventDatabase;
 import com.example.codechefeventsapp.data.models.Event;
@@ -18,6 +19,7 @@ public class EventRepository {
 
     private EventDao eventDao;
     private LiveData<List<Event>> allEvent;
+    private Storage storage;
 
     public EventRepository(Application application) {
         eventDao = EventDatabase.getInstance(application).getEventDao();
@@ -68,6 +70,4 @@ public class EventRepository {
         Log.d(TAG, "makeFirebaseCallAndStore: ");
         // TODO: Firebase logic
     }
-
-
 }

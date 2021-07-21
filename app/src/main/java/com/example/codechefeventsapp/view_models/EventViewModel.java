@@ -43,6 +43,4 @@ public class EventViewModel extends AndroidViewModel {
     public void getEventsFromFirebaseAndStore() {
         eventRepository.makeFirebaseCallAndStore();
     }
-
-
 }
