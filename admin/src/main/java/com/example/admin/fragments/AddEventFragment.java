@@ -154,7 +154,7 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
     }
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String time = hourOfDay+"/"+minute+"/"+"00";
+        String time = hourOfDay+":"+minute+":"+"00";
         eventTime.setText(time);
     }
 

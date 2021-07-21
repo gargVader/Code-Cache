@@ -60,7 +60,7 @@ public class EventsFragment extends Fragment implements EventAdapter.OnEventList
         getView().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_editEventFragment);
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_addEventFragment);
 
             }
         });
@@ -99,7 +99,6 @@ public class EventsFragment extends Fragment implements EventAdapter.OnEventList
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(eventAdapter);
     }
-
     @Override
     public void onEventClick(int position) {
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_editEventFragment);

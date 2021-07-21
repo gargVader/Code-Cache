@@ -54,7 +54,7 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_add_event, container, false);
+        View view= inflater.inflate(R.layout.fragment_edit_event, container, false);
         eventName=view.findViewById(R.id.eventName);
         eventLocation=view.findViewById(R.id.eventLocation);
         eventImage=view.findViewById(R.id.eventImage);
@@ -64,7 +64,7 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
         clockButton=view.findViewById(R.id.clockImage);
         notification=view.findViewById(R.id.notification_bar);
         deleteButton=view.findViewById(R.id.delete_button);
-        addButton=view.findViewById(R.id.add_button);
+        addButton=view.findViewById(R.id.edit_button);
         cancelButton=view.findViewById(R.id.cancel_button);
         imageUploadButton=view.findViewById(R.id.imageUploadButton);
 
@@ -150,7 +150,7 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
     }
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        String time = hourOfDay+"/"+minute+"/"+"00";
+        String time = hourOfDay+":"+minute+":"+"00";
         eventTime.setText(time);
     }
     @Override
