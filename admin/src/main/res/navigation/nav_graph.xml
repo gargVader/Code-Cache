@@ -13,10 +13,29 @@
         <action
             android:id="@+id/action_eventsFragment_to_addEventFragment"
             app:destination="@id/addEventFragment" />
+        <action
+            android:id="@+id/action_eventsFragment_to_editEventFragment"
+            app:destination="@id/editEventFragment" />
     </fragment>
     <fragment
         android:id="@+id/addEventFragment"
         android:name="com.example.admin.fragments.AddEventFragment"
         android:label="Add Event"
-        tools:layout="@layout/fragment_add_event" />
+        tools:layout="@layout/fragment_add_event" >
+        <action
+            android:id="@+id/action_addEventFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editEventFragment"
+        android:name="com.example.admin.fragments.EditEventFragment"
+        android:label="Add Event"
+        tools:layout="@layout/fragment_edit_event" >
+        <action
+            android:id="@+id/action_addEventFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_editEventFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
 </navigation>

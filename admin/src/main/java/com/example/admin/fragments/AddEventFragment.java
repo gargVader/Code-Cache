@@ -2,7 +2,10 @@ package com.example.admin.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.admin.R;
 
@@ -23,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Calendar;
 
 public class AddEventFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+    private static final int RESULT_TO_LOAD=1;
     public EditText eventName;
     public EditText eventLocation;
     public EditText eventDate;
@@ -60,6 +65,13 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         imageUploadButton=view.findViewById(R.id.imageUploadButton);
 
 
+        imageUploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent,RESULT_TO_LOAD)  ;
+            }
+        });
         calenderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,8 +84,26 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
                 showTimePickerDialog();
             }
         });
-        return view;
 
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                Implement Addition Into Database
+                */
+
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_addEventFragment_to_eventsFragment);
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_addEventFragment_to_eventsFragment);
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -115,4 +145,12 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         eventTime.setText(time);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==RESULT_TO_LOAD && data!=null){
+            Uri selectedImage=data.getData();
+            eventImage.setImageURI(selectedImage);
+        }
+    }
 }

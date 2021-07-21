@@ -1,5 +1,7 @@
 package com.example.admin.data;
 
+import com.example.admin.data.models.Event;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -20,10 +22,10 @@ public class Utils {
 
 
 
-//    public static boolean isPastEvent(Event event) {
-//        Date currentDate = new Date(System.currentTimeMillis());
-//        Date eventDate = new Date(Long.parseLong(event.getEventTimeStamp()) * 1000);
-//        return eventDate.before(currentDate);
-//    }
+    public static boolean isPastEvent(Event event) {
+        Date currentDate = new Date(System.currentTimeMillis());
+        Date eventDate = new Date(Long.parseLong(event.getEventTimeStamp()) * 1000);
+        return eventDate.before(currentDate);
+    }
 
 }

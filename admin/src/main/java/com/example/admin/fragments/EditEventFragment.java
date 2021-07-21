@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.admin.R;
 
@@ -78,8 +79,35 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
             }
         });
 
-        return view;
 
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                Implement Deletion From Database
+                */
+
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
+            }
+        });
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                Implement Addition Into Database
+                */
+
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
+            }
+        });
+        return view;
     }
 
     @Override

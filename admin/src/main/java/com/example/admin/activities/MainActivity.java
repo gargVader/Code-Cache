@@ -1,4 +1,4 @@
-package com.example.admin.activites;
+package com.example.admin.activities;
 
 import android.os.Bundle;
 
