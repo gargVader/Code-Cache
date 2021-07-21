@@ -90,16 +90,12 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
                 startActivityForResult(galleryIntent,RESULT_TO_LOAD)  ;
             }
         });
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*
-                Implement Deletion From Database
-                */
 
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
-            }
-        });
+        /*
+
+        DeleteButton is Yet to Be ADDED
+
+         */
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

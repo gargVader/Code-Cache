@@ -28,7 +28,7 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements EventAdapter.OnEventListener{
 
     EventViewModel eventViewModel;
     EventAdapter eventAdapter;
@@ -60,7 +60,8 @@ public class EventsFragment extends Fragment {
         getView().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_addEventFragment);
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_editEventFragment);
+
             }
         });
     }
@@ -87,11 +88,25 @@ public class EventsFragment extends Fragment {
     private void initEvent() {
         List<Event> eventList=new ArrayList<>();
         eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
-        eventAdapter = new EventAdapter(eventList);
+        eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
+        eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
+        eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
+        eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
+
+        eventAdapter = new EventAdapter(eventList,this);
 
         RecyclerView recyclerView = getView().findViewById(R.id.eventRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(eventAdapter);
     }
 
+    @Override
+    public void onEventClick(int position) {
+        Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_editEventFragment);
+
+        /*
+
+        Implement Navigation
+         */
+    }
 }

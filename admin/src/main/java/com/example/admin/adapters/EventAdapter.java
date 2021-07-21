@@ -18,17 +18,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.eventViewHolder> {
+
+    private OnEventListener monEventListener;
     List<Event> eventList;
 
-    public EventAdapter(List<Event> eventList) {
+    public EventAdapter(List<Event> eventList, OnEventListener onEventListener) {
         this.eventList = eventList;
+        this.monEventListener=onEventListener;
     }
 
     @NonNull
     @Override
     public eventViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item, parent, false);
-        return new eventViewHolder(view);
+        return new eventViewHolder(view,monEventListener);
     }
 
     @Override
@@ -50,23 +53,34 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.eventViewHol
         return eventList.size();
     }
 
-    class eventViewHolder extends RecyclerView.ViewHolder {
+    class eventViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView eventName;
         TextView eventLocation;
         TextView eventTime;
         TextView eventDate;
         ImageView eventImage;
-
-        public eventViewHolder(@NonNull @NotNull View itemView) {
+        OnEventListener onEventListener;
+        public eventViewHolder(@NonNull @NotNull View itemView,OnEventListener onEventListener) {
             super(itemView);
             eventName = itemView.findViewById(R.id.eventName);
             eventLocation = itemView.findViewById(R.id.eventLocation);
             eventTime= itemView.findViewById(R.id.eventTime);
             eventDate = itemView.findViewById(R.id.eventDate);
             eventImage = itemView.findViewById(R.id.eventImage);
+            this.onEventListener=onEventListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+                onEventListener.onEventClick(getAdapterPosition());
         }
     }
 
+    public interface OnEventListener{
+        void onEventClick(int position);
+
+    }
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
     }

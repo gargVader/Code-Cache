@@ -21,9 +21,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.admin.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
 import java.util.Calendar;
 
 public class AddEventFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
@@ -38,7 +40,13 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
     public CardView imageUploadButton;
     public ImageView calenderButton;
     public ImageView clockButton;
+    public long timeStamp;
 
+    public TextInputLayout leventName;
+    public TextInputLayout leventLocation;
+    public TextInputLayout leventDate;
+    public TextInputLayout leventTime;
+    public TextInputLayout leventImage;
     public AddEventFragment() {
         // Required empty public constructor
     }
@@ -63,8 +71,11 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         addButton=view.findViewById(R.id.add_button);
         cancelButton=view.findViewById(R.id.cancel_button);
         imageUploadButton=view.findViewById(R.id.imageUploadButton);
-
-
+        try {
+            timeStamp= new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse("01/01/1970 01:00:00").getTime() / 1000;
+        } catch (ParseException e) {
+            timeStamp = 0;
+        }
         imageUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,11 +100,13 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*
-                Implement Addition Into Database
+                Implement Addition Into Database (FireBase)
                 */
 
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_addEventFragment_to_eventsFragment);
+
             }
         });
         cancelButton.setOnClickListener(new View.OnClickListener() {
