@@ -85,7 +85,10 @@ public class EventsFragment extends Fragment {
         });
     }
     private void initEvent() {
-        eventAdapter = new EventAdapter(new ArrayList<>());
+        List<Event> eventList=new ArrayList<>();
+        eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
+        eventAdapter = new EventAdapter(eventList);
+
         RecyclerView recyclerView = getView().findViewById(R.id.eventRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(eventAdapter);

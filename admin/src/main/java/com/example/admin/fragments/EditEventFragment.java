@@ -2,7 +2,10 @@ package com.example.admin.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Calendar;
 
 public class EditEventFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+    private static final int RESULT_TO_LOAD=1;
     public EditText eventName;
     public EditText eventLocation;
     public EditText eventDate;
@@ -79,8 +83,13 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
             }
         });
 
-
-
+        imageUploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent=new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(galleryIntent,RESULT_TO_LOAD)  ;
+            }
+        });
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,5 +156,13 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         String time = hourOfDay+"/"+minute+"/"+"00";
         eventTime.setText(time);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==RESULT_TO_LOAD && data!=null){
+            Uri selectedImage=data.getData();
+            eventImage.setImageURI(selectedImage);
+        }
     }
 }
