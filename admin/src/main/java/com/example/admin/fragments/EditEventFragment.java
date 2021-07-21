@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
 
-public class AddEventFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
+public class EditEventFragment extends Fragment implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     public EditText eventName;
     public EditText eventLocation;
     public EditText eventDate;
@@ -33,16 +33,18 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
     public CardView imageUploadButton;
     public ImageView calenderButton;
     public ImageView clockButton;
+    public CardView notification;
+    public CardView deleteButton;
 
-    public AddEventFragment() {
+    public EditEventFragment(){
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,9 +57,12 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         eventTime=view.findViewById(R.id.eventTime);
         calenderButton=view.findViewById(R.id.calenderImage);
         clockButton=view.findViewById(R.id.clockImage);
+        notification=view.findViewById(R.id.notification_bar);
+        deleteButton=view.findViewById(R.id.delete_button);
         addButton=view.findViewById(R.id.add_button);
         cancelButton=view.findViewById(R.id.cancel_button);
         imageUploadButton=view.findViewById(R.id.imageUploadButton);
+
 
 
         calenderButton.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +77,7 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
                 showTimePickerDialog();
             }
         });
+
         return view;
 
     }
@@ -114,5 +120,4 @@ public class AddEventFragment extends Fragment implements DatePickerDialog.OnDat
         String time = hourOfDay+"/"+minute+"/"+"00";
         eventTime.setText(time);
     }
-
 }

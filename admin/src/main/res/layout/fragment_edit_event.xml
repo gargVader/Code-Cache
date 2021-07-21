@@ -140,7 +140,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintStart_toEndOf="@+id/eventTime"
                 android:layout_marginStart="@dimen/_30sdp"
-                android:src="@drawable/calender"
+                android:src="@drawable/clock"
                 android:clickable="true"
                 app:tint="@color/white"
                 />
@@ -197,7 +197,6 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textSize="17sp"
-
                     android:textColor="#FF1100"
                     />
             </androidx.cardview.widget.CardView>

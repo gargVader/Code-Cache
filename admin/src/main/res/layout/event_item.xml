@@ -24,7 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:id="@+id/eventImage"/>
         <TextView
-            android:id="@+id/pastEventName"
+            android:id="@+id/EventName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_bold"
@@ -43,7 +43,7 @@
             android:id="@+id/locationIcon"
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            app:layout_constraintTop_toBottomOf="@+id/pastEventName"
+            app:layout_constraintTop_toBottomOf="@+id/EventName"
             app:layout_constraintStart_toEndOf="@id/eventImage"
             android:src="@drawable/ic_baseline_location_on_24"
             android:layout_marginTop="@dimen/_8sdp"
@@ -52,10 +52,10 @@
             app:tint="@color/Yellow" />
 
         <TextView
-            android:id="@+id/pastEventLocation"
+            android:id="@+id/EventLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/pastEventName"
+            app:layout_constraintTop_toBottomOf="@+id/EventName"
             app:layout_constraintStart_toEndOf="@+id/locationIcon"
             android:fontFamily="@font/inter_medium"
             android:layout_marginTop="@dimen/_8sdp"

@@ -12,17 +12,28 @@ import androidx.navigation.Navigation;
 
 import com.example.admin.R;
 
+import org.jetbrains.annotations.NotNull;
+
 public class EventsFragment extends Fragment {
 
+    public EventsFragment() {
+        // Required empty public constructor
+    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        setHasOptionsMenu(true);
+        return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getView().findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
