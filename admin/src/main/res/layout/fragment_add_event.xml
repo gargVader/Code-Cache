@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
                 android:id="@+id/eventNameText"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Event Name"
+                android:text="@string/event_name"
 
                 android:textColor="@color/white"
                 android:layout_margin="@dimen/_20sdp"
@@ -35,11 +35,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventName"
+                android:inputType="textPersonName"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:textColor="@color/white"
-                android:hint="Enter Event Name"
+                android:hint="@string/event_name_hint"
                 android:textSize="15sp"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
                 android:id="@+id/eventLocationText"
                 app:layout_constraintTop_toBottomOf="@id/eventName"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Event Location/Platform"
+                android:text="@string/event_loc"
                 android:textColor="@color/white"
                 android:layout_margin="@dimen/_20sdp"
                 android:fontFamily="@font/inter_medium"
@@ -64,7 +65,8 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:textColor="@color/white"
                 android:id="@+id/eventLocation"
-                android:hint="Enter Event Location/Platform"
+                android:hint="@string/event_loc_hint"
+                android:inputType="textPersonName"
                 android:textSize="15sp"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +81,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="dd/mm/yyyy"
+                android:hint="@string/event_date_format_hint"
+                android:inputType="date"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
@@ -94,7 +97,7 @@
                 android:layout_marginStart="@dimen/_30sdp"
                 android:src="@drawable/calender"
                 android:clickable="true"
-                app:tint="@color/white"></ImageView>
+                app:tint="@color/white"/>
             <EditText
                 android:id="@+id/eventTime"
                 android:layout_width="@dimen/_150sdp"
@@ -103,7 +106,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="hh:mm:ss"
+                android:hint="@string/event_time_format_hint"
+                android:inputType="time"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventDate" />
@@ -145,7 +149,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Event Image"
+                    android:text="@string/event_image_button"
                     android:padding="@dimen/_7sdp"
                     android:fontFamily="@font/inter_medium"
                     android:textStyle="italic"
@@ -167,7 +171,7 @@
                 <TextView
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="wrap_content"
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:paddingVertical="@dimen/_8sdp"
                     android:fontFamily="@font/inter_medium"
                     android:textStyle="bold"
@@ -196,7 +200,7 @@
                     android:gravity="center_horizontal"
 
                     android:paddingVertical="@dimen/_8sdp"
-                    android:text="Add"
+                    android:text="@string/add"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"/>

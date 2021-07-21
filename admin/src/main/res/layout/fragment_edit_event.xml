@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
-    tools:context=".fragments.AddEventFragment">
+    tools:context=".fragments.EditEventFragment">
 
     <!--  TODO(2):
             - Add various input fields for Event class
@@ -14,10 +13,11 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                     android:gravity="center_horizontal"
 
                     android:paddingVertical="@dimen/_8sdp"
-                    android:text="Send Notification"
+                    android:text="@string/send_notifications"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"/>
@@ -49,7 +49,7 @@
                 android:paddingTop="@dimen/_18sdp"
                 app:layout_constraintTop_toBottomOf="@+id/notification_bar"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Event Name"
+                android:text="@string/event_name"
 
                 android:textColor="@color/white"
                 android:layout_margin="@dimen/_20sdp"
@@ -63,7 +63,8 @@
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:textColor="@color/white"
-                android:hint="Enter Event Name"
+                android:inputType="textPersonName"
+                android:hint="@string/event_name_hint"
                 android:textSize="15sp"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +76,7 @@
                 android:id="@+id/eventLocationText"
                 app:layout_constraintTop_toBottomOf="@id/eventName"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="Event Location/Platform"
+                android:text="@string/event_loc"
                 android:textColor="@color/white"
                 android:layout_margin="@dimen/_20sdp"
                 android:fontFamily="@font/inter_medium"
@@ -88,7 +89,8 @@
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:textColor="@color/white"
                 android:id="@+id/eventLocation"
-                android:hint="Enter Event Location/Platform"
+                android:hint="@string/event_loc_hint"
+                android:inputType="textPersonName"
                 android:textSize="15sp"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +105,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="dd/mm/yyyy"
+                android:inputType="date"
+                android:hint="@string/event_date_format_hint"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
@@ -127,7 +130,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="hh:mm:ss"
+                android:inputType="time"
+                android:hint="@string/event_time_format_hint"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventDate" />
@@ -140,7 +144,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintStart_toEndOf="@+id/eventTime"
                 android:layout_marginStart="@dimen/_30sdp"
-                android:src="@drawable/clock"
+                android:src="@drawable/calender"
                 android:clickable="true"
                 app:tint="@color/white"
                 />
@@ -169,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Event Image"
+                    android:text="@string/event_image_button"
                     android:padding="@dimen/_7sdp"
                     android:fontFamily="@font/inter_medium"
                     android:textStyle="italic"
@@ -191,12 +195,13 @@
                 <TextView
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="wrap_content"
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:paddingVertical="@dimen/_8sdp"
                     android:fontFamily="@font/inter_medium"
                     android:textStyle="bold"
                     android:gravity="center"
                     android:textSize="17sp"
+
                     android:textColor="#FF1100"
                     />
             </androidx.cardview.widget.CardView>
@@ -219,7 +224,7 @@
                     android:gravity="center_horizontal"
 
                     android:paddingVertical="@dimen/_8sdp"
-                    android:text="Edit"
+                    android:text="@string/edit"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"/>
@@ -243,7 +248,7 @@
                     android:gravity="center"
 
                     android:paddingVertical="@dimen/_6sdp"
-                    android:text="Delete"
+                    android:text="@string/delete"
 
                     android:textColor="@color/white"
                     android:textStyle="bold"
