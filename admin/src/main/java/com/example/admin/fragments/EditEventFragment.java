@@ -13,6 +13,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.admin.R;
+import com.example.admin.data.Utils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +42,6 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
     public ImageView clockButton;
     public CardView notification;
     public CardView deleteButton;
-
     public EditEventFragment(){
         // Required empty public constructor
     }
@@ -68,8 +69,24 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
         cancelButton=view.findViewById(R.id.cancel_button);
         imageUploadButton=view.findViewById(R.id.imageUploadButton);
 
+        Bundle bundle =this.getArguments();
+        if(bundle==null){
+            Toast.makeText(getContext(),"1",Toast.LENGTH_LONG).show();
+        }
 
-
+        if (bundle!=null) {
+                String data;
+                int EImage;
+                data=bundle.getString("Title");
+                eventName.setText(data);
+                data=getArguments().getString("Location");
+                eventLocation.setText(data);
+                data=getArguments().getString("TimeStamp");
+                EImage=getArguments().getInt("Image");
+                eventImage.setImageResource(EImage);
+                eventDate.setText(Utils.getDate(data)+ "/" + Utils.getMonth(data) + "/" + Utils.getYear(data));
+                eventTime.setText(Utils.getHour(data)+ ":" + Utils.getMinute(data) + ":00"+Utils.getAmPm(data));
+        }
         calenderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,12 +107,19 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
                 startActivityForResult(galleryIntent,RESULT_TO_LOAD)  ;
             }
         });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        /*
+                /*
+                Implement Deletion Into Database
+                */
 
-        DeleteButton is Yet to Be ADDED
 
-         */
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
+
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

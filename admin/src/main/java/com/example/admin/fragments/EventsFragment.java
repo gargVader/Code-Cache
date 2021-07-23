@@ -32,6 +32,7 @@ public class EventsFragment extends Fragment implements EventAdapter.OnEventList
 
     EventViewModel eventViewModel;
     EventAdapter eventAdapter;
+    List<Event> eventList;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -86,7 +87,7 @@ public class EventsFragment extends Fragment implements EventAdapter.OnEventList
         });
     }
     private void initEvent() {
-        List<Event> eventList=new ArrayList<>();
+        eventList=new ArrayList<>();
         eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
         eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
         eventList.add(new Event("Coding","XYZ","1628372389",R.drawable.laptop));
@@ -101,11 +102,23 @@ public class EventsFragment extends Fragment implements EventAdapter.OnEventList
     }
     @Override
     public void onEventClick(int position) {
+
+        String eventTitle= eventList.get(position).getEventTitle();
+        String eventLocation= eventList.get(position).getEventLocation();
+        String eventTimeStamp=eventList.get(position).getEventTimeStamp();
+        int eventImage=eventList.get(position).getEventImage();
+
+        Bundle bundle=new Bundle();
+        bundle.putString("Title",eventTitle);
+        bundle.putString("Location",eventLocation);
+        bundle.putString("TimeStamp",eventTimeStamp);
+        bundle.putInt("Image",eventImage);
+        EditEventFragment editEventFragment=new EditEventFragment();
+        editEventFragment.setArguments(bundle);
+
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_eventsFragment_to_editEventFragment);
-
-        /*
-
-        Implement Navigation
-         */
+    }
+    public interface FragmentCommunication {
+        void respond(int position,String name,String job);
     }
 }

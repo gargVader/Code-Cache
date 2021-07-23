@@ -5,16 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.admin.R;
 import com.example.admin.data.Utils;
 import com.example.admin.data.models.Event;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.eventViewHolder> {
@@ -46,6 +42,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.eventViewHol
                 Utils.getHour(eventList.get(position).getEventTimeStamp()) + " " +
                 Utils.getAmPm(eventList.get(position).getEventTimeStamp()));
         holder.eventImage.setImageResource(eventList.get(position).getEventImage());
+
     }
 
     @Override
@@ -68,20 +65,25 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.eventViewHol
             eventDate = itemView.findViewById(R.id.eventDate);
             eventImage = itemView.findViewById(R.id.eventImage);
             this.onEventListener=onEventListener;
+
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-                onEventListener.onEventClick(getAdapterPosition());
+
+            onEventListener.onEventClick(getAdapterPosition());
         }
     }
 
     public interface OnEventListener{
         void onEventClick(int position);
-
     }
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
+    }
+
+    interface OnTextClickListener {
+        void onTextClick(Event data);
     }
 }
