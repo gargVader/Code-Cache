@@ -1,7 +1,9 @@
 package com.example.admin.fragments;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -73,7 +75,6 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
         if(bundle==null){
             Toast.makeText(getContext(),"1",Toast.LENGTH_LONG).show();
         }
-
         if (bundle!=null) {
                 String data;
                 int EImage;
@@ -111,13 +112,25 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
             @Override
             public void onClick(View v) {
 
-                /*
-                Implement Deletion Into Database
-                */
-
-
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
-
+                AlertDialog dialog=new AlertDialog.Builder(getActivity())
+                        .setTitle("Warning")
+                        .setMessage("Do you want to delete this event?")
+                        .setPositiveButton("proceed", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                /*
+                                Implement Deletion Into Database
+                                */
+                                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.action_editEventFragment_to_eventsFragment);
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
             }
         });
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -142,8 +155,6 @@ public class EditEventFragment extends Fragment implements DatePickerDialog.OnDa
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
     }
 
     private void showDatePickerDialog(){
