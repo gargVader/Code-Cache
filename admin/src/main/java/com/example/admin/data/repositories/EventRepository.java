@@ -1,18 +1,17 @@
-package com.example.codechefeventsapp.data.repositories;
+package com.example.admin.data.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.data.dao.EventDao;
-import com.example.codechefeventsapp.data.database.EventDatabase;
-import com.example.codechefeventsapp.data.models.Event;
+import com.example.admin.data.dao.EventDao;
+import com.example.admin.data.database.EventDatabase;
+import com.example.admin.data.models.Event;
 
 import java.util.List;
 
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+//import static com.example.admin.activities.MainActivity.TAG;
 
 public class EventRepository {
 
@@ -65,7 +64,7 @@ public class EventRepository {
     }
 
     public void makeFirebaseCallAndStore() {
-        Log.d(TAG, "makeFirebaseCallAndStore: ");
+        //Log.d(TAG, "makeFirebaseCallAndStore: ");
         // TODO: Firebase logic
     }
 
