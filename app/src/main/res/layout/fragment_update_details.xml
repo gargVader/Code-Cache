@@ -46,7 +46,6 @@
                 app:boxBackgroundColor="@color/colorSecondary"
                 app:boxBackgroundMode="filled"
                 app:boxStrokeColor="@color/colorAccent">
-                <!--this is the actual edit text which takes the input-->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_name"
                     android:layout_width="match_parent"
@@ -64,7 +63,6 @@
                 android:hint="Enter Username"
                 app:boxBackgroundColor="@color/colorSecondary"
                 app:boxStrokeColor="@color/colorAccent">
-                <!--this is the actual edit text which takes the input-->
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_username"
                     android:layout_width="match_parent"
@@ -72,22 +70,23 @@
                     android:textColor="@color/colorTextWhite" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <!--<com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="32dp"
+                android:hint="Enter Institute Name"
                 app:boxBackgroundColor="@color/colorSecondary"
-                android:hint="Select Institute">
+                app:boxStrokeColor="@color/colorAccent">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:textColor="@color/colorTextWhite"
-                    android:id="@+id/edit_text_select_institute"
+                    android:id="@+id/edit_text_institute_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextWhite" />
 
-            </com.google.android.material.textfield.TextInputLayout>-->
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -99,7 +98,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorTextWhite"
                 android:textStyle="bold" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,7 +107,6 @@
                 android:background="@color/colorSecondary"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -118,7 +115,6 @@
                     android:text="CodeChef"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorTextWhite" />
-
                 <EditText
                     android:id="@+id/handle_codechef"
                     android:layout_width="0dp"
@@ -130,7 +126,6 @@
                     android:textColor="@color/colorTextWhite"
                     android:textColorHint="@color/colorSecondary" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -140,7 +135,6 @@
                 android:background="@color/colorSecondary"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -149,7 +143,6 @@
                     android:text="CodeForces"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorTextWhite" />
-
                 <EditText
                     android:id="@+id/handle_codeforces"
                     android:layout_width="0dp"
@@ -161,7 +154,6 @@
                     android:textColor="@color/colorTextWhite"
                     android:textColorHint="@color/colorSecondary" />
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,7 +163,6 @@
                 android:background="@color/colorSecondary"
                 android:orientation="horizontal"
                 android:padding="8dp">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -180,7 +171,6 @@
                     android:text="HackerEarth"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@color/colorTextWhite" />
-
                 <EditText
                     android:id="@+id/handle_hackerearth"
                     android:layout_width="0dp"
@@ -192,7 +182,6 @@
                     android:textColor="@color/colorTextWhite"
                     android:textColorHint="@color/colorSecondary" />
             </LinearLayout>
-
             <Button
                 android:id="@+id/save_update"
                 android:layout_width="wrap_content"

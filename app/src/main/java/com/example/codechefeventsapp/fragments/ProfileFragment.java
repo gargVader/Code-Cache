@@ -28,8 +28,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.activities.LoginActivity;
+import com.example.codechefeventsapp.activities.MainActivity;
 import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.User;
 import com.example.codechefeventsapp.view_models.UserViewModel;
@@ -130,18 +132,21 @@ public class ProfileFragment extends Fragment {
 
     private void saveUser(){
         User user = new User(personEmail, personName, personEmail.substring(0,10));
+        user.setProfileUrl(personPhoto.toString());
+        MainActivity.currentUser = user;
         userViewModel.insert(user);
         Toast.makeText(getActivity(), "User added", Toast.LENGTH_SHORT).show();
     }
 
     private void getUserData(){
         User user = currentUser.get(0);
+        MainActivity.currentUser = user;
         nameTV.setText(user.getFullName());
         userNameTV.setText(user.getUserName());
         followingsTV.setText(String.valueOf(user.getFollowings()) + "  followings");
         followersTV.setText(String.valueOf(user.getFollowers()) + "  followers");
         instituteTV.setText(user.getInstituteName());
-        Glide.with(this).load(String.valueOf(personPhoto)).into(profileIV);
+        Glide.with(this).load(String.valueOf(personPhoto)).apply(RequestOptions.circleCropTransform()).into(profileIV);
         Toast.makeText(getActivity(), "getUserData()", Toast.LENGTH_SHORT).show();
     }
 

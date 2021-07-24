@@ -10,11 +10,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.data.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "Codechef";
+    public static User currentUser;
 
     NavController navController;
     BottomNavigationView bottomNavigationView;

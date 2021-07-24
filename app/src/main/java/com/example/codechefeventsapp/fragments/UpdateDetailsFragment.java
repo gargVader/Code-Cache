@@ -14,6 +14,7 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,8 +27,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.activities.MainActivity;
+import com.example.codechefeventsapp.data.models.User;
+import com.example.codechefeventsapp.view_models.UserViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,10 +44,12 @@ import java.io.ByteArrayOutputStream;
 import static android.app.Activity.RESULT_OK;
 
 public class UpdateDetailsFragment extends Fragment {
+    private UserViewModel userViewModel;
     static final int REQUEST_CAMERA = 1;
     private ImageView profileIV;
     private TextInputEditText fullNameET;
     private TextInputEditText userNameET;
+    private TextInputEditText instituteNameET;
     private EditText handleCCET;
     private EditText handleCFET;
     private EditText handleHEET;
@@ -64,15 +73,35 @@ public class UpdateDetailsFragment extends Fragment {
         profileIV = view.findViewById(R.id.iv_profile);
         fullNameET = view.findViewById(R.id.edit_text_name);
         userNameET = view.findViewById(R.id.edit_text_username);
+        instituteNameET = view.findViewById(R.id.edit_text_institute_name);
         handleCCET = view.findViewById(R.id.handle_codechef);
         handleCFET = view.findViewById(R.id.handle_codeforces);
         handleHEET = view.findViewById(R.id.handle_hackerearth);
+
+        User user = MainActivity.currentUser;
+        Glide.with(this).load(String.valueOf(user.getProfileUrl())).apply(RequestOptions.circleCropTransform()).into(profileIV);
+        fullNameET.setText(user.getFullName());
+        userNameET.setText(user.getUserName());
+        instituteNameET.setText(user.getInstituteName());
+        handleCCET.setText(user.getCodeChefHandle());
+        handleCFET.setText(user.getCodeforcesHandle());
+        handleHEET.setText(user.getHackerEarthHandle());
 
         Button saveButton = view.findViewById(R.id.save_update);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // update user data;
+                user.setFullName(fullNameET.getText().toString().trim());
+                user.setUserName(userNameET.getText().toString().trim());
+                user.setInstituteName(instituteNameET.getText().toString().trim());
+                user.setCodeChefHandle(handleCCET.getText().toString().trim());
+                user.setCodeforcesHandle(handleCFET.getText().toString().trim());
+                user.setHackerEarthHandle(handleHEET.getText().toString());
+
+                userViewModel = ViewModelProviders.of(getActivity()).get(UserViewModel.class);
+                userViewModel.update(user);
+                Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -87,11 +116,6 @@ public class UpdateDetailsFragment extends Fragment {
                  */
             }
         });
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.cc_icon);
-        RoundedBitmapDrawable mDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-        mDrawable.setCircular(true);
-        profileIV.setImageDrawable(mDrawable);
         return view;
     }
 
@@ -112,7 +136,7 @@ public class UpdateDetailsFragment extends Fragment {
 
      */
 
-    public static Bitmap drawableToBitmap(Drawable drawable) {
+    /*public static Bitmap drawableToBitmap(Drawable drawable) {
 
         if (drawable instanceof BitmapDrawable) {
             return ((BitmapDrawable) drawable).getBitmap();
@@ -134,16 +158,13 @@ public class UpdateDetailsFragment extends Fragment {
 
         return bitmap;
     }
+
+     */
     public void goBack(){
-        // Create new fragment and transaction
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.setReorderingAllowed(true);
-
-        // Replace whatever is in the fragment_container view with this fragment
         transaction.replace(getId(), ProfileFragment.class, null);
-
-        // Commit the transaction
         transaction.commit();
 
     }
