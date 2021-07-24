@@ -1,6 +1,7 @@
 package com.example.codechefeventsapp.data;
 
 import com.example.codechefeventsapp.data.models.Event;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,6 +24,11 @@ public class Utils {
         Date currentDate = new Date(System.currentTimeMillis());
         Date eventDate = new Date(Long.parseLong(event.getEventTimeStamp()) * 1000);
         return eventDate.before(currentDate);
+    }
+
+    public static class Constants{
+        public static String userEmail = "xyz@gmail.com";
+        //public static GoogleSignInAccount account;
     }
 
 }
