@@ -4,43 +4,30 @@ import android.app.Application;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.FireStoreStorage.FirebaseStorage;
 import com.example.codechefeventsapp.data.dao.EventDao;
 import com.example.codechefeventsapp.data.database.EventDatabase;
 import com.example.codechefeventsapp.data.models.Event;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
-public class EventRepository {
+public class EventRepository implements FirebaseStorage.FirebaseListener {
 
     private EventDao eventDao;
     private LiveData<List<Event>> allEvent;
     Application application;
+    FirebaseStorage firebaseStorage;
 
     public EventRepository(Application application) {
         this.application = application;
         eventDao = EventDatabase.getInstance(application).getEventDao();
         allEvent = eventDao.getAllEvents();
+        firebaseStorage = FirebaseStorage.getInstance();
+        firebaseStorage.setFirebaseListener(this);
     }
 
     public void insert(Event event) {
@@ -53,6 +40,14 @@ public class EventRepository {
 
     public void delete(Event event) {
         new DeleteAsyncTask().execute(event);
+    }
+
+    public void deleteAll() {
+        new DeleteAllAsyncTask().execute();
+    }
+
+    public void insertAll(List<Event> eventList) {
+        new InsertAllAsyncTask().execute(eventList);
     }
 
     public LiveData<List<Event>> getAllEvent() {
@@ -83,91 +78,58 @@ public class EventRepository {
         }
     }
 
-    public static final String EVENT_COLLECTION_ID = "EventCollection";
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference eventCollection = db.collection(EVENT_COLLECTION_ID);
+    private class InsertAllAsyncTask extends AsyncTask<List<Event>, Void, Void> {
+        @Override
+        protected Void doInBackground(List<Event>... lists) {
+            eventDao.insertAll(lists[0]);
+            return null;
+        }
+    }
+
+    private class DeleteAllAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            eventDao.deleteAll();
+            return null;
+        }
+    }
+
 
     public void makeFirebaseCallAndStore() {
         Log.d(TAG, "makeFirebaseCallAndStore: ");
-        List<Event> eventList = new ArrayList<>();
+        firebaseStorage.getAllEvents();
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                eventDao.deleteAll();
-                eventDao.insertAll(eventList);
-                Log.d(TAG, "run: " + eventList.toString());
-            }
-        });
-
-        Task<QuerySnapshot> task = eventCollection.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Event event = documentSnapshot.toObject(Event.class);
-                            event.setId(documentSnapshot.getId());
-                            event.setEventImage(R.drawable.laptop);
-                            eventList.add(event);
-                        }
-                        thread.start();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Log.d(TAG, "onFailure: " + e.getMessage());
-                    }
-                });
-        // may pass (Activity) application.getApplicationContext()
-        eventCollection.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                Log.d(TAG, "onEvent: Snapshot listener has detected changes");
-                if (error != null) {
-                    Log.d(TAG, "onEvent: " + error.getMessage());
-                    return;
-                }
-                for (DocumentChange dc : value.getDocumentChanges()) {
-                    DocumentSnapshot document = dc.getDocument();
-                    Event event = document.toObject(Event.class);
-                    event.setId(document.getId());
-                    event.setEventImage(R.drawable.laptop);
-                    Log.d(TAG, "onEvent: "+event.toString());
-                    switch (dc.getType()) {
-                        case ADDED:
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    eventDao.insert(event);
-                                }
-                            }).start();
-                            break;
-
-                        case MODIFIED:
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    eventDao.update(event);
-                                }
-                            }).start();
-                            break;
-
-                        case REMOVED:
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    eventDao.delete(event);
-                                }
-                            }).start();
-                            break;
-
-                    }
-
-                }
-            }
-        });
     }
+
+    /*********************************************************************************************/
+    /**FirebaseListener Callback methods*/
+    @Override
+    public void onGetSuccess(List<Event> eventList) {
+        deleteAll();
+        insertAll(eventList);
+    }
+
+    @Override
+    public void onGetFailure() {
+
+    }
+
+    @Override
+    public void onDocumentAdded(Event event) {
+        insert(event);
+    }
+
+    @Override
+    public void onDocumentModified(Event event) {
+        update(event);
+    }
+
+    @Override
+    public void onDocumentRemoved(Event event) {
+        delete(event);
+    }
+    /**FirebaseListener Callback methods*/
+    /*********************************************************************************************/
 
     // TODO (Girish):
     //  EventFragment work ->

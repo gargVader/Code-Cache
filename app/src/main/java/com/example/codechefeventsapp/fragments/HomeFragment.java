@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.adapters.PastEventAdapter;
@@ -106,6 +107,16 @@ public class HomeFragment extends Fragment {
         RecyclerView pastRecyclerView = getView().findViewById(R.id.pastRecyclerView);
         pastRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         pastRecyclerView.setAdapter(pastEventAdapter);
+    }
+
+    private void setupSwipeRefreshLayout(){
+        SwipeRefreshLayout swipeRefreshLayout = getView().findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
     }
 
     @Override
