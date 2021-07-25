@@ -1,87 +1,71 @@
 package com.example.codechefeventsapp.adapters;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class UpcomingEventAdapter extends PagerAdapter {
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
-    private List<Event> eventList;
-    private LayoutInflater layoutInflater;
-    private Context context;
+public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdapter.UpcomingEventViewHolder> {
 
-    ImageView eventImage;
-    TextView eventTitle, eventDay, eventMonth;
+    List<Event> eventList;
 
-    public UpcomingEventAdapter(List<Event> eventList, Context context) {
+    public UpcomingEventAdapter(List<Event> eventList){
         this.eventList = eventList;
-        this.context = context;
-    }
-
-    public void setEventList(List<Event> eventList){
-        this.eventList = eventList;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getCount() {
-        return eventList.size();
-    }
-
-    @Override
-    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view.equals(object);
     }
 
     @NonNull
+    @NotNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        layoutInflater = LayoutInflater.from(context);
-        View view = layoutInflater.inflate(R.layout.event_item_1, container, false);
-        getView(view);
-        setView(position);
-        container.addView(view, 0);
-
-        if (position == 0) {
-            LinearLayout linearLayout = view.findViewById(R.id.eventCardLayout);
-            CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) linearLayout.getLayoutParams();
-            lp.leftMargin = 0;
-            linearLayout.setLayoutParams(lp);
-        }
-        return view;
+    public UpcomingEventViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item_upcoming, parent, false);
+        return new UpcomingEventViewHolder(view);
     }
 
-    private void getView(View view) {
-        eventImage = view.findViewById(R.id.eventImage);
-        eventTitle = view.findViewById(R.id.eventTitle);
-        eventDay = view.findViewById(R.id.eventDay);
-        eventMonth = view.findViewById(R.id.eventMonth);
-    }
-
-    private void setView(int position) {
+    @Override
+    public void onBindViewHolder(@NonNull @NotNull UpcomingEventViewHolder holder, int position) {
         Event event = eventList.get(position);
-        eventImage.setImageResource(event.getEventImage());
-        eventTitle.setText(event.getEventTitle());
-        eventDay.setText(Utils.getDate(event.getEventTimeStamp()));
-        eventMonth.setText(Utils.getMonth(event.getEventTimeStamp()));
+        holder.eventImage.setImageResource(R.drawable.laptop);
+        holder.eventTitle.setText(event.getEventTitle());
+        holder.eventDay.setText(Utils.getDate(event.getEventTimeStamp()));
+        holder.eventMonth.setText(Utils.getMonth(event.getEventTimeStamp()));
     }
 
     @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+    public int getItemCount() {
+        return eventList.size();
+    }
+
+    class UpcomingEventViewHolder extends RecyclerView.ViewHolder {
+        ImageView eventImage;
+        TextView eventTitle, eventDay, eventMonth;
+
+        public UpcomingEventViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            eventImage = itemView.findViewById(R.id.eventImage);
+            eventTitle = itemView.findViewById(R.id.eventTitle);
+            eventDay = itemView.findViewById(R.id.eventDay);
+            eventMonth = itemView.findViewById(R.id.eventMonth);
+        }
+    }
+
+    public void setEventList(List<Event> eventList) {
+        Log.d(TAG, "setEventList: upcoming");
+        this.eventList = eventList;
+        notifyDataSetChanged();
     }
 }

@@ -17,7 +17,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.adapters.PastEventAdapter;
@@ -75,15 +74,16 @@ public class HomeFragment extends Fragment {
         eventViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
-                Log.d(TAG, "onChanged: ");
                 List<Event> upcomingEventList = new ArrayList<>();
                 List<Event> pastEventList = new ArrayList<>();
                 for (Event event : eventList) {
-                    if (Utils.isPastEvent(event)) upcomingEventList.add(event);
-                    else pastEventList.add(event);
+                    if (Utils.isPastEvent(event)) pastEventList.add(event);
+                    else upcomingEventList.add(event);
                 }
                 upcomingEventAdapter.setEventList(upcomingEventList);
                 pastEventAdapter.setEventList(pastEventList);
+                Log.d(TAG, "onChanged: Upcoming=" + upcomingEventList.toString());
+                Log.d(TAG, "onChanged: Past=" + pastEventList.toString());
             }
         });
     }
@@ -92,9 +92,10 @@ public class HomeFragment extends Fragment {
      * Initialises upcomingEventAdapter with empty list and attach it to ViewPager
      */
     private void initUpcomingEvents() {
-        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>(), getContext());
-        ViewPager viewPager = getView().findViewById(R.id.viewPager);
-        viewPager.setAdapter(upcomingEventAdapter);
+        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>());
+        RecyclerView upcomingRecyclerView = getView().findViewById(R.id.upcomingRecyclerView);
+        upcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        upcomingRecyclerView.setAdapter(upcomingEventAdapter);
     }
 
     /**
