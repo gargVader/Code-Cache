@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_230sdp"
             android:scaleType="centerCrop"
+            android:transitionName="eventImage"
             tools:src="@drawable/laptop" />
 
         <ImageView
@@ -37,7 +38,7 @@
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
-            tools:text="Dj Party"></TextView>
+            tools:text="Dj Party"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

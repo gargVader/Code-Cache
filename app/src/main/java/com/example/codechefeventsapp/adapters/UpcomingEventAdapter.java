@@ -1,5 +1,8 @@
 package com.example.codechefeventsapp.adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.activities.EventDetailsActivity;
 import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
 
@@ -23,8 +27,9 @@ import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdapter.UpcomingEventViewHolder> {
 
     List<Event> eventList;
+    OnItemClickListener listener;
 
-    public UpcomingEventAdapter(List<Event> eventList){
+    public UpcomingEventAdapter(List<Event> eventList) {
         this.eventList = eventList;
     }
 
@@ -60,6 +65,17 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
             eventTitle = itemView.findViewById(R.id.eventTitle);
             eventDay = itemView.findViewById(R.id.eventDay);
             eventMonth = itemView.findViewById(R.id.eventMonth);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Event event = eventList.get(position);
+                    Intent intent = new Intent(itemView.getContext(), EventDetailsActivity.class);
+//                    ActivityOptions options = ActivityOptions
+//                            .makeSceneTransitionAnimation((Activity) itemView.getContext(), eventImage, "eventImage");
+                    itemView.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
@@ -68,4 +84,13 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
         this.eventList = eventList;
         notifyDataSetChanged();
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
 }

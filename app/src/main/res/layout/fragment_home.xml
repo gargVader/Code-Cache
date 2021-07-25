@@ -7,74 +7,56 @@
     android:background="@color/colorPrimary"
     tools:context=".fragments.HomeFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeRefresh"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/text_upcomingEvents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/inter_medium"
+                android:text="Upcoming Events"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/upcomingRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_upcomingEvents" />
 
-                <TextView
-                    android:id="@+id/text_upcomingEvents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Upcoming Events"
-                    android:textColor="@color/colorTextWhite"
-                    android:textSize="@dimen/_20ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/text_pastEvents"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/inter_medium"
+                android:text="Past Events"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/upcomingRecyclerView" />
 
-                <!--            <androidx.viewpager.widget.ViewPager-->
-                <!--                android:id="@+id/viewPager"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="@dimen/_270sdp"-->
-                <!--                android:background="@null"-->
-                <!--                android:clipToPadding="false"-->
-                <!--                android:foregroundGravity="center"-->
-                <!--                android:overScrollMode="never"-->
-                <!--                android:paddingHorizontal="@dimen/_40sdp"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintTop_toBottomOf="@id/text_upcomingEvents" />-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/pastRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/text_pastEvents"
+                tools:listitem="@layout/event_item_past" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/upcomingRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/text_upcomingEvents" />
-
-                <TextView
-                    android:id="@+id/text_pastEvents"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="Past Events"
-                    android:textColor="@color/colorTextWhite"
-                    android:textSize="@dimen/_20ssp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/upcomingRecyclerView" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/pastRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:nestedScrollingEnabled="false"
-                    app:layout_constraintTop_toBottomOf="@id/text_pastEvents"
-                    tools:listitem="@layout/event_item_past" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>

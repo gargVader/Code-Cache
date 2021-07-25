@@ -1,13 +1,17 @@
 package com.example.codechefeventsapp.fragments;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,9 +21,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.activities.EventDetailsActivity;
 import com.example.codechefeventsapp.adapters.PastEventAdapter;
 import com.example.codechefeventsapp.adapters.UpcomingEventAdapter;
 import com.example.codechefeventsapp.data.Utils;
@@ -93,9 +97,9 @@ public class HomeFragment extends Fragment {
      * Initialises upcomingEventAdapter with empty list and attach it to ViewPager
      */
     private void initUpcomingEvents() {
-        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>());
         RecyclerView upcomingRecyclerView = getView().findViewById(R.id.upcomingRecyclerView);
         upcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>());
         upcomingRecyclerView.setAdapter(upcomingEventAdapter);
     }
 
@@ -103,20 +107,10 @@ public class HomeFragment extends Fragment {
      * Initialises pastEventAdapter with empty list and attach it to RecyclerView
      */
     private void initPastEvents() {
-        pastEventAdapter = new PastEventAdapter(new ArrayList<>());
         RecyclerView pastRecyclerView = getView().findViewById(R.id.pastRecyclerView);
         pastRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        pastEventAdapter = new PastEventAdapter(new ArrayList<>());
         pastRecyclerView.setAdapter(pastEventAdapter);
-    }
-
-    private void setupSwipeRefreshLayout(){
-        SwipeRefreshLayout swipeRefreshLayout = getView().findViewById(R.id.swipeRefresh);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-            }
-        });
     }
 
     @Override

@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +17,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.pastEventViewHolder> {
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
+public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.PastEventViewHolder> {
     List<Event> eventList;
+    OnItemClickListener listener;
 
     public PastEventAdapter(List<Event> eventList) {
         this.eventList = eventList;
@@ -26,13 +29,13 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
 
     @NonNull
     @Override
-    public pastEventViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public PastEventViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item_past, parent, false);
-        return new pastEventViewHolder(view);
+        return new PastEventViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull pastEventViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull PastEventViewHolder holder, int position) {
         holder.eventTitle.setText(eventList.get(position).getEventTitle());
         holder.eventLocation.setText(eventList.get(position).getEventLocation());
         holder.eventDate.setText(Utils.getDate(eventList.get(position).getEventTimeStamp()));
@@ -45,20 +48,30 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
         return eventList.size();
     }
 
-    class pastEventViewHolder extends RecyclerView.ViewHolder {
+    class PastEventViewHolder extends RecyclerView.ViewHolder {
         TextView eventTitle;
         TextView eventLocation;
         TextView eventMonth;
         TextView eventDate;
         //ImageView eventImage;
 
-        public pastEventViewHolder(@NonNull @NotNull View itemView) {
+        public PastEventViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             eventTitle = itemView.findViewById(R.id.pastEventName);
             eventLocation = itemView.findViewById(R.id.pastEventLocation);
             eventMonth = itemView.findViewById(R.id.eventMonth);
             eventDate = itemView.findViewById(R.id.eventDay);
             //eventImage = itemView.findViewById(R.id.pastEventImage);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION){
+                        Event event = eventList.get(position);
+
+                    }
+                }
+            });
         }
     }
 
@@ -66,5 +79,13 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
         Log.d(TAG, "setEventList: past");
         this.eventList = eventList;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

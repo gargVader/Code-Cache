@@ -133,9 +133,6 @@ public class EventRepository implements FirebaseStorage.FirebaseListener {
 
     // TODO (Girish):
     //  EventFragment work ->
-    //  1) Implement SwipeRefreshLayout
-    //  2) Implement separate class for Firebase
-    //  3) Change ViewPagerLayout to RecyclerView
     //  4) Update design of upcoming events
     //  5) Make eventDetailsFragment
     //  6) Implement photos for Firebase
