@@ -7,7 +7,6 @@ import java.util.Date;
 
 public class Utils {
 
-
     public static String getDate(String eventTimeStamp) {
         Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
         SimpleDateFormat formatter = new SimpleDateFormat("dd");
