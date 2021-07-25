@@ -4,26 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
-    tools:context=".fragments.AddEventFragment">
-
-    <!--  TODO(2):
-            - Add various input fields for Event class
-            - Add a menu item for save button
-     -->
+    tools:context=".fragments.EditEventFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/notification_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="19dp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/Yellow">
 
+                <TextView
+                    android:layout_width="@dimen/_220sdp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:gravity="center_horizontal"
+
+                    android:paddingVertical="@dimen/_8sdp"
+                    android:text="@string/send_notifications"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="17sp"/>
+            </androidx.cardview.widget.CardView>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventNameText"
-                app:layout_constraintTop_toTopOf="parent"
+                android:paddingTop="@dimen/_18sdp"
+                app:layout_constraintTop_toBottomOf="@+id/notification_bar"
                 app:layout_constraintStart_toStartOf="parent"
                 android:text="@string/event_name"
 
@@ -35,11 +54,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/eventName"
-                android:inputType="textPersonName"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_15sdp"
                 android:textColor="@color/white"
+                android:inputType="textPersonName"
                 android:hint="@string/event_name_hint"
                 android:textSize="15sp"
                 android:textColorHint="@color/white"
@@ -81,8 +100,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="@string/event_date_format_hint"
                 android:inputType="date"
+                android:hint="@string/event_date_format_hint"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventLocation" />
@@ -106,8 +125,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:backgroundTint="@color/white"
                 android:focusable="false"
-                android:hint="@string/event_time_format_hint"
                 android:inputType="time"
+                android:hint="@string/event_time_format_hint"
                 android:textColorHint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventDate" />
@@ -163,7 +182,7 @@
                 android:id="@+id/cancel_button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/eventImage"
-                app:layout_constraintEnd_toStartOf="@+id/add_button"
+                app:layout_constraintEnd_toStartOf="@+id/edit_button"
                 app:cardCornerRadius="19dp"
                 android:layout_marginTop="@dimen/_25sdp"
                 android:clickable="true"
@@ -184,7 +203,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/add_button"
+                android:id="@+id/edit_button"
                 app:layout_constraintStart_toEndOf="@+id/cancel_button"
                 app:layout_constraintTop_toBottomOf="@id/eventImage"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -200,10 +219,37 @@
                     android:gravity="center_horizontal"
 
                     android:paddingVertical="@dimen/_8sdp"
-                    android:text="@string/add"
+                    android:text="@string/edit"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="17sp"/>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/delete_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cancel_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="19dp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:clickable="true"
+                app:cardBackgroundColor="#FF0000">
+
+                <TextView
+                    android:layout_width="@dimen/_220sdp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_medium"
+                    android:gravity="center"
+
+                    android:paddingVertical="@dimen/_6sdp"
+                    android:text="@string/delete"
+
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:drawableTop="@drawable/ic_baseline_warning_24"/>
+
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
