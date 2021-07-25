@@ -1,15 +1,18 @@
 package com.example.codechefeventsapp.data.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.Exclude;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "event_table")
 public class Event {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    private String id;
 
     @SerializedName("eventTitle")
     String eventTitle;
@@ -25,6 +28,10 @@ public class Event {
         this.eventLocation = eventLocation;
         this.eventTimeStamp = eventTimeStamp;
         this.eventImage = eventImage;
+    }
+
+    public Event(){
+
     }
 
     public String getEventTitle() {
@@ -59,11 +66,12 @@ public class Event {
         this.eventImage = eventImage;
     }
 
-    public int getId() {
+    @Exclude
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

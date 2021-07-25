@@ -1,10 +1,11 @@
 package com.example.codechefeventsapp.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +27,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
     @NonNull
     @Override
     public pastEventViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.past_event_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item_past, parent, false);
         return new pastEventViewHolder(view);
     }
 
@@ -62,6 +63,8 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.past
     }
 
     public void setEventList(List<Event> eventList) {
+        Log.d(TAG, "setEventList: past");
         this.eventList = eventList;
+        notifyDataSetChanged();
     }
 }
