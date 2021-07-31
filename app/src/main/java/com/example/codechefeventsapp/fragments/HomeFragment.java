@@ -19,6 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -94,7 +97,7 @@ public class HomeFragment extends Fragment {
     }
 
     /**
-     * Initialises upcomingEventAdapter with empty list and attach it to ViewPager
+     * Initialises upcomingEventAdapter with empty list and attach it to upcomingEventAdapter
      */
     private void initUpcomingEvents() {
         RecyclerView upcomingRecyclerView = getView().findViewById(R.id.upcomingRecyclerView);
@@ -117,16 +120,6 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_home, menu);
         super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.notifications:
-                Toast.makeText(getContext(), "Notifications", Toast.LENGTH_SHORT).show();
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
 }

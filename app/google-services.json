@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "963816998657-7ou13utplh96m51b2516icja003grncp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.codechefeventsapp",
+            "certificate_hash": "043d197f405c8cd39808ca4f52a8216838590a55"
+          }
+        },
+        {
+          "client_id": "963816998657-lqlrq5t9i3q7j58f65s03lt9pgeau6d5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.codechefeventsapp",
+            "certificate_hash": "4542b48a5a45e22755c55295fd92c104ce5ec529"
+          }
+        },
+        {
           "client_id": "963816998657-eoahrjj6hsmi5l9incg7knurea5co2pp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -28,7 +44,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "963816998657-eoahrjj6hsmi5l9incg7knurea5co2pp.apps.googleusercontent.com",
+              "client_id": "963816998657-8fmaood7vlbhqbp6496csbqpehug5k4d.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

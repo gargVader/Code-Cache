@@ -20,4 +20,9 @@
         android:name="com.example.codechefeventsapp.fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.codechefeventsapp.NotificationsFragment"
+        android:label="Notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

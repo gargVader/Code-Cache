@@ -36,7 +36,7 @@
     <style name="textStyleMedium">
         <item name="android:textColor">@color/colorTextWhite</item>
         <item name="fontFamily">@font/inter_medium</item>
-        <item name="android:textSize">@dimen/_13ssp</item>
+        <item name="android:textSize">@dimen/_20ssp</item>
     </style>
 
 </resources>
