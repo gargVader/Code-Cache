@@ -22,7 +22,12 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.example.codechefeventsapp.NotificationsFragment"
+        android:name="com.example.codechefeventsapp.fragments.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/userSettingsFragment"
+        android:name="com.example.codechefeventsapp.fragments.UserSettingsFragment"
+        android:label="Update details"
+        tools:layout="@layout/fragment_user_settings" />
 </navigation>

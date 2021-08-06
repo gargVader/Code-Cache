@@ -3,11 +3,16 @@ package com.example.codechefeventsapp.fragments;
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -40,6 +45,10 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
+    TextView nameTextView;
+    ImageView profileImageView;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: Profile");
@@ -54,10 +63,23 @@ public class ProfileFragment extends Fragment {
         signInLayout = view.findViewById(R.id.signInLayout);
         profileLayout = view.findViewById(R.id.profileLayout);
         signInButton = view.findViewById(R.id.signInButton);
+//        nameTextView = view.findViewById(R.id.name_text_view);
+//        profileImageView = view.findViewById(R.id.profile_image_view);
 
         initGoogleSign();
+        initProfileLayout();
 
         return view;
+    }
+
+    /*
+    At the start of the fragment check if there exists a currentUser and updateUI accordingly
+     */
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        updateUI(currentUser);
     }
 
     void initGoogleSign() {
@@ -73,6 +95,24 @@ public class ProfileFragment extends Fragment {
                 signIn();
             }
         });
+    }
+
+    void initProfileLayout() {
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) return;
+        setHasOptionsMenu(true);
+        String name = currentUser.getDisplayName();
+        String email = currentUser.getEmail();
+        Uri photoUrl = currentUser.getPhotoUrl();
+        String uid = currentUser.getUid();
+
+//            nameTextView.setText(name);
+//            Glide.with(this)
+//                    .load(String.valueOf(photoUrl))
+//                    .apply(RequestOptions.circleCropTransform())
+//                    .into(profileImageView);
+
+
     }
 
     private void signIn() {
@@ -122,17 +162,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateUI(FirebaseUser user) {
-        if (user == null)
-            return;
-
+        if (user == null) return;
         signInLayout.setVisibility(View.GONE);
+        initProfileLayout();
         profileLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        updateUI(currentUser);
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_profile, menu);
     }
 }

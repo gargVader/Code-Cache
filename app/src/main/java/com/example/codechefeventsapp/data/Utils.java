@@ -25,4 +25,9 @@ public class Utils {
         return eventDate.before(currentDate);
     }
 
+    public static class Constants{
+        public static String userEmail = "xyz@gmail.com";
+        //public static GoogleSignInAccount account;
+    }
+
 }

@@ -55,4 +55,6 @@
     <color name="colorSearchBackground">#333333</color>
     <color name="Yellow">#FBEF6A</color>
 
+    <color name="barGraphColor">#3D7EEC</color>
+
 </resources>

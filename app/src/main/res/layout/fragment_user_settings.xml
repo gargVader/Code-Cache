@@ -4,14 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:paddingHorizontal="@dimen/_16sdp"
-    tools:context=".fragments.NotificationsFragment">
+    tools:context=".fragments.UserSettingsFragment">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:text="User Settings Fragment"
         style="@style/textStyleMedium"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:text="Welcome to Notifications Fragment" />
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>
