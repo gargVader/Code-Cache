@@ -30,12 +30,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:fontFamily="@font/inter_bold"
-                android:text="Girish Garg"
+                android:text="FirstName LastName"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_34sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name">
+                app:layout_constraintTop_toBottomOf="@id/user_name">
 
                 <include layout="@layout/user_number_of_problems_layout" />
             </LinearLayout>

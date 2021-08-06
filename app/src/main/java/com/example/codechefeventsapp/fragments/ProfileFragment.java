@@ -19,11 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.codechefeventsapp.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -60,8 +61,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
-    TextView nameTextView;
-    ImageView profileImageView;
+    TextView user_name;
+    ImageView user_image;
     PieChart pieChart;
     LineChart lineChart;
 
@@ -80,10 +81,11 @@ public class ProfileFragment extends Fragment {
         signInLayout = view.findViewById(R.id.signInLayout);
         profileLayout = view.findViewById(R.id.profileLayout);
         signInButton = view.findViewById(R.id.signInButton);
+
         pieChart = view.findViewById(R.id.piechart);
         lineChart = view.findViewById(R.id.ratingGraph);
-//        nameTextView = view.findViewById(R.id.name_text_view);
-//        profileImageView = view.findViewById(R.id.profile_image_view);
+        user_name = view.findViewById(R.id.user_name);
+        user_image = view.findViewById(R.id.userImage);
 
         initGoogleSign();
         initProfileLayout();
@@ -152,12 +154,13 @@ public class ProfileFragment extends Fragment {
         String email = currentUser.getEmail();
         Uri photoUrl = currentUser.getPhotoUrl();
         String uid = currentUser.getUid();
+        String photoUrlString= photoUrl.toString().replace("s96-c", "s400-c");
 
-//            nameTextView.setText(name);
-//            Glide.with(this)
-//                    .load(String.valueOf(photoUrl))
-//                    .apply(RequestOptions.circleCropTransform())
-//                    .into(profileImageView);
+        user_name.setText(name);
+        Glide.with(this)
+                .load(photoUrlString)
+                .apply(RequestOptions.circleCropTransform())
+                .into(user_image);
 
         initPieChart();
         initRatingGraph();
@@ -212,7 +215,7 @@ public class ProfileFragment extends Fragment {
         pieChart.getLegend().setDirection(Legend.LegendDirection.RIGHT_TO_LEFT);
     }
 
-    void initRatingGraph(){
+    void initRatingGraph() {
 //        lineChart.setTouchEnabled(true);
 //        lineChart.setPinchZoom(true);
 //        LimitLine limitLine = new LimitLine(30f, "girishgarg");
