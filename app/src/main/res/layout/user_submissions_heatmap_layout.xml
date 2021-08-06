@@ -6,15 +6,15 @@
     android:background="@drawable/background_search">
 
     <TextView
-        android:id="@+id/TitleText"
+        android:id="@+id/title_text"
         style="@style/textStyleRegular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="@dimen/_10sdp"
-        android:drawableStart="@drawable/rating_graph_icon"
+        android:drawableStart="@drawable/histogram_icon"
         android:paddingTop="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_10sdp"
-        android:text="Total Submissions"
+        android:text="Acceptance Heatmap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

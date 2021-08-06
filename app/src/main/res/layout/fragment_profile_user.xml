@@ -51,11 +51,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name">
 
-                <include layout="@layout/number_of_problems_layout" />
+                <include layout="@layout/user_number_of_problems_layout" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/rating"
+                android:id="@+id/rating_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
@@ -66,25 +66,26 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/piechart"
+                android:id="@+id/piechart_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rating">
+                app:layout_constraintTop_toBottomOf="@id/rating_ll">
 
-                <include layout="@layout/submissions_pie_chart_layout" />
+                <include
+                    layout="@layout/user_submissions_pie_chart_layout" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/heatmap"
+                android:id="@+id/heatmap_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/piechart">
+                app:layout_constraintTop_toBottomOf="@id/piechart_ll">
 
-                <include layout="@layout/submissions_heatmap_layout" />
+                <include layout="@layout/user_submissions_heatmap_layout" />
             </LinearLayout>
 
 
