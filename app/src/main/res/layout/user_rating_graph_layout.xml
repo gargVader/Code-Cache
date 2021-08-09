@@ -23,11 +23,13 @@
         android:id="@+id/ratingGraph"
         android:layout_width="match_parent"
         android:paddingHorizontal="@dimen/_4sdp"
-        android:layout_height="@dimen/_200sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_height="@dimen/_220sdp"
+        android:layout_marginTop="@dimen/_2sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text" />
+        app:layout_constraintTop_toBottomOf="@id/title_text"
+        android:layout_marginHorizontal="20dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

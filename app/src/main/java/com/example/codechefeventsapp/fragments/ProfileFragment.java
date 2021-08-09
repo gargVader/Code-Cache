@@ -25,6 +25,7 @@ import com.example.codechefeventsapp.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -47,8 +48,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
@@ -206,39 +209,81 @@ public class ProfileFragment extends Fragment {
         PieDataSet pieDataSet = new PieDataSet(pieEntries, "Label");
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieDataSet.setValueTextColor(Color.WHITE);
-        pieDataSet.setValueTextSize(16f);
+        pieDataSet.setValueTextSize(15);
 
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieChart.getDescription().setEnabled(false);
-        pieChart.setCenterText("Text");
-        pieChart.getLegend().setDirection(Legend.LegendDirection.RIGHT_TO_LEFT);
+        pieChart.setCenterText("Submissions");
+        pieChart.setCenterTextSize(20);
+
+        pieChart.setDrawSliceText(false);
+        pieChart.setCenterTextColor(Color.WHITE);
+        pieChart.setHoleColor(Color.rgb(47, 59, 73));
+        pieChart.setDrawEntryLabels(true);
+        pieChart.setEntryLabelColor(0);
+        pieChart.setDrawRoundedSlices(true);
+        pieChart.getLegend().setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+        pieChart.getLegend().setTextColor(Color.WHITE);
+        pieChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        pieChart.getLegend().setTextSize(12);
+        pieChart.setEntryLabelColor(0);
+        pieChart.setEntryLabelTextSize(20);
+        pieChart.setDrawHoleEnabled(true);
+
     }
 
     void initRatingGraph() {
 //        lineChart.setTouchEnabled(true);
-//        lineChart.setPinchZoom(true);
+        lineChart.setPinchZoom(true);
 //        LimitLine limitLine = new LimitLine(30f, "girishgarg");
 //        limitLine.setLineColor(Color.WHITE);
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(true);
 
         ArrayList<Entry> yVals = new ArrayList<>();
-        yVals.add(new Entry(0, 60f));
-        yVals.add(new Entry(1, 70f));
-        yVals.add(new Entry(2, 90f));
-        yVals.add(new Entry(3, 40f));
-        yVals.add(new Entry(4, 30f));
+        yVals.add(new Entry(0, 60));
+        yVals.add(new Entry(1, 70));
+        yVals.add(new Entry(2, 90));
+        yVals.add(new Entry(3, 40));
+        yVals.add(new Entry(4, 30));
+
+        ArrayList<Entry> yVals2 = new ArrayList<>();
+        yVals2.add(new Entry(0, 50));
+        yVals2.add(new Entry(1, 80));
+        yVals2.add(new Entry(2, 70));
+        yVals2.add(new Entry(3, 20));
+        yVals2.add(new Entry(4, 90));
 
         LineDataSet set1 = new LineDataSet(yVals, "Data Set 1");
+        LineDataSet set2 = new LineDataSet(yVals2, "Data Set 2");
         set1.setFillAlpha(110);
-
+        set2.setFillAlpha(110);
+       // lineChart.moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration);
         ArrayList<ILineDataSet> datasets = new ArrayList<>();
         datasets.add(set1);
-
+        datasets.add(set2);
         LineData lineData = new LineData(datasets);
 
+//        lineData.setValueTextColors();
         lineChart.setData(lineData);
+        lineChart.getLegend().setTextColor(Color.WHITE);
+        lineChart.getLegend().setTextSize(12);
+        lineChart.setAutoScaleMinMaxEnabled(true);
+        lineChart.setBorderColor(Color.WHITE);
+        lineChart.setGridBackgroundColor(Color.YELLOW);
+        lineChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        lineChart.getLegend().setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+
+        lineChart.getLineData().setValueTextSize(0);
+        lineChart.getXAxis().setTextColor(Color.WHITE);
+        lineChart.getXAxis().setTextSize(12);
+        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getAxisLeft().setTextColor(Color.WHITE);
+        //lineChart.getLegend().setYOffset(0);
+        lineChart.getAxisRight().setDrawLabels(false);
+        lineChart.getAxisRight().setTextSize(12);
+        lineChart.getDescription().setText("");
 
     }
 

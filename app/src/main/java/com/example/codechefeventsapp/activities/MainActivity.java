@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupToolbar() {
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
                 .Builder(R.id.homeFragment, R.id.contestFragment, R.id.profileFragment)
                 .build();
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+       // NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
     }
 
     @Override
