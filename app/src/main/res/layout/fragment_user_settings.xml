@@ -22,14 +22,16 @@
                 style="@style/textStyleMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_16sdp"
                 android:text="Update Handles"
-                android:textSize="@dimen/_16ssp" />
+                android:textSize="@dimen/_20ssp"
+
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -48,20 +50,20 @@
                     android:textColor="@color/colorTextWhite" />
 
                 <EditText
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_32sdp"
                     android:background="@drawable/background_search"
+                    android:imeOptions="actionDone"
                     android:paddingHorizontal="8dp"
+                    android:singleLine="true"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -82,17 +84,18 @@
                     android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_21sdp"
                     android:background="@drawable/background_search"
                     android:paddingHorizontal="8dp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -111,20 +114,20 @@
                     android:textColor="@color/colorTextWhite" />
 
                 <EditText
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_43sdp"
                     android:background="@drawable/background_search"
+                    android:imeOptions="actionDone"
                     android:paddingHorizontal="8dp"
+                    android:singleLine="true"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -132,7 +135,7 @@
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:src="@drawable/spoj_icon"
-                    app:tint="@color/white" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -143,20 +146,20 @@
                     android:textColor="@color/colorTextWhite" />
 
                 <EditText
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_65sdp"
                     android:background="@drawable/background_search"
+                    android:imeOptions="actionDone"
                     android:paddingHorizontal="8dp"
+                    android:singleLine="true"
                     android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -177,8 +180,8 @@
                     android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:background="@drawable/background_search"
                     android:paddingHorizontal="8dp"
                     android:textColor="@color/white" />
@@ -187,9 +190,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/hackerearth_data">
 
                 <ImageView
                     android:layout_width="@dimen/_25sdp"
@@ -209,23 +213,45 @@
                     android:imeOptions="actionDone"
                     android:singleLine="true"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_38sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
                     android:background="@drawable/background_search"
                     android:paddingHorizontal="8dp"
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <Button
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_45sdp"
-                android:layout_marginTop="@dimen/_16sdp"
-                android:backgroundTint="@color/colorSecondary"
-                android:elevation="@dimen/_16sdp"
-                android:text="Save Changes"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardBackgroundColor="@color/colorDelete"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginVertical="@dimen/_16sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    android:padding="10dp"
+                    android:layout_marginHorizontal="@dimen/_40sdp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SAVE CHANGES"
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/white"
+                        android:paddingVertical="10dp"
+                        android:paddingHorizontal="30dp"
+                        android:clickable="true"
+                        android:elevation="@dimen/_16sdp"
+                        />
+                </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
         </LinearLayout>
 
