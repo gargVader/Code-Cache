@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/piechart_include"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/_245sdp"
     android:background="@drawable/background_search">
 
     <TextView
@@ -22,7 +22,7 @@
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
-        android:layout_width="@dimen/_200sdp"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_8sdp"
