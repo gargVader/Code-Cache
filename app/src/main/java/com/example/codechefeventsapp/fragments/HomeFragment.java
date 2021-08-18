@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment {
         eventViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
+                Utils.sort(eventList);
                 List<Event> upcomingEventList = new ArrayList<>();
                 List<Event> pastEventList = new ArrayList<>();
                 for (Event event : eventList) {

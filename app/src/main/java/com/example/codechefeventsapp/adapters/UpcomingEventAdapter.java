@@ -46,7 +46,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
         Event event = eventList.get(position);
         holder.eventImage.setImageResource(R.drawable.laptop);
         holder.eventTitle.setText(event.getEventTitle());
-        holder.eventDay.setText(Utils.getDate(event.getEventTimeStamp()));
+        holder.eventDay.setText(Utils.getDay(event.getEventTimeStamp()));
         holder.eventMonth.setText(Utils.getMonth(event.getEventTimeStamp()));
     }
 

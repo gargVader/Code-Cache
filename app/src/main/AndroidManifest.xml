@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CodechefEventsApp">
         <activity android:name=".activities.EventDetailsActivity"></activity>
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
