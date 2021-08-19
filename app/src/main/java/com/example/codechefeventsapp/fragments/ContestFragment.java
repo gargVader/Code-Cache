@@ -1,5 +1,8 @@
 package com.example.codechefeventsapp.fragments;
 
+import android.app.ActionBar;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -35,7 +38,8 @@ public class ContestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_contest, container, false);
+        View view = inflater.inflate(R.layout.fragment_contest, container, false);
+        return view;
     }
 
     @Override
@@ -45,9 +49,17 @@ public class ContestFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerview_contest);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        contestAdapter = new ContestAdapter(new ArrayList<>());
+        contestAdapter = new ContestAdapter(new ArrayList<>(), getActivity());
         recyclerView.setAdapter(contestAdapter);
         initViewModel();
+        contestAdapter.setOnItemClickListener(new ContestAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Contest contest) {
+                Uri newsUri = Uri.parse(contest.getContestUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW, newsUri);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initViewModel() {
