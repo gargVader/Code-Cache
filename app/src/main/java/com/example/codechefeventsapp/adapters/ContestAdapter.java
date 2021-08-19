@@ -63,6 +63,18 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
         if(contest.getContestSite() != null && contest.getContestSite().equals("CodeChef")){
             holder.contestIcon.setImageResource(R.drawable.codechef_icon);
         }
+        else if(contest.getContestSite() != null && contest.getContestSite().equals("CodeForces")){
+            holder.contestIcon.setImageResource(R.drawable.codeforces_icon);
+        }
+        else if(contest.getContestSite() != null && contest.getContestSite().equals("AtCoder")){
+            holder.contestIcon.setImageResource(R.drawable.atcoder_icon);
+        }
+        else if(contest.getContestSite() != null && contest.getContestSite().equals("HackerEarth")){
+            holder.contestIcon.setImageResource(R.drawable.hackerearth_icon);
+        }
+        else if(contest.getContestSite() != null && contest.getContestSite().equals("HackerRank")){
+            holder.contestIcon.setImageResource(R.drawable.hackerrank_icon);
+        }
         else {
             holder.contestIcon.setImageResource(R.drawable.codeforces_icon);
         }
@@ -76,7 +88,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
     protected class ContestViewHolder extends RecyclerView.ViewHolder {
 
         public TextView contestName, contestUrl, contestStartTime, contestEndTime, contestDuration, contestSite, contestIn24Hours, contestStatus;
-        public ImageView contestIcon;
+        public de.hdodenhof.circleimageview.CircleImageView contestIcon;
 
         public ContestViewHolder(View itemView) {
             super(itemView);
