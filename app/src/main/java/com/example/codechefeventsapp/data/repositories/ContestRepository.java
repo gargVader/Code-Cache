@@ -74,6 +74,7 @@ public class ContestRepository {
     }
 
     public void makeAPICallAndStore() {
+        String platform = "all";
         Log.d(TAG, "makeAPICallAndStore: ");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://kontests.net/api/v1/")
@@ -82,7 +83,7 @@ public class ContestRepository {
 
         contestApi = retrofit.create(ContestApi.class);
 
-        Call<List<Contest>> call = contestApi.getContests("codeforces");
+        Call<List<Contest>> call = contestApi.getContests(platform);
         call.enqueue(new Callback<List<Contest>>() {
             @Override
             public void onResponse(Call<List<Contest>> call, Response<List<Contest>> response) {

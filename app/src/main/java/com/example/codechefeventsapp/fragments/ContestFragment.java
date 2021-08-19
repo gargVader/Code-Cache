@@ -1,16 +1,21 @@
 package com.example.codechefeventsapp.fragments;
 
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,11 +39,16 @@ public class ContestFragment extends Fragment {
     RecyclerView recyclerView;
     ContestAdapter contestAdapter;
     ContestViewModel contestViewModel;
+    List<Contest> contestList;
+    private String[] filters = {"CodeForces", "CodeForces::Gym", "TopCoder", "AtCoder", "CodeChef", "HackerRank", "HackerEarth", "LeetCode"};
+    private ArrayList<Integer> selectedFilters;
+    private boolean[] checkedFilters;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contest, container, false);
+        setHasOptionsMenu(true);
         return view;
     }
 
@@ -70,11 +80,63 @@ public class ContestFragment extends Fragment {
         contestViewModel.getContestsFromAPIAndStore();
         contestViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Contest>>() {
             @Override
-            public void onChanged(List<Contest> contestList) {
+            public void onChanged(List<Contest> list) {
+                contestList = list;
                 Log.d(TAG, "onChanged: ");
                 contestAdapter.setContestList(contestList);
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
+        Log.d(TAG, "onCreateOptionsMenu: ");
+        inflater.inflate(R.menu.menu_contest, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected: ");
+        switch (item.getItemId()){
+            case R.id.filter_action:
+                showFilters();
+                return true;
+            default:
+                return true;
+        }
+    }
+
+    public void showFilters(){
+        selectedFilters = new ArrayList<>();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Select filters");
+        builder.setCancelable(true);
+        builder.setMultiChoiceItems(filters, checkedFilters ,new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                selectedFilters.add(which);
+            }
+        });
+        builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                applyFilters();
+            }
+        });
+        builder.show();
+    }
+
+    public void applyFilters(){
+        Log.d(TAG, "applyFilters: ");
+        List<Contest> contests = new ArrayList<>();
+        for(Contest contest : contestList){
+            for(int pos : selectedFilters){
+                if(contest.getContestSite().equals(filters[pos])){
+                    contests.add(contest);
+                }
+            }
+        }
+        contestAdapter.setContestList(contests);
     }
 }
 
