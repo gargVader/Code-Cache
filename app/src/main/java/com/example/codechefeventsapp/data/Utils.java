@@ -2,11 +2,14 @@ package com.example.codechefeventsapp.data;
 
 import com.example.codechefeventsapp.data.models.Event;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class Utils {
 
@@ -48,6 +51,16 @@ public class Utils {
 
     public static void sort(List<Event> eventList){
         Collections.sort(eventList, new SortByTimeStamp());
+    }
+
+    public static String getFormattedDate(String dateStr) throws ParseException {
+        //String dateStr = "Jul 16, 2013 12:08:59 AM";
+        SimpleDateFormat df = new SimpleDateFormat("MMM dd HH:mm:ss a", Locale.ENGLISH);
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+        Date date = df.parse(dateStr);
+        df.setTimeZone(TimeZone.getDefault());
+        String formattedDate = df.format(date);
+        return formattedDate;
     }
 
 

@@ -7,27 +7,89 @@
     app:cardBackgroundColor="@color/colorSecondary"
     app:cardCornerRadius="@dimen/_20sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/contest_Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/site_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/codechef_icon"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp"
+            android:layout_gravity="center_vertical"/>
 
-            android:text="July Long Challenge 2021"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/contest_Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="July Long Challenge 2021"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
-        <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/start"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_weight="4"
+                    android:text="19 Aug 20:05"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
+                    android:text="3 Hours"
+                    android:textColor="#FFFFFF"
+                    android:visibility="gone" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/colorDelete"
+                    app:cardCornerRadius="10dp">
+
+                    <TextView
+                        android:id="@+id/is_live_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/_16sdp"
+                        android:paddingHorizontal="8dp"
+                        android:text="Live"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+       <!-- <TextView
             android:id="@+id/contest_Url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,6 +98,7 @@
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contest_Name" />
+
 
         <TextView
             android:id="@+id/start"
@@ -59,15 +122,7 @@
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-        <TextView
-            android:id="@+id/duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="3 Hours"
-            android:textColor="#FFFFFF"
-            app:layout_constraintStart_toEndOf="@+id/cardView2"
-            app:layout_constraintTop_toTopOf="@+id/cardView2" />
+
 
         <TextView
             android:id="@+id/in24hour"
@@ -77,17 +132,15 @@
             android:text="YES"
             android:textColor="#FFFFFF"
             app:layout_constraintStart_toEndOf="@+id/cardView3"
-            app:layout_constraintTop_toTopOf="@+id/cardView3" />
+            app:layout_constraintTop_toTopOf="@+id/cardView3" />-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <!--<LinearLayout
             android:id="@+id/constraintLayout"
             android:layout_width="90dp"
             android:layout_height="27dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/count_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:background="@drawable/count_background">
 
             <TextView
                 android:id="@+id/status"
@@ -100,7 +153,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView"
@@ -188,6 +241,7 @@
             app:layout_constraintStart_toEndOf="@+id/cardView4"
             app:layout_constraintTop_toTopOf="@+id/cardView4" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    -->
 
 </androidx.cardview.widget.CardView>
