@@ -20,18 +20,28 @@ public class Event {
     String eventLocation;
     @SerializedName("eventTimeStamp")
     String eventTimeStamp;
-    @SerializedName("eventImage")
-    int eventImage;
+    @SerializedName("eventImageUrl")
+    String eventImageUrl;
 
-    public Event(String eventTitle, String eventLocation, String eventTimeStamp, int eventImage) {
+    public Event(String eventTitle, String eventLocation, String eventTimeStamp, String eventImageUrl) {
+        this.id = id;
         this.eventTitle = eventTitle;
         this.eventLocation = eventLocation;
         this.eventTimeStamp = eventTimeStamp;
-        this.eventImage = eventImage;
+        this.eventImageUrl = eventImageUrl;
     }
 
-    public Event(){
+    public Event() {
 
+    }
+
+    @Exclude
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEventTitle() {
@@ -58,31 +68,22 @@ public class Event {
         this.eventTimeStamp = eventTimeStamp;
     }
 
-    public int getEventImage() {
-        return eventImage;
+    public String getEventImageUrl() {
+        return eventImageUrl;
     }
 
-    public void setEventImage(int eventImage) {
-        this.eventImage = eventImage;
-    }
-
-    @Exclude
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setEventImageUrl(String eventImageUrl) {
+        this.eventImageUrl = eventImageUrl;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", eventTitle='" + eventTitle + '\'' +
                 ", eventLocation='" + eventLocation + '\'' +
                 ", eventTimeStamp='" + eventTimeStamp + '\'' +
-                ", eventImage=" + eventImage +
+                ", eventImageUrl='" + eventImageUrl + '\'' +
                 '}';
     }
 }

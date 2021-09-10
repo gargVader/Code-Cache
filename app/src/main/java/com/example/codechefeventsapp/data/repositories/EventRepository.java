@@ -6,7 +6,7 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.FireStoreStorage.FirebaseStorage;
+import com.example.codechefeventsapp.FirebaseLayer;
 import com.example.codechefeventsapp.data.dao.EventDao;
 import com.example.codechefeventsapp.data.database.EventDatabase;
 import com.example.codechefeventsapp.data.models.Event;
@@ -15,19 +15,19 @@ import java.util.List;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
-public class EventRepository implements FirebaseStorage.FirebaseListener {
+public class EventRepository implements FirebaseLayer.FirebaseListener {
 
     private EventDao eventDao;
     private LiveData<List<Event>> allEvent;
     Application application;
-    FirebaseStorage firebaseStorage;
+    FirebaseLayer firebaseLayer;
 
     public EventRepository(Application application) {
         this.application = application;
         eventDao = EventDatabase.getInstance(application).getEventDao();
         allEvent = eventDao.getAllEvents();
-        firebaseStorage = FirebaseStorage.getInstance();
-        firebaseStorage.setFirebaseListener(this);
+        firebaseLayer = FirebaseLayer.getInstance();
+        firebaseLayer.setFirebaseListener(this);
     }
 
     public void insert(Event event) {
@@ -96,8 +96,8 @@ public class EventRepository implements FirebaseStorage.FirebaseListener {
 
 
     public void makeFirebaseCallAndStore() {
-        Log.d(TAG, "makeFirebaseCallAndStore: ");
-        firebaseStorage.getAllEvents();
+//        Log.d(TAG, "makeFirebaseCallAndStore: ");
+        firebaseLayer.getAllEvents();
 
     }
 
@@ -131,16 +131,5 @@ public class EventRepository implements FirebaseStorage.FirebaseListener {
     /**FirebaseListener Callback methods*/
     /*********************************************************************************************/
 
-    // TODO (Girish):
-    //  EventFragment work ->
-    //  4) Update design of upcoming events
-    //  5) Make eventDetailsFragment
-    //  6) Implement photos for Firebase
-    //  7) Implement event notifications
-    //  ContestFragment work ->
-    //  1) Add filters in contestFragment
-    //  2) Change design of contest_item
-    //  Admin App work ->
-    //  1) Connect firebase
 
 }

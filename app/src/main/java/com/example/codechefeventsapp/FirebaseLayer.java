@@ -1,11 +1,10 @@
-package com.example.codechefeventsapp.FireStoreStorage;
+package com.example.codechefeventsapp;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.models.Event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,28 +27,28 @@ import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 /**
  * Singleton Class for all Firebase Operations
  */
-public class FirebaseStorage {
+public class FirebaseLayer {
 
     public static final String EVENT_COLLECTION_ID = "EventCollection";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference eventCollection = db.collection(EVENT_COLLECTION_ID);
-    private static FirebaseStorage instance;
+    private static FirebaseLayer instance;
     private FirebaseListener firebaseListener;
 
-    public static FirebaseStorage getInstance() {
+    public static FirebaseLayer getInstance() {
         if (instance == null) {
-            instance = new FirebaseStorage();
+            instance = new FirebaseLayer();
         }
         return instance;
     }
 
-    private FirebaseStorage() {
+    private FirebaseLayer() {
         // may pass (Activity) application.getApplicationContext()
         eventCollection.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                Log.d(TAG, "onEvent: Snapshot listener has detected changes");
+//                Log.d(TAG, "onEvent: Snapshot listener has detected changes");
                 if (error != null) {
                     Log.d(TAG, "onEvent: " + error.getMessage());
                     return;
@@ -58,8 +57,7 @@ public class FirebaseStorage {
                     DocumentSnapshot document = dc.getDocument();
                     Event event = document.toObject(Event.class);
                     event.setId(document.getId());
-                    event.setEventImage(R.drawable.laptop);
-                    Log.d(TAG, "onEvent: " + event.toString());
+//                    Log.d(TAG, "onEvent: " + event.toString());
                     switch (dc.getType()) {
                         case ADDED:
                             firebaseListener.onDocumentAdded(event);
@@ -82,6 +80,12 @@ public class FirebaseStorage {
      * It is an implicit method which fetches data from firebase and triggers
      * callback methods
      */
+
+    private static final String EVENT_TITLE = "eventTitle";
+    private static final String EVENT_LOCATION = "eventLocation";
+    private static final String EVENT_TIMESTAMP = "eventTimeStamp";
+    private static final String EVENT_IMAGE_URL = "eventImageURl";
+
     public List<Event> getAllEvents() {
         List<Event> eventList = new ArrayList<>();
         eventCollection.get()
@@ -91,7 +95,6 @@ public class FirebaseStorage {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Event event = documentSnapshot.toObject(Event.class);
                             event.setId(documentSnapshot.getId());
-                            event.setEventImage(R.drawable.laptop);
                             eventList.add(event);
                         }
                         firebaseListener.onGetSuccess(eventList);

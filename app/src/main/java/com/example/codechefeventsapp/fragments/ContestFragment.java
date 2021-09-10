@@ -82,7 +82,7 @@ public class ContestFragment extends Fragment {
             @Override
             public void onChanged(List<Contest> list) {
                 contestList = list;
-                Log.d(TAG, "onChanged: ");
+//                Log.d(TAG, "onChanged: ");
                 contestAdapter.setContestList(contestList);
             }
         });
@@ -90,13 +90,13 @@ public class ContestFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
-        Log.d(TAG, "onCreateOptionsMenu: ");
+//        Log.d(TAG, "onCreateOptionsMenu: ");
         inflater.inflate(R.menu.menu_contest, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        Log.d(TAG, "onOptionsItemSelected: ");
+//        Log.d(TAG, "onOptionsItemSelected: ");
         switch (item.getItemId()){
             case R.id.filter_action:
                 showFilters();
@@ -127,7 +127,7 @@ public class ContestFragment extends Fragment {
     }
 
     public void applyFilters(){
-        Log.d(TAG, "applyFilters: ");
+//        Log.d(TAG, "applyFilters: ");
         List<Contest> contests = new ArrayList<>();
         for(Contest contest : contestList){
             for(int pos : selectedFilters){

@@ -70,7 +70,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
     }
 
     public void setEventList(List<Event> eventList) {
-        Log.d(TAG, "setEventList: past");
+//        Log.d(TAG, "setEventList: past");
         this.eventList = eventList;
         notifyDataSetChanged();
     }

@@ -19,7 +19,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
 
-        Log.d(TAG, "onCreate: "+this.getClass().getSimpleName());
+//        Log.d(TAG, "onCreate: "+this.getClass().getSimpleName());
 
         registerB = findViewById(R.id.event_regist_button);
         registerB.setOnClickListener(new View.OnClickListener() {

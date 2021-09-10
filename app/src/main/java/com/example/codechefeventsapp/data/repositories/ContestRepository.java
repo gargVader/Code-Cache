@@ -75,7 +75,7 @@ public class ContestRepository {
 
     public void makeAPICallAndStore() {
         String platform = "all";
-        Log.d(TAG, "makeAPICallAndStore: ");
+//        Log.d(TAG, "makeAPICallAndStore: ");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://kontests.net/api/v1/")
                 .addConverterFactory(GsonConverterFactory.create())

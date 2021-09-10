@@ -180,15 +180,12 @@
                     android:orientation="vertical">
 
                     <EditText
+                        style="@style/editTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="15dp"
-                        android:background="@drawable/background_search"
-                        android:imeOptions="actionDone"
-                        android:paddingHorizontal="8dp"
-                        android:singleLine="true"
-                        android:textColor="@color/white" />
+                        android:paddingHorizontal="8dp" />
 
                     <EditText
                         android:layout_width="match_parent"

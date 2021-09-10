@@ -72,7 +72,7 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "onCreate: Profile");
+//        Log.d(TAG, "onCreate: Profile");
         super.onCreate(savedInstanceState);
     }
 

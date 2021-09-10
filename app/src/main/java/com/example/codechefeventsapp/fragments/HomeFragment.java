@@ -82,17 +82,19 @@ public class HomeFragment extends Fragment {
         eventViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
-                Utils.sort(eventList);
+//                Utils.sort(eventList);
                 List<Event> upcomingEventList = new ArrayList<>();
                 List<Event> pastEventList = new ArrayList<>();
                 for (Event event : eventList) {
                     if (Utils.isPastEvent(event)) pastEventList.add(event);
                     else upcomingEventList.add(event);
                 }
+                Utils.sort(upcomingEventList);
+                Utils.reverseSort(pastEventList);
                 upcomingEventAdapter.setEventList(upcomingEventList);
                 pastEventAdapter.setEventList(pastEventList);
-                Log.d(TAG, "onChanged: Upcoming=" + upcomingEventList.toString());
-                Log.d(TAG, "onChanged: Past=" + pastEventList.toString());
+//                Log.d(TAG, "onChanged: Upcoming=" + upcomingEventList.toString());
+//                Log.d(TAG, "onChanged: Past=" + pastEventList.toString());
             }
         });
     }
@@ -103,7 +105,7 @@ public class HomeFragment extends Fragment {
     private void initUpcomingEvents() {
         RecyclerView upcomingRecyclerView = getView().findViewById(R.id.upcomingRecyclerView);
         upcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>());
+        upcomingEventAdapter = new UpcomingEventAdapter(new ArrayList<>(), getContext());
         upcomingRecyclerView.setAdapter(upcomingEventAdapter);
     }
 

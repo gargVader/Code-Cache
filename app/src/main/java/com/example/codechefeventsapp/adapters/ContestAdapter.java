@@ -28,7 +28,7 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
     OnItemClickListener listener;
     Context context;
     public ContestAdapter(List<Contest> contestList, Context context) {
-        Log.d(TAG, "ContestAdapter: ");
+//        Log.d(TAG, "ContestAdapter: ");
         this.contestList = contestList;
         this.context = context;
     }
