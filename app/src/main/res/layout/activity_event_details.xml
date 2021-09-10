@@ -16,13 +16,30 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/eventImage"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/laptop"
-                android:transitionName="eventImage" />
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progress_load_photo"
+                    style="@android:style/Widget.ProgressBar.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminateTint="@color/colorPrimaryDark"
+                    android:indeterminateTintMode="src_in"
+                    app:layout_constraintBottom_toBottomOf="@+id/eventImage"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/eventImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_305sdp"
+                    android:scaleType="centerCrop"
+                    android:transitionName="eventImage"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/event_poster" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -69,6 +86,7 @@
                             android:text="Mon, July 23, 2021" />
 
                         <TextView
+                            android:id="@+id/eventTime"
                             style="@style/textStyleRegular"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -131,11 +149,11 @@
                 android:id="@+id/event_regist_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="4dp"
                 android:backgroundTint="@color/colorSecondary"
                 android:elevation="@dimen/_16sdp"
-                android:text="Register"
-                android:layout_gravity="center"
-                android:layout_margin="4dp"/>
+                android:text="Register" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

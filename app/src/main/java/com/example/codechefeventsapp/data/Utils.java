@@ -1,8 +1,23 @@
 package com.example.codechefeventsapp.data;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 import com.example.codechefeventsapp.data.models.Event;
 
 import java.text.ParseException;
@@ -23,6 +38,12 @@ public class Utils {
         return formatter.format(date);
     }
 
+    public static String getDateFull(String eventTimeStamp) {
+        Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMM d yyyy");
+        return formatter.format(date);
+    }
+
     public static String getDay(String eventTimeStamp) {
         Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
         SimpleDateFormat formatter = new SimpleDateFormat("dd");
@@ -35,9 +56,15 @@ public class Utils {
         return formatter.format(date).toUpperCase();
     }
 
-    public static String getTime(String eventTimeStamp) {
+    public static String getTimeWithDay(String eventTimeStamp) {
         Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
         SimpleDateFormat formatter = new SimpleDateFormat("EEEE, h:mm a");
+        return formatter.format(date);
+    }
+
+    public static String getTime(String eventTimeStamp) {
+        Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
+        SimpleDateFormat formatter = new SimpleDateFormat("h:mm a");
         return formatter.format(date);
     }
 
@@ -107,6 +134,33 @@ public class Utils {
     public static ColorDrawable getRandomDrawbleColor() {
         int idx = new Random().nextInt(vibrantLightColorList.length);
         return vibrantLightColorList[idx];
+    }
+
+    public static void loadImage(Context context, String imageUrl, ImageView imageView, ProgressBar progressBar) {
+        // Setting up Glide
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions.placeholder(Utils.getRandomDrawbleColor());
+        requestOptions.error(Utils.getRandomDrawbleColor());
+        requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+
+        Glide.with(context.getApplicationContext())
+                .load(imageUrl)
+                .apply(requestOptions)
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView);
     }
 
 

@@ -7,8 +7,10 @@ import androidx.room.PrimaryKey;
 import com.google.firebase.firestore.Exclude;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 @Entity(tableName = "event_table")
-public class Event {
+public class Event implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
     @NonNull

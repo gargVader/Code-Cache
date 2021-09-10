@@ -62,6 +62,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
                     int position = getAdapterPosition();
                     Event event = eventList.get(position);
                     Intent intent = new Intent(itemView.getContext(), EventDetailsActivity.class);
+                    intent.putExtra("EVENT", event);
                     itemView.getContext().startActivity(intent);
 
                 }

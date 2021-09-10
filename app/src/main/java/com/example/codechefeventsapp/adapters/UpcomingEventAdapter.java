@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,37 +55,14 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
     public void onBindViewHolder(@NonNull @NotNull UpcomingEventViewHolder holder, int position) {
         Event event = eventList.get(position);
         if (event.getEventImageUrl() != null) {
-            // Setting up Glide
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(Utils.getRandomDrawbleColor());
-            requestOptions.error(Utils.getRandomDrawbleColor());
-            requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-
-            Glide.with(context.getApplicationContext())
-                    .load(event.getEventImageUrl())
-                    .apply(requestOptions)
-                    .listener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            holder.progressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(holder.eventImage);
+            Utils.loadImage(context, event.getEventImageUrl(), holder.eventImage, holder.progressBar);
         } else {
             holder.eventImage.setImageResource(R.drawable.event_poster);
         }
         holder.eventTitle.setText(event.getEventTitle());
         holder.eventDay.setText(Utils.getDay(event.getEventTimeStamp()));
         holder.eventMonth.setText(Utils.getMonth(event.getEventTimeStamp()));
-        holder.eventTime.setText(Utils.getTime(event.getEventTimeStamp()));
+        holder.eventTime.setText(Utils.getTimeWithDay(event.getEventTimeStamp()));
     }
 
     @Override
@@ -111,6 +89,7 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
                     int position = getAdapterPosition();
                     Event event = eventList.get(position);
                     Intent intent = new Intent(itemView.getContext(), EventDetailsActivity.class);
+                    intent.putExtra("EVENT", event);
 //                    ActivityOptions options = ActivityOptions
 //                            .makeSceneTransitionAnimation((Activity) itemView.getContext(), eventImage, "eventImage");
                     itemView.getContext().startActivity(intent);
