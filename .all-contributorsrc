@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "SrishtiC99",
+      "name": "Srishti Kumari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78294375?v=4",
+      "profile": "https://www.linkedin.com/in/srishti03/",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "CodechefEventsApp",
+  "projectOwner": "gargVader",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
