@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "gargVader",
+      "name": "Girish Garg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52619530?v=4",
+      "profile": "http:// gargVader.github.io",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "CodechefEventsApp",
+  "projectOwner": "gargVader",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
