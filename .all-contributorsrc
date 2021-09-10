@@ -5,11 +5,56 @@
   "imageSize": 100,
   "commit": false,
   "contributors": [
-    {
+   {
       "login": "gargVader",
       "name": "Girish Garg",
       "avatar_url": "https://avatars.githubusercontent.com/u/52619530?v=4",
       "profile": "http:// gargVader.github.io",
+      "contributions": [
+        "code",
+      ]
+    },
+    {
+      "login": "Suswan114",
+      "name": "Suswan114",
+      "avatar_url": "https://avatars.githubusercontent.com/u/67154528?v=4",
+      "profile": "https://github.com/Suswan114",
+      "contributions": [
+        "code",
+        "content"
+    },
+    {
+      "login": "SrishtiC99",
+      "name": "Srishti Kumari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78294375?v=4",
+      "profile": "https://www.linkedin.com/in/srishti03/",
+      "contributions": [
+        "code"
+      ]
+    },
+     {
+      "login": "raghunath704",
+      "name": "Raghunath Das",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74724537?v=4",
+      "profile": "https://github.com/raghunath704",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Nil2000",
+      "name": "Anonymus2000",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54113952?v=4",
+      "profile": "https://github.com/Nil2000",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rudraneel18",
+      "name": "RUDRANEEL DUTTA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/64578089?v=4",
+      "profile": "https://github.com/rudraneel18",
       "contributions": [
         "code"
       ]
