@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "Nil2000",
+      "name": "Anonymus2000",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54113952?v=4",
+      "profile": "https://github.com/Nil2000",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "CodechefEventsApp",
+  "projectOwner": "gargVader",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
