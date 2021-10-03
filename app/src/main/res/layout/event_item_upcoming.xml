@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <ProgressBar
             android:id="@+id/progress_load_photo"
@@ -25,11 +25,12 @@
 
         <ImageView
             android:id="@+id/eventImage"
-            android:layout_width="@dimen/_230sdp"
-            android:layout_height="@dimen/_230sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:transitionName="eventImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/event_poster"
             android:scaleType="centerCrop"
              />
 
@@ -39,7 +40,8 @@
             android:layout_height="120dp"
             android:layout_gravity="bottom"
             android:src="@drawable/bottom_shadow"
-            app:layout_constraintBottom_toBottomOf="@id/eventImage" />
+            app:layout_constraintBottom_toBottomOf="parent"
+             />
 
 
         <TextView

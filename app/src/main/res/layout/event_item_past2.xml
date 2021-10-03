@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/allEventsCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:layout_marginVertical="@dimen/_6sdp"
+    android:background="@android:color/white"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorSecondary"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/card_elevation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="@dimen/layout_margin_none"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/padding_extra_small"
+            android:layout_weight="0.4"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/padding_medium">
+
+            <TextView
+                android:id="@+id/eventMonth"
+                style="@style/textStyleRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/details_margin_small"
+                android:text="@{eventMonth}"
+                android:textSize="@dimen/_10ssp"
+                tools:text="JAN" />
+
+            <TextView
+                android:id="@+id/eventDay"
+                style="@style/textStyleRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/layout_margin_medium"
+                android:textColor="@color/purple_200"
+                android:textSize="@dimen/_10ssp"
+                tools:text="15" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/layout_margin_none"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/layout_margin_small"
+            android:layout_weight="1.6"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_6sdp">
+
+            <TextView
+                android:id="@+id/eventTitle"
+                style="@style/textStyleRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_height"
+                android:layout_marginBottom="@dimen/layout_margin_small"
+                android:ellipsize="end"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="2"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Learn Bit Manipulation" />
+
+            <TextView
+                android:id="@+id/eventDescription"
+                style="@style/textStyleRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:autoLink="web"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/longString"
+                android:textColor="@color/greyDate"
+                android:textSize="@dimen/_8ssp"
+                app:layout_constraintTop_toBottomOf="@id/eventTitle" />
+
+            <LinearLayout
+                android:id="@+id/eventYoutubeLinkLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:src="@drawable/youtube" />
+
+                <TextView
+                    android:id="@+id/eventYoutubeLink"
+                    style="@style/textStyleRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:padding="@dimen/_3sdp"
+                    android:text="Watch session"
+                    android:textColorLink="@android:color/holo_blue_bright"
+                    android:textSize="@dimen/_8ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/eventImage"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:src="@drawable/event_poster" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

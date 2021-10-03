@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
-
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 public class Utils {
 
     public static String getDate(String eventTimeStamp) {
@@ -69,8 +70,11 @@ public class Utils {
     }
 
     public static boolean isPastEvent(Event event) {
+        if(event.getEventStartTimeStamp()==null){
+            Log.d(TAG, event.toString());
+        }
         Date currentDate = new Date(System.currentTimeMillis());
-        Date eventDate = new Date(Long.parseLong(event.getEventTimeStamp()) * 1000);
+        Date eventDate = new Date(Long.parseLong(event.getEventStartTimeStamp()) * 1000);
         return eventDate.before(currentDate);
     }
 
@@ -93,9 +97,9 @@ public class Utils {
         @Override
         public int compare(Event e1, Event e2) {
             if (reverse) {
-                return e2.getEventTimeStamp().compareTo(e1.getEventTimeStamp());
+                return e2.getEventStartTimeStamp().compareTo(e1.getEventStartTimeStamp());
             } else {
-                return e1.getEventTimeStamp().compareTo(e2.getEventTimeStamp());
+                return e1.getEventStartTimeStamp().compareTo(e2.getEventStartTimeStamp());
             }
         }
     }
@@ -142,20 +146,22 @@ public class Utils {
         requestOptions.placeholder(Utils.getRandomDrawbleColor());
         requestOptions.error(Utils.getRandomDrawbleColor());
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-
+        Log.d(TAG, "loadImage: "+imageUrl);
         Glide.with(context.getApplicationContext())
                 .load(imageUrl)
                 .apply(requestOptions)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        progressBar.setVisibility(View.GONE);
+                        if (progressBar != null) progressBar.setVisibility(View.GONE);
+                        Log.d(TAG, "onLoadFailed: ");
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        progressBar.setVisibility(View.GONE);
+                        if (progressBar != null) progressBar.setVisibility(View.GONE);
+                        Log.d(TAG, "onResourceReady: ");
                         return false;
                     }
                 })

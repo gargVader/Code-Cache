@@ -1,32 +1,24 @@
 package com.example.codechefeventsapp.fragments;
 
-import android.app.ActivityOptions;
-import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
-import com.example.codechefeventsapp.activities.EventDetailsActivity;
 import com.example.codechefeventsapp.adapters.PastEventAdapter;
 import com.example.codechefeventsapp.adapters.UpcomingEventAdapter;
 import com.example.codechefeventsapp.data.Utils;
@@ -37,8 +29,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 public class HomeFragment extends Fragment {
 
@@ -68,9 +58,20 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        initAnimation();
         initUpcomingEvents();
         initPastEvents();
         initViewModel();
+    }
+
+    void initAnimation() {
+        CardView cardView =  getView().findViewById(R.id.calendarCard);
+        cardView.setBackgroundResource(R.drawable.gradient_animation);
+        AnimationDrawable animationDrawable = (AnimationDrawable) cardView.getBackground();
+        animationDrawable.setEnterFadeDuration(10);
+        animationDrawable.setExitFadeDuration(3000);
+        animationDrawable.setOneShot(false);
+        animationDrawable.start();
     }
 
     private void initViewModel() {
@@ -115,7 +116,7 @@ public class HomeFragment extends Fragment {
     private void initPastEvents() {
         RecyclerView pastRecyclerView = getView().findViewById(R.id.pastRecyclerView);
         pastRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        pastEventAdapter = new PastEventAdapter(new ArrayList<>());
+        pastEventAdapter = new PastEventAdapter(new ArrayList<>(), getContext());
         pastRecyclerView.setAdapter(pastEventAdapter);
     }
 

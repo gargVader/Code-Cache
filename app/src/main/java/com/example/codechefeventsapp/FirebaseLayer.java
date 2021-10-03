@@ -1,5 +1,7 @@
 package com.example.codechefeventsapp;
 
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -21,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 /**
  * Singleton Class for all Firebase Operations
@@ -94,6 +94,10 @@ public class FirebaseLayer {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Event event = documentSnapshot.toObject(Event.class);
+                            if (documentSnapshot.getString("eventLongDescription") != null) {
+                                Log.d(TAG, "onSuccess: " + documentSnapshot.getString("eventLongDescription"));
+                                event.setEventLongDescription(documentSnapshot.getString("eventLongDescription").replace("  ", "\n\n"));
+                            }
                             event.setId(documentSnapshot.getId());
                             eventList.add(event);
                         }

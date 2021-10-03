@@ -53,13 +53,26 @@ public class EventDetailsActivity extends AppCompatActivity {
     void setViews() {
         eventTitle.setText(event.getEventTitle());
         eventLocation.setText(event.getEventLocation());
-        eventDate.setText(Utils.getDateFull(event.getEventTimeStamp()));
-        eventTime.setText(Utils.getTime(event.getEventTimeStamp()));
+        eventDate.setText(Utils.getDateFull(event.getEventStartTimeStamp()));
+        eventTime.setText(Utils.getTime(event.getEventStartTimeStamp()));
         if (event.getEventImageUrl() != null) {
             Utils.loadImage(this, event.getEventImageUrl(), eventImage, progressBar);
         } else {
             eventImage.setImageResource(R.drawable.laptop);
         }
+        if (isUseable(event.getEventLongDescription())) {
+            eventDescription.setVisibility(View.VISIBLE);
+            eventDescription.setText(event.getEventLongDescription());
+        } else if (isUseable(event.getEventShortDescription())) {
+            eventDescription.setVisibility(View.VISIBLE);
+            eventDescription.setText(event.getEventShortDescription());
+        } else {
+            eventDescription.setVisibility(View.GONE);
+        }
+    }
+
+    boolean isUseable(String string) {
+        return string != null && !(string.trim().isEmpty());
     }
 
 }

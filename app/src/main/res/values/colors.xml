@@ -57,4 +57,9 @@
 
     <color name="barGraphColor">#3D7EEC</color>
 
+    <color name="colorTransparent">#00FFFFFF</color>
+    <color name="colorGradientStart">#FC466B</color>
+    <color name="colorGradientCenter">#9353BA</color>
+    <color name="colorGradientEnd">#3F5EFB</color>
+
 </resources>

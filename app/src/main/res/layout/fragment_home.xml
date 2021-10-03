@@ -28,12 +28,47 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/upcomingRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_upcomingEvents" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/calendarCard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/gradient_animation"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/upcomingRecyclerView">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        style="@style/textStyleRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Calendar"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/text_pastEvents"
@@ -46,7 +81,7 @@
                 android:textColor="@color/colorTextWhite"
                 android:textSize="@dimen/_20ssp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/upcomingRecyclerView" />
+                app:layout_constraintTop_toBottomOf="@+id/calendarCard" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pastRecyclerView"
@@ -54,7 +89,7 @@
                 android:layout_height="0dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@id/text_pastEvents"
-                tools:listitem="@layout/event_item_past" />
+                tools:listitem="@layout/event_item_past2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
