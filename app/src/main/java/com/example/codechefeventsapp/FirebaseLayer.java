@@ -95,7 +95,6 @@ public class FirebaseLayer {
                         for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             Event event = documentSnapshot.toObject(Event.class);
                             if (documentSnapshot.getString("eventLongDescription") != null) {
-                                Log.d(TAG, "onSuccess: " + documentSnapshot.getString("eventLongDescription"));
                                 event.setEventLongDescription(documentSnapshot.getString("eventLongDescription").replace("  ", "\n\n"));
                             }
                             event.setId(documentSnapshot.getId());

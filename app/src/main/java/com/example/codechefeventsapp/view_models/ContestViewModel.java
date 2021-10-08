@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData;
 import com.example.codechefeventsapp.data.models.Contest;
 import com.example.codechefeventsapp.data.repositories.ContestRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
@@ -45,4 +46,9 @@ public class ContestViewModel extends AndroidViewModel {
     public void getContestsFromAPIAndStore() {
         contestRepository.makeAPICallAndStore();
     }
+
+    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters){
+        return contestRepository.getFilteredContests(selectedFilters);
+    }
+
 }

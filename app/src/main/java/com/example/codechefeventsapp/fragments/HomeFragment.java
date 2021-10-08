@@ -92,6 +92,11 @@ public class HomeFragment extends Fragment {
                 }
                 Utils.sort(upcomingEventList);
                 Utils.reverseSort(pastEventList);
+
+                if (upcomingEventList.isEmpty()){
+
+                }
+
                 upcomingEventAdapter.setEventList(upcomingEventList);
                 pastEventAdapter.setEventList(pastEventList);
 //                Log.d(TAG, "onChanged: Upcoming=" + upcomingEventList.toString());

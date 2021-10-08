@@ -11,6 +11,7 @@ import com.example.codechefeventsapp.data.dao.ContestDao;
 import com.example.codechefeventsapp.data.database.ContestDatabase;
 import com.example.codechefeventsapp.data.models.Contest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,6 +49,11 @@ public class ContestRepository {
     public LiveData<List<Contest>> getAllContest() {
         return allContest;
     }
+
+    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters){
+        return contestDao.getFilteredContests(selectedFilters);
+    }
+
 
     private class InsertAsyncTask extends AsyncTask<Contest, Void, Void> {
         @Override
@@ -93,7 +99,6 @@ public class ContestRepository {
                         public void run() {
                             contestDao.deleteAll();
                             contestDao.insertAll(response.body());
-                            List<Contest> temp = response.body();
                         }
                     });
                     thread.start();

@@ -86,17 +86,18 @@
                 android:textSize="@dimen/_8ssp"
                 app:layout_constraintTop_toBottomOf="@id/eventTitle" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/eventYoutubeLinkLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_6sdp"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <ImageView
+                    android:id="@+id/ytbIcon"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
+                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:clickable="true"
                     android:src="@drawable/youtube" />
@@ -106,6 +107,7 @@
                     style="@style/textStyleRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/ytbIcon"
                     android:clickable="true"
                     android:padding="@dimen/_3sdp"
                     android:text="Watch session"
@@ -113,7 +115,18 @@
                     android:textSize="@dimen/_8ssp"
                     android:textStyle="bold" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/eventAgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/greyDate"
+                    android:textSize="@dimen/_8ssp"
+                    tools:text="13 days ago" />
+
+
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

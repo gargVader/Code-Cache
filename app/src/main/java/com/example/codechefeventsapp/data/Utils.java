@@ -1,12 +1,9 @@
 package com.example.codechefeventsapp.data;
 
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -71,9 +68,91 @@ public class Utils {
         return formatter.format(date);
     }
 
+    public static String getTimeElapsed(String eventTimeStamp) {
+        long start = Long.parseLong(eventTimeStamp) * 1000;
+        long end = System.currentTimeMillis();
+        long seconds = (end - start) / (1000);
+        return getDaysAgo(String.valueOf(seconds)) + " ago";
+    }
+
+
+    // %Y-%m-%dT%H:%M:%S.%LZ
+    // 2021-10-02T14:30:00.000Z
+    public static String getContestStartTime(String time) {
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm aaa MMM d, EEEE");
+        Date date = null;
+        try {
+            date = inputFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedDate = outputFormat.format(date);
+        return formattedDate;
+
+    }
+
+    public static boolean isContestLive(String startTime, String endTime) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        Date start = null, end = null;
+        try {
+            start = inputFormat.parse(startTime);
+            end = inputFormat.parse(endTime);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Date now = new Date();
+
+        return now.after(start) && now.before(end);
+    }
+
+
+    private static String getDaysAgo(String secondsString) {
+        Float seconds = Float.parseFloat(secondsString);
+        Float minutes = seconds / 60;
+        Float hours = minutes / 60;
+        Float days = hours / 24;
+        Float years = days / 365;
+
+        if (hours < 1) {
+            return Math.round(minutes) + " min";
+        }
+        if (days < 1) {
+            return Math.round(Math.floor(hours)) + " hours ";
+        }
+
+        if (years < 1) {
+            return Math.round(Math.floor(days)) + " days ";
+        }
+
+        return Math.round(Math.floor(years)) + " years ";
+    }
+
+
+    public static String getContestDuration(String secondsString) {
+        Float seconds = Float.parseFloat(secondsString);
+        Float minutes = seconds / 60;
+        Float hours = minutes / 60;
+        Float days = hours / 24;
+        Float years = days / 365;
+
+        if (hours < 1) {
+            return Math.round(minutes) + " min";
+        }
+        if (days < 1) {
+            return Math.round(Math.floor(hours)) + " hours " + ((minutes % 60 > 0) ? (Math.round(minutes % 60) + " min") : "");
+        }
+
+        if (years < 1) {
+            return Math.round(Math.floor(days)) + " days " + ((hours % 24 > 0) ? (Math.round(hours % 24) + " h") : "");
+        }
+
+        return Math.round(Math.floor(years)) + " years " + ((days % 365 > 0) ? (Math.round(days % 365) + " days") : "");
+    }
+
     public static boolean isPastEvent(Event event) {
         if (event.getEventStartTimeStamp() == null) {
-            Log.d(TAG, event.toString());
         }
         Date currentDate = new Date(System.currentTimeMillis());
         Date eventDate = new Date(Long.parseLong(event.getEventStartTimeStamp()) * 1000);
@@ -138,7 +217,6 @@ public class Utils {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.placeholder(new ColorDrawable(Color.parseColor(getRandomDrawableColor())));
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-        Log.d(TAG, "loadImage: " + imageUrl);
         Glide.with(context.getApplicationContext())
                 .load(imageUrl)
                 .apply(requestOptions)
@@ -146,14 +224,12 @@ public class Utils {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                         if (progressBar != null) progressBar.setVisibility(View.GONE);
-                        Log.d(TAG, "onLoadFailed: ");
                         return false;
                     }
 
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         if (progressBar != null) progressBar.setVisibility(View.GONE);
-                        Log.d(TAG, "onResourceReady: ");
                         return false;
                     }
                 })

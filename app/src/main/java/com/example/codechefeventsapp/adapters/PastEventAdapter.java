@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
         holder.eventTitle.setText(event.getEventTitle());
         holder.eventDay.setText(Utils.getDay(event.getEventStartTimeStamp()));
         holder.eventMonth.setText(Utils.getMonth(event.getEventStartTimeStamp()));
+        holder.eventAgo.setText(Utils.getTimeElapsed(event.getEventStartTimeStamp()));
         if (isUseable(event.getEventShortDescription())) {
             holder.eventDescription.setVisibility(View.VISIBLE);
             holder.eventDescription.setText(event.getEventShortDescription());
@@ -63,13 +65,15 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
             holder.eventDescription.setVisibility(View.GONE);
         }
         if (isUseable(event.getEventRecLink())) {
-            holder.eventYoutubeLinkLayout.setVisibility(View.VISIBLE);
+            holder.ytbIcon.setVisibility(View.VISIBLE);
+            holder.eventYoutubeLink.setVisibility(View.VISIBLE);
             holder.eventYoutubeLink.setClickable(true);
             holder.eventYoutubeLink.setMovementMethod(LinkMovementMethod.getInstance());
             String text = "<a href='"+event.getEventRecLink()+"'>Watch Session </a>";
             holder.eventYoutubeLink.setText(Html.fromHtml(text));
         } else {
-            holder.eventYoutubeLinkLayout.setVisibility(View.GONE);
+            holder.ytbIcon.setVisibility(View.INVISIBLE);
+            holder.eventYoutubeLink.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -83,9 +87,9 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
     }
 
     class PastEventViewHolder extends RecyclerView.ViewHolder {
-        TextView eventTitle, eventMonth, eventDay, eventDescription, eventYoutubeLink;
-        LinearLayout eventYoutubeLinkLayout;
-        ImageView eventImage;
+        TextView eventTitle, eventMonth, eventDay, eventDescription, eventYoutubeLink, eventAgo;
+        RelativeLayout eventYoutubeLinkLayout;
+        ImageView eventImage, ytbIcon;
         //ImageView eventImage;
 
         public PastEventViewHolder(@NonNull @NotNull View itemView) {
@@ -97,6 +101,8 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
             eventYoutubeLinkLayout = itemView.findViewById(R.id.eventYoutubeLinkLayout);
             eventYoutubeLink = itemView.findViewById(R.id.eventYoutubeLink);
             eventImage = itemView.findViewById(R.id.eventImage);
+            eventAgo = itemView.findViewById(R.id.eventAgo);
+            ytbIcon = itemView.findViewById(R.id.ytbIcon);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

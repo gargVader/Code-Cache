@@ -10,6 +10,7 @@ import androidx.room.Update;
 
 import com.example.codechefeventsapp.data.models.Contest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -31,5 +32,10 @@ public interface ContestDao {
 
     @Query("DELETE FROM contest_table")
     public void deleteAll();
+
+    @Query("SELECT * FROM contest_table WHERE contestSite IN (:selectedFilters)")
+    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters);
+
+
 
 }

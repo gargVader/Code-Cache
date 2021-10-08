@@ -50,7 +50,7 @@
                         <ImageView
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
-                            android:src="@drawable/codechef_icon"
+                            android:src="@drawable/cc_icon_white"
                             app:tint="@color/white" />
 
                         <TextView
@@ -93,7 +93,7 @@
                         <ImageView
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
-                            android:src="@drawable/atcoder_icon"
+                            android:src="@drawable/atcoder_icon_white"
                             app:tint="@color/white" />
 
                         <TextView
@@ -157,7 +157,7 @@
                         <ImageView
                             android:layout_width="@dimen/_25sdp"
                             android:layout_height="@dimen/_25sdp"
-                            android:src="@drawable/hackerearth_icon"
+                            android:src="@drawable/hackerearth_icon_white"
                             app:tint="@color/white" />
 
                         <TextView

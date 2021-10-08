@@ -36,8 +36,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_upcomingEvents" />
 
-
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/calendarCard"
                 android:layout_width="match_parent"
