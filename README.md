@@ -4,6 +4,29 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 App to display events organised in college
 
+# Screenshots
+
+<p align="center">
+  <img width="300" src="Screenshots/1.png" />
+  <img width="300" src="Screenshots/2.png" />
+  </p>
+  
+<p align="center">
+  <img width="300" src="Screenshots/3.png" />
+  <img width="300" src="Screenshots/4.png"/>
+  <img width="300" src="Screenshots/5.png" />
+  <img width="300" src="Screenshots/6.png" />
+  <img width="300" src="Screenshots/7.png" />
+  <img width="300" src="Screenshots/8.png"/>
+</p>
+
+  
+<p align="center">
+   <img width="300" src="Screenshots/9.png" />
+  <img width="300" src="Screenshots/10.png"/>
+</p>
+
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
