@@ -27,12 +27,11 @@
             android:id="@+id/eventImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scaleType="centerCrop"
             android:transitionName="eventImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/event_poster"
-            android:scaleType="centerCrop"
-             />
+            android:src="@android:color/holo_purple" />
 
         <ImageView
             android:id="@+id/shadow_bottom"
@@ -40,8 +39,7 @@
             android:layout_height="120dp"
             android:layout_gravity="bottom"
             android:src="@drawable/bottom_shadow"
-            app:layout_constraintBottom_toBottomOf="parent"
-             />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <TextView
@@ -64,10 +62,10 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            tools:text="Sunday, 6:00 PM"
             android:textColor="@color/white"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Sunday, 6:00 PM" />
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"

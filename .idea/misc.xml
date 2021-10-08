@@ -10,10 +10,11 @@
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/drawable/gradient_start.xml" value="0.11018518518518519" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/activity_event_details.xml" value="0.25" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/contest_item.xml" value="0.17685185185185184" />
+        <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/contest_item.xml" value="0.33" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/event_item_past.xml" value="0.33" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/event_item_past2.xml" value="0.5" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/event_item_upcoming.xml" value="0.33" />
+        <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/fragment_contest.xml" value="0.36666666666666664" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/fragment_home.xml" value="0.32805219012115566" />
         <entry key="..\:/Manu/Android Projects/Codechef App/CodechefEventsApp/app/src/main/res/layout/splash_screen.xml" value="0.22" />
       </map>

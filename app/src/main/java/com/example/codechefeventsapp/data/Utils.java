@@ -1,5 +1,7 @@
 package com.example.codechefeventsapp.data;
 
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -30,7 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.TimeZone;
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
 public class Utils {
 
     public static String getDate(String eventTimeStamp) {
@@ -70,7 +72,7 @@ public class Utils {
     }
 
     public static boolean isPastEvent(Event event) {
-        if(event.getEventStartTimeStamp()==null){
+        if (event.getEventStartTimeStamp() == null) {
             Log.d(TAG, event.toString());
         }
         Date currentDate = new Date(System.currentTimeMillis());
@@ -123,19 +125,10 @@ public class Utils {
         return formattedDate;
     }
 
-    public static ColorDrawable[] vibrantLightColorList =
-            {
-                    new ColorDrawable(Color.parseColor("#ffeead")),
-                    new ColorDrawable(Color.parseColor("#93cfb3")),
-                    new ColorDrawable(Color.parseColor("#fd7a7a")),
-                    new ColorDrawable(Color.parseColor("#faca5f")),
-                    new ColorDrawable(Color.parseColor("#1ba798")),
-                    new ColorDrawable(Color.parseColor("#6aa9ae")),
-                    new ColorDrawable(Color.parseColor("#ffbf27")),
-                    new ColorDrawable(Color.parseColor("#d93947"))
-            };
+    public static String[] vibrantLightColorList = {"#ffeead", "#93cfb3", "#fd7a7a", "#faca5f",
+            "#1ba798", "#6aa9ae", "#ffbf27", "#d93947"};
 
-    public static ColorDrawable getRandomDrawbleColor() {
+    public static String getRandomDrawableColor() {
         int idx = new Random().nextInt(vibrantLightColorList.length);
         return vibrantLightColorList[idx];
     }
@@ -143,10 +136,9 @@ public class Utils {
     public static void loadImage(Context context, String imageUrl, ImageView imageView, ProgressBar progressBar) {
         // Setting up Glide
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(Utils.getRandomDrawbleColor());
-        requestOptions.error(Utils.getRandomDrawbleColor());
+        requestOptions.placeholder(new ColorDrawable(Color.parseColor(getRandomDrawableColor())));
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-        Log.d(TAG, "loadImage: "+imageUrl);
+        Log.d(TAG, "loadImage: " + imageUrl);
         Glide.with(context.getApplicationContext())
                 .load(imageUrl)
                 .apply(requestOptions)
