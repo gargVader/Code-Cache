@@ -57,14 +57,27 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/shakeText"
+                    style="@style/textStyleRegular"
+                    android:textColor="#969696"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/shake_icon"
+                    android:text="Shake your phone to register"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/eventTitle" />
+
+
                 <!-- Date Layout -->
                 <LinearLayout
                     android:id="@+id/dateLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/eventTitle">
+                    app:layout_constraintTop_toBottomOf="@id/shakeText">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -134,10 +147,10 @@
                 <TextView
                     android:id="@+id/eventDescription"
                     style="@style/textStyleRegular"
-                    android:autoLink="web"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:autoLink="web"
                     android:text="@string/longString"
                     android:textColor="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
