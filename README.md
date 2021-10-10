@@ -4,6 +4,12 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 App to display events organised in college
 
+* Get a list of all the upcoming and past events coducted by the various chapters at college
+* Get all the details regarding an event including the youtube link and meeting link
+* Shake your phone to register for an event
+* Know about the upcoming coding contests on your favourite platform
+* Keep track of your progress with an in-depth profile analysis  
+
 # Screenshots
 
 <p align="center">
