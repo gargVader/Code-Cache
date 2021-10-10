@@ -23,6 +23,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
 
     private Button registerB;
     Event event;
+    ShakeDetector sd = new ShakeDetector(this);
 
     ImageView eventImage;
     TextView eventTitle, eventDate, eventTime, eventDescription, eventLocation;
@@ -50,8 +51,6 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
                 registerUserForEvent();
             }
         });
-
-        initSensor();
     }
 
     void registerUserForEvent() {
@@ -88,9 +87,20 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
         vibratePhone();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sd.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initSensor();
+    }
+
     void initSensor() {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        ShakeDetector sd = new ShakeDetector(this);
         sd.setSensitivity(10);
         sd.start(sensorManager);
     }
