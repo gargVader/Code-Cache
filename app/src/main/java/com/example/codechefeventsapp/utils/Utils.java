@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.data;
+package com.example.codechefeventsapp.utils;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -31,6 +31,9 @@ import java.util.Random;
 import java.util.TimeZone;
 
 public class Utils {
+
+    public static String[] vibrantLightColorList = {"#ffeead", "#93cfb3", "#fd7a7a", "#faca5f",
+            "#1ba798", "#6aa9ae", "#ffbf27", "#d93947"};
 
     public static String getDate(String eventTimeStamp) {
         Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
@@ -75,7 +78,6 @@ public class Utils {
         return getDaysAgo(String.valueOf(seconds)) + " ago";
     }
 
-
     // %Y-%m-%dT%H:%M:%S.%LZ
     // 2021-10-02T14:30:00.000Z
     public static String getContestStartTime(String time) {
@@ -107,7 +109,6 @@ public class Utils {
         return now.after(start) && now.before(end);
     }
 
-
     private static String getDaysAgo(String secondsString) {
         Float seconds = Float.parseFloat(secondsString);
         Float minutes = seconds / 60;
@@ -128,7 +129,6 @@ public class Utils {
 
         return Math.round(Math.floor(years)) + " years ";
     }
-
 
     public static String getContestDuration(String secondsString) {
         Float seconds = Float.parseFloat(secondsString);
@@ -159,32 +159,6 @@ public class Utils {
         return eventDate.before(currentDate);
     }
 
-    public static class Constants {
-        public static String userEmail = "xyz@gmail.com";
-        //public static GoogleSignInAccount account;
-    }
-
-    static class SortByTimeStamp implements Comparator<Event> {
-
-        boolean reverse = false;
-
-        public SortByTimeStamp(boolean reverse) {
-            this.reverse = reverse;
-        }
-
-        public SortByTimeStamp() {
-        }
-
-        @Override
-        public int compare(Event e1, Event e2) {
-            if (reverse) {
-                return e2.getEventStartTimeStamp().compareTo(e1.getEventStartTimeStamp());
-            } else {
-                return e1.getEventStartTimeStamp().compareTo(e2.getEventStartTimeStamp());
-            }
-        }
-    }
-
     public static void sort(List<Event> eventList) {
         Collections.sort(eventList, new SortByTimeStamp());
     }
@@ -192,7 +166,6 @@ public class Utils {
     public static void reverseSort(List<Event> eventList) {
         Collections.sort(eventList, new SortByTimeStamp(true));
     }
-
 
     public static String getFormattedDate(String dateStr) throws ParseException {
         //String dateStr = "Jul 16, 2013 12:08:59 AM";
@@ -203,9 +176,6 @@ public class Utils {
         String formattedDate = df.format(date);
         return formattedDate;
     }
-
-    public static String[] vibrantLightColorList = {"#ffeead", "#93cfb3", "#fd7a7a", "#faca5f",
-            "#1ba798", "#6aa9ae", "#ffbf27", "#d93947"};
 
     public static String getRandomDrawableColor() {
         int idx = new Random().nextInt(vibrantLightColorList.length);
@@ -235,6 +205,32 @@ public class Utils {
                 })
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageView);
+    }
+
+    public static class Constants {
+        public static String userEmail = "xyz@gmail.com";
+        //public static GoogleSignInAccount account;
+    }
+
+    static class SortByTimeStamp implements Comparator<Event> {
+
+        boolean reverse = false;
+
+        public SortByTimeStamp(boolean reverse) {
+            this.reverse = reverse;
+        }
+
+        public SortByTimeStamp() {
+        }
+
+        @Override
+        public int compare(Event e1, Event e2) {
+            if (reverse) {
+                return e2.getEventStartTimeStamp().compareTo(e1.getEventStartTimeStamp());
+            } else {
+                return e1.getEventStartTimeStamp().compareTo(e2.getEventStartTimeStamp());
+            }
+        }
     }
 
 

@@ -15,10 +15,6 @@ import java.util.Set;
 @Entity(tableName = "event_table")
 public class Event implements Serializable {
 
-    @PrimaryKey(autoGenerate = false)
-    @NonNull
-    private String id;
-
     @SerializedName("eventTitle")
     String eventTitle;
     @SerializedName("eventLocation")
@@ -40,6 +36,9 @@ public class Event implements Serializable {
     @TypeConverters(MyTypeConverter.class)
     @SerializedName("eventAttendees")
     Set<User> eventAttendees;
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    private String id;
 
     public Event(String eventTitle, String eventLocation, String eventTimeStamp, String eventImageUrl) {
         this.id = id;

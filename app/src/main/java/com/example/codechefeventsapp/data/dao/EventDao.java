@@ -16,22 +16,22 @@ import java.util.List;
 public interface EventDao {
 
     @Query("SELECT * FROM event_table")
-    public LiveData<List<Event>> getAllEvents();
+    LiveData<List<Event>> getAllEvents();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(Event event);
+    void insert(Event event);
 
     @Delete
-    public void delete(Event event);
+    void delete(Event event);
 
     @Update
-    public void update(Event event);
+    void update(Event event);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertAll(List<Event> eventList);
+    void insertAll(List<Event> eventList);
 
     @Query("DELETE FROM event_table")
-    public void deleteAll();
+    void deleteAll();
 
 
 }

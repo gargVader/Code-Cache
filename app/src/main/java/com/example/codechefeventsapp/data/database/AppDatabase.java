@@ -18,10 +18,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase instance;
 
-    public abstract ContestDao getContestDao();
-    public abstract EventDao getEventDao();
-    public abstract UserDao getUserDao();
-
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context, AppDatabase.class, "app_database")
@@ -30,4 +26,10 @@ public abstract class AppDatabase extends RoomDatabase {
         }
         return instance;
     }
+
+    public abstract ContestDao getContestDao();
+
+    public abstract EventDao getEventDao();
+
+    public abstract UserDao getUserDao();
 }

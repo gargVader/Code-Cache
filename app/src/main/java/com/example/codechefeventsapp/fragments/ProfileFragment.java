@@ -48,27 +48,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.database.collection.LLRBNode;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileFragment extends Fragment {
 
+    public static int RC_SIGN_IN = 1;
     ConstraintLayout signInLayout;
     ConstraintLayout profileLayout;
     SignInButton signInButton;
-
-    private GoogleSignInClient googleSignInClient;
-    public static int RC_SIGN_IN = 1;
-    private FirebaseAuth auth;
-    private FirebaseUser currentUser;
-
     TextView user_name;
     ImageView user_image;
     PieChart pieChart;
     LineChart lineChart;
-
+    private GoogleSignInClient googleSignInClient;
+    private FirebaseAuth auth;
+    private FirebaseUser currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -157,7 +152,7 @@ public class ProfileFragment extends Fragment {
         String email = currentUser.getEmail();
         Uri photoUrl = currentUser.getPhotoUrl();
         String uid = currentUser.getUid();
-        String photoUrlString= photoUrl.toString().replace("s96-c", "s400-c");
+        String photoUrlString = photoUrl.toString().replace("s96-c", "s400-c");
 
         user_name.setText(name);
         Glide.with(this)
@@ -169,7 +164,7 @@ public class ProfileFragment extends Fragment {
         initRatingGraph();
     }
 
-    private void signIn() {
+    public void signIn() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -259,7 +254,7 @@ public class ProfileFragment extends Fragment {
         LineDataSet set2 = new LineDataSet(yVals2, "Data Set 2");
         set1.setFillAlpha(110);
         set2.setFillAlpha(110);
-       // lineChart.moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration);
+        // lineChart.moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration);
         ArrayList<ILineDataSet> datasets = new ArrayList<>();
         datasets.add(set1);
         datasets.add(set2);

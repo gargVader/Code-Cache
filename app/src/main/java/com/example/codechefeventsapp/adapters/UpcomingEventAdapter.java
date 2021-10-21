@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.activities.EventDetailsActivity;
-import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
+import com.example.codechefeventsapp.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -59,6 +59,20 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
         return eventList.size();
     }
 
+    public void setEventList(List<Event> eventList) {
+//        Log.d(TAG, "setEventList: upcoming");
+        this.eventList = eventList;
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
+    }
+
     class UpcomingEventViewHolder extends RecyclerView.ViewHolder {
         ImageView eventImage;
         TextView eventTitle, eventDay, eventMonth, eventTime;
@@ -85,20 +99,6 @@ public class UpcomingEventAdapter extends RecyclerView.Adapter<UpcomingEventAdap
                 }
             });
         }
-    }
-
-    public void setEventList(List<Event> eventList) {
-//        Log.d(TAG, "setEventList: upcoming");
-        this.eventList = eventList;
-        notifyDataSetChanged();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(Event event);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 
 }

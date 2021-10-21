@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.adapters.PastEventAdapter;
 import com.example.codechefeventsapp.adapters.UpcomingEventAdapter;
-import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
+import com.example.codechefeventsapp.utils.Utils;
 import com.example.codechefeventsapp.view_models.EventViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -65,7 +64,7 @@ public class HomeFragment extends Fragment {
     }
 
     void initAnimation() {
-        CardView cardView =  getView().findViewById(R.id.calendarCard);
+        CardView cardView = getView().findViewById(R.id.calendarCard);
         cardView.setBackgroundResource(R.drawable.gradient_animation);
         AnimationDrawable animationDrawable = (AnimationDrawable) cardView.getBackground();
         animationDrawable.setEnterFadeDuration(10);
@@ -93,7 +92,7 @@ public class HomeFragment extends Fragment {
                 Utils.sort(upcomingEventList);
                 Utils.reverseSort(pastEventList);
 
-                if (upcomingEventList.isEmpty()){
+                if (upcomingEventList.isEmpty()) {
 
                 }
 

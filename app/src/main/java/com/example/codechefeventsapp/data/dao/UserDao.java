@@ -15,13 +15,15 @@ import java.util.List;
 public interface UserDao {
     @Insert
     void insert(User user);
+
     @Update
     void update(User user);
+
     @Delete
     void delete(User user);
 
     @Query("DELETE FROM user_table")
-    public void deleteAll();
+    void deleteAll();
 
     @Query("SELECT * FROM user_table where email LIKE :email")
     LiveData<List<User>> getUser(String email);

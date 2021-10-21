@@ -22,7 +22,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Singleton Class for all Firebase Operations
@@ -30,9 +32,11 @@ import java.util.List;
 public class FirebaseLayer {
 
     public static final String EVENT_COLLECTION_ID = "EventCollection";
+    public static final String EVENT_REG_COLLECTION_ID = "EventRegCollection";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference eventCollection = db.collection(EVENT_COLLECTION_ID);
+    private CollectionReference eventRegCollection = db.collection(EVENT_REG_COLLECTION_ID);
     private static FirebaseLayer instance;
     private FirebaseListener firebaseListener;
 
@@ -115,6 +119,29 @@ public class FirebaseLayer {
     public void setFirebaseListener(FirebaseListener firebaseListener) {
         this.firebaseListener = firebaseListener;
     }
+
+    public void registerUserForEvent(String userId, String eventId) {
+        eventRegCollection.document(eventId).get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        Map<String, Object> eventRegMap = documentSnapshot.getData();
+                        if (eventRegMap == null) {
+                            eventRegMap = new HashMap<>();
+                        }
+                        eventRegMap.put(userId, true);
+                        eventRegCollection.document(eventId).set(eventRegMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d(TAG, "onSuccess: registered");
+                            }
+                        });
+                    }
+                });
+
+
+    }
+
 
     public interface FirebaseListener {
         void onGetSuccess(List<Event> eventList);

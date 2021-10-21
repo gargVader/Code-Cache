@@ -16,26 +16,25 @@ import java.util.List;
 @Dao
 public interface ContestDao {
     @Query("SELECT * FROM contest_table")
-    public LiveData<List<Contest>> getAllContest();
+    LiveData<List<Contest>> getAllContest();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insert(Contest contest);
+    void insert(Contest contest);
 
     @Delete
-    public void delete(Contest contest);
+    void delete(Contest contest);
 
     @Update
-    public void update(Contest contest);
+    void update(Contest contest);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertAll(List<Contest> contestList);
+    void insertAll(List<Contest> contestList);
 
     @Query("DELETE FROM contest_table")
-    public void deleteAll();
+    void deleteAll();
 
     @Query("SELECT * FROM contest_table WHERE contestSite IN (:selectedFilters)")
-    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters);
-
+    LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters);
 
 
 }

@@ -1,7 +1,7 @@
 package com.example.codechefeventsapp.fragments;
 
-import static com.example.codechefeventsapp.data.Constants.*;
-
+import static com.example.codechefeventsapp.data.Constants.getDefault;
+import static com.example.codechefeventsapp.data.Constants.sites;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -32,9 +32,9 @@ import com.example.codechefeventsapp.data.models.Contest;
 import com.example.codechefeventsapp.view_models.ContestViewModel;
 
 import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ContestFragment extends Fragment {
 
@@ -157,8 +157,8 @@ public class ContestFragment extends Fragment {
     ArrayList<String> generateSelectedFiltersArrayList() {
         isSiteSelected = generateArrayFromSharedPref();
         ArrayList<String> arrayList = new ArrayList<>();
-        for(int i=0; i<sites.length; i++){
-            if(isSiteSelected[i]) arrayList.add(sites[i]);
+        for (int i = 0; i < sites.length; i++) {
+            if (isSiteSelected[i]) arrayList.add(sites[i]);
         }
         return arrayList;
     }

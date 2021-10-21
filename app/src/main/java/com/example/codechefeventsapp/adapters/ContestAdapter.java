@@ -13,8 +13,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
-import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Contest;
+import com.example.codechefeventsapp.utils.Utils;
 
 import java.util.List;
 
@@ -48,10 +48,10 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
         holder.contestStartTime.setText(Utils.getContestStartTime(contest.getContestStartTime()));
         holder.contestDuration.setText(Utils.getContestDuration(contest.getContestDuration()));
         setContestIcon(contest.getContestSite(), holder);
-        if (Utils.isContestLive(contest.getContestStartTime(), contest.getContestEndTime())){
+        if (Utils.isContestLive(contest.getContestStartTime(), contest.getContestEndTime())) {
             Log.d("Codechef", "onBindViewHolder: isLive=true");
             holder.contestLiveCard.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             Log.d("Codechef", "onBindViewHolder: isLive=false");
             holder.contestLiveCard.setVisibility(View.GONE);
         }
@@ -98,6 +98,14 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
         return contestList.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Contest contest);
+    }
+
     protected class ContestViewHolder extends RecyclerView.ViewHolder {
 
         public TextView contestName, contestUrl, contestStartTime, contestEndTime, contestDuration, contestSite, contestIn24Hours, contestStatus;
@@ -120,14 +128,6 @@ public class ContestAdapter extends RecyclerView.Adapter<ContestAdapter.ContestV
                 }
             });
         }
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(Contest contest);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 
 }

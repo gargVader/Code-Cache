@@ -22,9 +22,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ContestRepository {
 
-    private ContestDao contestDao;
+    private final ContestDao contestDao;
     private ContestApi contestApi;
-    private LiveData<List<Contest>> allContest;
+    private final LiveData<List<Contest>> allContest;
 
     public ContestRepository(Application application) {
         contestDao = AppDatabase.getInstance(application).getContestDao();
@@ -47,33 +47,8 @@ public class ContestRepository {
         return allContest;
     }
 
-    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters){
+    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters) {
         return contestDao.getFilteredContests(selectedFilters);
-    }
-
-
-    private class InsertAsyncTask extends AsyncTask<Contest, Void, Void> {
-        @Override
-        protected Void doInBackground(Contest... contests) {
-            contestDao.insert(contests[0]);
-            return null;
-        }
-    }
-
-    private class UpdateAsyncTask extends AsyncTask<Contest, Void, Void> {
-        @Override
-        protected Void doInBackground(Contest... contests) {
-            contestDao.update(contests[0]);
-            return null;
-        }
-    }
-
-    private class DeleteAsyncTask extends AsyncTask<Contest, Void, Void> {
-        @Override
-        protected Void doInBackground(Contest... contests) {
-            contestDao.delete(contests[0]);
-            return null;
-        }
     }
 
     public void makeAPICallAndStore() {
@@ -108,5 +83,29 @@ public class ContestRepository {
             }
         });
 
+    }
+
+    private class InsertAsyncTask extends AsyncTask<Contest, Void, Void> {
+        @Override
+        protected Void doInBackground(Contest... contests) {
+            contestDao.insert(contests[0]);
+            return null;
+        }
+    }
+
+    private class UpdateAsyncTask extends AsyncTask<Contest, Void, Void> {
+        @Override
+        protected Void doInBackground(Contest... contests) {
+            contestDao.update(contests[0]);
+            return null;
+        }
+    }
+
+    private class DeleteAsyncTask extends AsyncTask<Contest, Void, Void> {
+        @Override
+        protected Void doInBackground(Contest... contests) {
+            contestDao.delete(contests[0]);
+            return null;
+        }
     }
 }

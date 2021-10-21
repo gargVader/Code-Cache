@@ -14,10 +14,10 @@ import java.util.List;
 
 public class EventRepository implements FirebaseLayer.FirebaseListener {
 
-    private EventDao eventDao;
-    private LiveData<List<Event>> allEvent;
     Application application;
     FirebaseLayer firebaseLayer;
+    private final EventDao eventDao;
+    private final LiveData<List<Event>> allEvent;
 
     public EventRepository(Application application) {
         this.application = application;
@@ -50,6 +50,43 @@ public class EventRepository implements FirebaseLayer.FirebaseListener {
     public LiveData<List<Event>> getAllEvent() {
         return allEvent;
     }
+
+    public void makeFirebaseCallAndStore() {
+//        Log.d(TAG, "makeFirebaseCallAndStore: ");
+        firebaseLayer.getAllEvents();
+
+    }
+
+    /**
+     * FirebaseListener Callback methods
+     */
+    @Override
+    public void onGetSuccess(List<Event> eventList) {
+        deleteAll();
+        insertAll(eventList);
+    }
+
+    @Override
+    public void onGetFailure() {
+
+    }
+
+    @Override
+    public void onDocumentAdded(Event event) {
+        insert(event);
+    }
+
+    @Override
+    public void onDocumentModified(Event event) {
+        update(event);
+    }
+
+    @Override
+    public void onDocumentRemoved(Event event) {
+        delete(event);
+    }
+
+    /*********************************************************************************************/
 
     private class InsertAsyncTask extends AsyncTask<Event, Void, Void> {
         @Override
@@ -89,41 +126,6 @@ public class EventRepository implements FirebaseLayer.FirebaseListener {
             eventDao.deleteAll();
             return null;
         }
-    }
-
-
-    public void makeFirebaseCallAndStore() {
-//        Log.d(TAG, "makeFirebaseCallAndStore: ");
-        firebaseLayer.getAllEvents();
-
-    }
-
-    /*********************************************************************************************/
-    /**FirebaseListener Callback methods*/
-    @Override
-    public void onGetSuccess(List<Event> eventList) {
-        deleteAll();
-        insertAll(eventList);
-    }
-
-    @Override
-    public void onGetFailure() {
-
-    }
-
-    @Override
-    public void onDocumentAdded(Event event) {
-        insert(event);
-    }
-
-    @Override
-    public void onDocumentModified(Event event) {
-        update(event);
-    }
-
-    @Override
-    public void onDocumentRemoved(Event event) {
-        delete(event);
     }
     /**FirebaseListener Callback methods*/
     /*********************************************************************************************/

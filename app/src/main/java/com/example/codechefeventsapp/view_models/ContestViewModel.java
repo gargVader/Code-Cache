@@ -1,5 +1,7 @@
 package com.example.codechefeventsapp.view_models;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -13,12 +15,10 @@ import com.example.codechefeventsapp.data.repositories.ContestRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
-
 public class ContestViewModel extends AndroidViewModel {
 
-    private LiveData<List<Contest>> allContests;
-    private ContestRepository contestRepository;
+    private final LiveData<List<Contest>> allContests;
+    private final ContestRepository contestRepository;
 
     public ContestViewModel(@NonNull Application application) {
         super(application);
@@ -47,7 +47,7 @@ public class ContestViewModel extends AndroidViewModel {
         contestRepository.makeAPICallAndStore();
     }
 
-    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters){
+    public LiveData<List<Contest>> getFilteredContests(ArrayList<String> selectedFilters) {
         return contestRepository.getFilteredContests(selectedFilters);
     }
 

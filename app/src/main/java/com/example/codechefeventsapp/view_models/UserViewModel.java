@@ -14,15 +14,17 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private LiveData<List<User>> user;
-    private LiveData<List<User>> allUsers;
-    private UserRepository repository;
+    private final LiveData<List<User>> user;
+    private final LiveData<List<User>> allUsers;
+    private final UserRepository repository;
+
     public UserViewModel(@NonNull @NotNull Application application) {
         super(application);
         repository = new UserRepository(application);
         user = repository.getUser();
         allUsers = repository.getAllUsers();
     }
+
     public void insert(User user) {
         repository.insert(user);
     }

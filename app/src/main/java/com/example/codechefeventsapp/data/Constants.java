@@ -17,7 +17,7 @@ public final class Constants {
             "TopCoder"
     };
 
-     public static final Map<String, Boolean> getDefault = new HashMap<String, Boolean>() {{
+    public static final Map<String, Boolean> getDefault = new HashMap<String, Boolean>() {{
         put(sites[0], true);
         put(sites[1], true);
         put(sites[2], true);

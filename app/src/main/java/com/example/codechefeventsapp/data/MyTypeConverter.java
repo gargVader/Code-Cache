@@ -15,15 +15,16 @@ public class MyTypeConverter {
     static Gson gson = new Gson();
 
     @TypeConverter
-    public static Set<User> stringToSetOfUsers(String data){
-        if(data==null) return Collections.emptySet();
+    public static Set<User> stringToSetOfUsers(String data) {
+        if (data == null) return Collections.emptySet();
 
-        Type setType = new TypeToken<Set<User>>(){}.getType();
+        Type setType = new TypeToken<Set<User>>() {
+        }.getType();
         return gson.fromJson(data, setType);
     }
 
     @TypeConverter
-    public static String SetOfUsersToString(Set<User> userSet){
+    public static String SetOfUsersToString(Set<User> userSet) {
         return gson.toJson(userSet);
     }
 

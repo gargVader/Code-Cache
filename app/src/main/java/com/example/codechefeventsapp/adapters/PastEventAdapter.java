@@ -4,12 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,11 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.activities.EventDetailsActivity;
-import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.models.Event;
+import com.example.codechefeventsapp.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 import java.util.List;
 
@@ -61,7 +58,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
         } else if (isUseable(event.getEventLongDescription())) {
             holder.eventDescription.setVisibility(View.VISIBLE);
             holder.eventDescription.setText(event.getEventLongDescription());
-        }else{
+        } else {
             holder.eventDescription.setVisibility(View.GONE);
         }
         if (isUseable(event.getEventRecLink())) {
@@ -69,7 +66,7 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
             holder.eventYoutubeLink.setVisibility(View.VISIBLE);
             holder.eventYoutubeLink.setClickable(true);
             holder.eventYoutubeLink.setMovementMethod(LinkMovementMethod.getInstance());
-            String text = "<a href='"+event.getEventRecLink()+"'>Watch Session </a>";
+            String text = "<a href='" + event.getEventRecLink() + "'>Watch Session </a>";
             holder.eventYoutubeLink.setText(Html.fromHtml(text));
         } else {
             holder.ytbIcon.setVisibility(View.INVISIBLE);
@@ -84,6 +81,20 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
     @Override
     public int getItemCount() {
         return eventList.size();
+    }
+
+    public void setEventList(List<Event> eventList) {
+//        Log.d(TAG, "setEventList: past");
+        this.eventList = eventList;
+        notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
     }
 
     class PastEventViewHolder extends RecyclerView.ViewHolder {
@@ -116,19 +127,5 @@ public class PastEventAdapter extends RecyclerView.Adapter<PastEventAdapter.Past
                 }
             });
         }
-    }
-
-    public void setEventList(List<Event> eventList) {
-//        Log.d(TAG, "setEventList: past");
-        this.eventList = eventList;
-        notifyDataSetChanged();
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(Event event);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
     }
 }

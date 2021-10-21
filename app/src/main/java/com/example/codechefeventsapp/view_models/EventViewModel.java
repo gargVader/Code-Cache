@@ -9,22 +9,20 @@ import androidx.lifecycle.LiveData;
 import com.example.codechefeventsapp.data.models.Event;
 import com.example.codechefeventsapp.data.repositories.EventRepository;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 
 public class EventViewModel extends AndroidViewModel {
 
-    private LiveData<List<Event>> allEvent;
-    private EventRepository eventRepository;
+    private final LiveData<List<Event>> allEvent;
+    private final EventRepository eventRepository;
 
-    public EventViewModel(@NonNull Application application){
+    public EventViewModel(@NonNull Application application) {
         super(application);
         eventRepository = new EventRepository(application);
         allEvent = eventRepository.getAllEvent();
     }
 
-     public void insert(Event event) {
+    public void insert(Event event) {
         eventRepository.insert(event);
     }
 

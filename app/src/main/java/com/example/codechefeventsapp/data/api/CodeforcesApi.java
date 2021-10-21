@@ -1,8 +1,5 @@
 package com.example.codechefeventsapp.data.api;
 
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-
 public interface CodeforcesApi {
 
 //    @GET("user.info")
