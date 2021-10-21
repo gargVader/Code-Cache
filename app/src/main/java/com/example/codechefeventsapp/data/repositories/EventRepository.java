@@ -2,18 +2,15 @@ package com.example.codechefeventsapp.data.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.codechefeventsapp.FirebaseLayer;
 import com.example.codechefeventsapp.data.dao.EventDao;
-import com.example.codechefeventsapp.data.database.EventDatabase;
+import com.example.codechefeventsapp.data.database.AppDatabase;
 import com.example.codechefeventsapp.data.models.Event;
 
 import java.util.List;
-
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
 public class EventRepository implements FirebaseLayer.FirebaseListener {
 
@@ -24,7 +21,7 @@ public class EventRepository implements FirebaseLayer.FirebaseListener {
 
     public EventRepository(Application application) {
         this.application = application;
-        eventDao = EventDatabase.getInstance(application).getEventDao();
+        eventDao = AppDatabase.getInstance(application).getEventDao();
         allEvent = eventDao.getAllEvents();
         firebaseLayer = FirebaseLayer.getInstance();
         firebaseLayer.setFirebaseListener(this);

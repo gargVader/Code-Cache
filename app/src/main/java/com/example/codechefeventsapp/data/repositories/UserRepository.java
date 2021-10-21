@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.codechefeventsapp.data.Utils;
 import com.example.codechefeventsapp.data.dao.UserDao;
-import com.example.codechefeventsapp.data.database.UserDatabase;
+import com.example.codechefeventsapp.data.database.AppDatabase;
 import com.example.codechefeventsapp.data.models.User;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class UserRepository {
 
 
     public UserRepository(Application application){
-        UserDatabase database = UserDatabase.getInstance(application);
+        AppDatabase database = AppDatabase.getInstance(application);
         userDao = database.getUserDao();
         String email = Utils.Constants.userEmail;
         user = userDao.getUser(email);

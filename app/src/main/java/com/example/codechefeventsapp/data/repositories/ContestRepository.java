@@ -2,13 +2,12 @@ package com.example.codechefeventsapp.data.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.example.codechefeventsapp.data.api.ContestApi;
 import com.example.codechefeventsapp.data.dao.ContestDao;
-import com.example.codechefeventsapp.data.database.ContestDatabase;
+import com.example.codechefeventsapp.data.database.AppDatabase;
 import com.example.codechefeventsapp.data.models.Contest;
 
 import java.util.ArrayList;
@@ -20,8 +19,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.codechefeventsapp.activities.MainActivity.TAG;
-
 
 public class ContestRepository {
 
@@ -30,7 +27,7 @@ public class ContestRepository {
     private LiveData<List<Contest>> allContest;
 
     public ContestRepository(Application application) {
-        contestDao = ContestDatabase.getInstance(application).getContestDao();
+        contestDao = AppDatabase.getInstance(application).getContestDao();
         allContest = contestDao.getAllContest();
     }
 
