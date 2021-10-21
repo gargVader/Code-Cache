@@ -39,6 +39,7 @@ public class FirebaseLayer {
     private CollectionReference eventRegCollection = db.collection(EVENT_REG_COLLECTION_ID);
     private static FirebaseLayer instance;
     private FirebaseListener firebaseListener;
+    private FirebaseRegistrationListener firebaseRegistrationListener;
 
     public static FirebaseLayer getInstance() {
         if (instance == null) {
@@ -133,7 +134,8 @@ public class FirebaseLayer {
                         eventRegCollection.document(eventId).set(eventRegMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Log.d(TAG, "onSuccess: registered");
+                                Log.d(TAG, "onSuccess: Registered");
+                                firebaseRegistrationListener.onRegistrationSuccess();
                             }
                         });
                     }
@@ -142,6 +144,9 @@ public class FirebaseLayer {
 
     }
 
+    public void setFirebaseRegistrationListener(FirebaseRegistrationListener firebaseRegistrationListener) {
+        this.firebaseRegistrationListener = firebaseRegistrationListener;
+    }
 
     public interface FirebaseListener {
         void onGetSuccess(List<Event> eventList);
@@ -154,6 +159,12 @@ public class FirebaseLayer {
 
         void onDocumentRemoved(Event event);
     }
+
+    public interface FirebaseRegistrationListener {
+        void onRegistrationSuccess();
+        void onRegistrationFailure();
+    }
+
 
 //    public void addEvent(Event event) {
 //        eventCollection.add(event);

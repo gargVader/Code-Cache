@@ -1,14 +1,19 @@
 package com.example.codechefeventsapp.activities;
 
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 import static com.example.codechefeventsapp.fragments.ProfileFragment.RC_SIGN_IN;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.codechefeventsapp.FirebaseLayer;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.models.Event;
@@ -26,7 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.seismic.ShakeDetector;
 
-public class EventDetailsActivity extends AppCompatActivity implements ShakeDetector.Listener, FirebaseSignIn.OnFirebaseSignInListener {
+public class EventDetailsActivity extends AppCompatActivity implements ShakeDetector.Listener, FirebaseSignIn.OnFirebaseSignInListener, FirebaseLayer.FirebaseRegistrationListener {
 
     Event event;
     ShakeDetector sd = new ShakeDetector(this);
@@ -35,6 +41,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
     TextView eventTitle, eventDate, eventTime, eventDescription, eventLocation;
     ProgressBar progressBar;
     private Button registerB;
+    LottieAnimationView animationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
         eventTime = findViewById(R.id.eventTime);
         progressBar = findViewById(R.id.progress_load_photo);
         eventDescription = findViewById(R.id.eventDescription);
+        animationView = findViewById(R.id.animationView);
         event = (Event) getIntent().getSerializableExtra("EVENT");
         setViews();
 
@@ -89,7 +97,8 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
 
     @Override
     public void hearShake() {
-        vibratePhone();
+        vibratePhone(500);
+        registerForEvent();
     }
 
     @Override
@@ -110,18 +119,19 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
         sd.start(sensorManager);
     }
 
-    void vibratePhone() {
+    void vibratePhone(long millis) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         // Vibrate for 500 milliseconds
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE));
-            registerForEvent();
+            v.vibrate(VibrationEffect.createOneShot(millis, VibrationEffect.DEFAULT_AMPLITUDE));
+
         }
     }
 
     void registerForEvent() {
         String userId = getCurrentUserId();
         if (userId != null) {
+            FirebaseLayer.getInstance().setFirebaseRegistrationListener(this);
             FirebaseLayer.getInstance().registerUserForEvent(userId, event.getId());
         } else {
             firebaseSignIn.setOnFirebaseSignInListener(this);
@@ -154,6 +164,51 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
 
     @Override
     public void signInFailure() {
+
+    }
+
+    @Override
+    public void onRegistrationSuccess() {
+        Log.d(TAG, "onRegistrationSuccess: ");
+        animationView.setVisibility(View.VISIBLE);
+        animationView.addAnimatorListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                MediaPlayer mp = MediaPlayer.create(EventDetailsActivity.this, R.raw.regsiter_success_sound);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mp.start();
+                    }
+                }, 500);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        animationView.setVisibility(View.GONE);
+                    }
+                }, 1500);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+        animationView.playAnimation();
+    }
+
+    @Override
+    public void onRegistrationFailure() {
 
     }
 }
