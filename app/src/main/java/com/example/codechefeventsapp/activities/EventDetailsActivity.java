@@ -1,7 +1,7 @@
 package com.example.codechefeventsapp.activities;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
-import static com.example.codechefeventsapp.fragments.ProfileFragment.RC_SIGN_IN;
+import static com.example.codechefeventsapp.utils.Utils.RC_SIGN_IN;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -23,16 +23,17 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.codechefeventsapp.FirebaseLayer;
+import com.example.codechefeventsapp.firebase.FirebaseLayer;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.models.Event;
-import com.example.codechefeventsapp.utils.FirebaseSignIn;
+import com.example.codechefeventsapp.firebase.FirebaseSignIn;
 import com.example.codechefeventsapp.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.seismic.ShakeDetector;
 
-public class EventDetailsActivity extends AppCompatActivity implements ShakeDetector.Listener, FirebaseSignIn.OnFirebaseSignInListener, FirebaseLayer.FirebaseRegistrationListener {
+public class EventDetailsActivity extends AppCompatActivity implements ShakeDetector.Listener,
+        FirebaseSignIn.OnFirebaseSignInListener, FirebaseLayer.FirebaseRegistrationListener {
 
     Event event;
     ShakeDetector sd = new ShakeDetector(this);
@@ -167,6 +168,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
 
     }
 
+    /*************** Callbacks for FirebaseLayer *********************/
     @Override
     public void onRegistrationSuccess() {
         Log.d(TAG, "onRegistrationSuccess: ");

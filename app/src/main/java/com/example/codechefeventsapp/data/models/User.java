@@ -5,6 +5,13 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * We donot use this class as we donot have the requirement for it.
+ * FirebaseUser is used to provide us the displayName, email, photoUrl
+ * Also, creating a custom user is hectic as it involves creating a separate Collection for it in
+ * Firebase.
+ */
+@Deprecated
 @Entity(tableName = "user_table")
 public class User {
     @PrimaryKey(autoGenerate = true)

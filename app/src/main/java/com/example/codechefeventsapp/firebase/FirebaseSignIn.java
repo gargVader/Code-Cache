@@ -1,6 +1,7 @@
-package com.example.codechefeventsapp.utils;
+package com.example.codechefeventsapp.firebase;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+import static com.example.codechefeventsapp.utils.Utils.RC_SIGN_IN;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +24,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+/**
+ * Singleton class which abstracts Google Sign In using Firebase
+ */
 public class FirebaseSignIn {
 
-    public static int RC_SIGN_IN = 1;
     static FirebaseSignIn instance = null;
     private static Activity mActivity;
     private GoogleSignInClient googleSignInClient;
@@ -96,6 +99,10 @@ public class FirebaseSignIn {
 
     public void setOnFirebaseSignInListener(OnFirebaseSignInListener listener) {
         this.listener = listener;
+    }
+
+    public FirebaseUser getCurrentUser(){
+        return auth.getCurrentUser();
     }
 
     public interface OnFirebaseSignInListener {

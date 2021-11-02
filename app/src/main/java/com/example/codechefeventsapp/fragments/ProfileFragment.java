@@ -1,31 +1,49 @@
 package com.example.codechefeventsapp.fragments;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+import static com.example.codechefeventsapp.utils.Utils.KEY_CF_HANDLE;
+import static com.example.codechefeventsapp.utils.Utils.KEY_STAT_DATA_FETCHED_ONCE;
+import static com.example.codechefeventsapp.utils.Utils.RC_SIGN_IN;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.codechefeventsapp.R;
+import com.example.codechefeventsapp.data.models.cf.CfContest;
+import com.example.codechefeventsapp.firebase.FirebaseSignIn;
+import com.example.codechefeventsapp.fragments.styling.LineChartStyling;
+import com.example.codechefeventsapp.utils.Utils;
+import com.example.codechefeventsapp.view_models.UserViewModel;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -50,10 +68,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFirebaseSignInListener {
 
-    public static int RC_SIGN_IN = 1;
     ConstraintLayout signInLayout;
     ConstraintLayout profileLayout;
     SignInButton signInButton;
@@ -61,13 +80,18 @@ public class ProfileFragment extends Fragment {
     ImageView user_image;
     PieChart pieChart;
     LineChart lineChart;
-    private GoogleSignInClient googleSignInClient;
-    private FirebaseAuth auth;
-    private FirebaseUser currentUser;
+    GoogleSignInClient googleSignInClient;
+    FirebaseAuth auth;
+    FirebaseUser currentUser;
+    UserViewModel userViewModel;
+    LinearLayout handleLinearLayout;
+    TextView cfHandle;
+    String handle = "";
+    SharedPreferences sharedPreferences;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-//        Log.d(TAG, "onCreate: Profile");
         super.onCreate(savedInstanceState);
     }
 
@@ -84,21 +108,29 @@ public class ProfileFragment extends Fragment {
         lineChart = view.findViewById(R.id.ratingGraph);
         user_name = view.findViewById(R.id.user_name);
         user_image = view.findViewById(R.id.userImage);
+        cfHandle = view.findViewById(R.id.cfHandle);
+        handleLinearLayout = view.findViewById(R.id.cfLinearLayout);
 
         initGoogleSign();
-        initProfileLayout();
 
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        handle = sharedPreferences.getString(KEY_CF_HANDLE, "");
+        initProfileLayout();
+        initViewModel();
+    }
+
     /*
-    At the start of the fragment check if there exists a currentUser and updateUI accordingly
-     */
+        At the start of the fragment check if there exists a currentUser and updateUI accordingly
+         */
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = auth.getCurrentUser();
-        updateUI(currentUser);
+        updateUI(FirebaseAuth.getInstance().getCurrentUser());
     }
 
     @Override
@@ -122,11 +154,78 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    private void initViewModel() {
+        userViewModel = new ViewModelProvider(this,
+                ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()))
+                .get(UserViewModel.class);
+
+        if (!sharedPreferences.getBoolean(KEY_STAT_DATA_FETCHED_ONCE, false)) {
+            userViewModel.getUserCfDetailsAndStore(handle);
+        } else {
+            sharedPreferences.edit()
+                    .putBoolean(KEY_STAT_DATA_FETCHED_ONCE, true)
+                    .apply();
+        }
+
+        userViewModel.getAllCfUserContest().observe(getViewLifecycleOwner(), new Observer<List<CfContest>>() {
+            @Override
+            public void onChanged(List<CfContest> cfContests) {
+                Log.d(TAG, "onChanged: " + cfContests.size());
+                updateGraph(cfContests);
+            }
+        });
+    }
+
+    void updateGraph(List<CfContest> cfContests) {
+        if (cfContests == null || cfContests.size() == 0) return;
+        ArrayList<Entry> ratings = new ArrayList<>();
+
+        int maxHere = -2000000;
+        int minHere = 2000000;
+        int postion = 0;
+
+        long minTime = cfContests.get(0).getRatingUpdateTimeSeconds();
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        for (CfContest contest : cfContests) {
+            maxHere = Math.max(maxHere, contest.getNewRating());
+            minHere = Math.min(minHere, contest.getNewRating());
+            // (Float)(contest.getRatingUpdateTimeSeconds() - minTime) / 1000)
+
+            float x = Float.valueOf(contest.getRatingUpdateTimeSeconds() - minTime) / 1000;
+            float y = Float.valueOf(contest.getNewRating());
+            ratings.add(new Entry(x, y));
+        }
+        Collections.sort(ratings, new Utils.SortByEntryX());
+        LineDataSet lineDataSet = new LineDataSet(ratings, "girishgarg");
+        lineDataSet.setLineWidth(2F);
+//        lineDataSet.setColor(R.color.colorAccent);
+        lineDataSet.setDrawValues(false);
+        styleRatingGraph(maxHere, minHere);
+        lineChart.setVisibility(View.VISIBLE);
+        lineChart.invalidate();
+        dataSets.add(lineDataSet);
+        lineChart.setData(new LineData(dataSets));
+    }
+
+    void styleRatingGraph(int maxHere, int minHere) {
+        maxHere = (maxHere != -2000000) ? (maxHere + 200) : 2000;
+        minHere = (minHere != 2000000) ? Math.min(minHere - 200, 1200) : 1200;
+        lineChart.getAxisLeft().setAxisMaximum(maxHere);
+        lineChart.getAxisLeft().setAxisMinimum(minHere);
+        new LineChartStyling(lineChart, getContext()).styleIt();
+    }
+
+
     private void updateUI(FirebaseUser user) {
-        if (user == null) return;
-        signInLayout.setVisibility(View.GONE);
-        initProfileLayout();
-        profileLayout.setVisibility(View.VISIBLE);
+        if (user == null) {
+            signInLayout.setVisibility(View.VISIBLE);
+            profileLayout.setVisibility(View.GONE);
+        } else {
+            signInLayout.setVisibility(View.GONE);
+            initProfileLayout();
+            profileLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     void initGoogleSign() {
@@ -160,9 +259,68 @@ public class ProfileFragment extends Fragment {
                 .apply(RequestOptions.circleCropTransform())
                 .into(user_image);
 
-        initPieChart();
-        initRatingGraph();
+        handleLinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showHandleDialog();
+            }
+        });
+
+        if (handle != null && !handle.trim().isEmpty()) {
+            cfHandle.setText(handle);
+        } else {
+            cfHandle.setText("Your Codeforces handle");
+        }
+
     }
+
+    private void showHandleDialog() {
+        AlertDialog dialogAddURL;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dialog,
+                (ViewGroup) getView().findViewById(R.id.layoutAddUrlContainer)
+        );
+        builder.setView(view);
+        dialogAddURL = builder.create();
+
+
+        if (dialogAddURL.getWindow() != null) {
+            dialogAddURL.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+
+        EditText inputHandle = view.findViewById(R.id.inputHandle);
+        inputHandle.setText(handle);
+        inputHandle.requestFocus();
+
+        view.findViewById(R.id.textSave).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (inputHandle.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getActivity(), "Enter handle", Toast.LENGTH_SHORT).show();
+                } else {
+                    String text = inputHandle.getText().toString();
+                    if (text != null && !text.trim().isEmpty()) {
+                        handle = text;
+                        userViewModel.getUserCfDetailsAndStore(text);
+                        cfHandle.setText(handle);
+                        sharedPreferences.edit().putString(KEY_CF_HANDLE, handle).apply();
+                    } else {
+                        cfHandle.setText("Your Codeforces Handle");
+                    }
+                    dialogAddURL.dismiss();
+                }
+            }
+        });
+
+        view.findViewById(R.id.textCancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddURL.dismiss();
+            }
+        });
+        dialogAddURL.show();
+    }
+
 
     public void signIn() {
         Intent signInIntent = googleSignInClient.getSignInIntent();
@@ -189,10 +347,26 @@ public class ProfileFragment extends Fragment {
                 });
     }
 
+
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_profile, menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                logOut();
+                break;
+        }
+        return true;
+    }
+
+    void logOut() {
+        FirebaseAuth.getInstance().signOut();
+    }
+
 
     void initPieChart() {
         ArrayList<PieEntry> pieEntries = new ArrayList<>();
@@ -229,57 +403,67 @@ public class ProfileFragment extends Fragment {
     }
 
     void initRatingGraph() {
+//        updateGraph(new ArrayList<>());
 //        lineChart.setTouchEnabled(true);
-        lineChart.setPinchZoom(true);
-//        LimitLine limitLine = new LimitLine(30f, "girishgarg");
-//        limitLine.setLineColor(Color.WHITE);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-
-        ArrayList<Entry> yVals = new ArrayList<>();
-        yVals.add(new Entry(0, 60));
-        yVals.add(new Entry(1, 70));
-        yVals.add(new Entry(2, 90));
-        yVals.add(new Entry(3, 40));
-        yVals.add(new Entry(4, 30));
-
-        ArrayList<Entry> yVals2 = new ArrayList<>();
-        yVals2.add(new Entry(0, 50));
-        yVals2.add(new Entry(1, 80));
-        yVals2.add(new Entry(2, 70));
-        yVals2.add(new Entry(3, 20));
-        yVals2.add(new Entry(4, 90));
-
-        LineDataSet set1 = new LineDataSet(yVals, "Data Set 1");
-        LineDataSet set2 = new LineDataSet(yVals2, "Data Set 2");
-        set1.setFillAlpha(110);
-        set2.setFillAlpha(110);
-        // lineChart.moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration);
-        ArrayList<ILineDataSet> datasets = new ArrayList<>();
-        datasets.add(set1);
-        datasets.add(set2);
-        LineData lineData = new LineData(datasets);
-
-//        lineData.setValueTextColors();
-        lineChart.setData(lineData);
-        lineChart.getLegend().setTextColor(Color.WHITE);
-        lineChart.getLegend().setTextSize(12);
-        lineChart.setAutoScaleMinMaxEnabled(true);
-        lineChart.setBorderColor(Color.WHITE);
-        lineChart.setGridBackgroundColor(Color.YELLOW);
-        lineChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        lineChart.getLegend().setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
-
-        lineChart.getLineData().setValueTextSize(0);
-        lineChart.getXAxis().setTextColor(Color.WHITE);
-        lineChart.getXAxis().setTextSize(12);
-        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        lineChart.getAxisLeft().setTextColor(Color.WHITE);
-        //lineChart.getLegend().setYOffset(0);
-        lineChart.getAxisRight().setDrawLabels(false);
-        lineChart.getAxisRight().setTextSize(12);
-        lineChart.getDescription().setText("");
+//        lineChart.setPinchZoom(true);
+////        LimitLine limitLine = new LimitLine(30f, "girishgarg");
+////        limitLine.setLineColor(Color.WHITE);
+//        lineChart.setDragEnabled(true);
+//        lineChart.setScaleEnabled(true);
+//
+//        ArrayList<Entry> yVals = new ArrayList<>();
+//        yVals.add(new Entry(0, 60));
+//        yVals.add(new Entry(1, 70));
+//        yVals.add(new Entry(2, 90));
+//        yVals.add(new Entry(3, 40));
+//        yVals.add(new Entry(4, 30));
+//
+//        ArrayList<Entry> yVals2 = new ArrayList<>();
+//        yVals2.add(new Entry(0, 50));
+//        yVals2.add(new Entry(1, 80));
+//        yVals2.add(new Entry(2, 70));
+//        yVals2.add(new Entry(3, 20));
+//        yVals2.add(new Entry(4, 90));
+//
+//        LineDataSet set1 = new LineDataSet(yVals, "Data Set 1");
+//        LineDataSet set2 = new LineDataSet(yVals2, "Data Set 2");
+//        set1.setFillAlpha(110);
+//        set2.setFillAlpha(110);
+//        // lineChart.moveViewToAnimated(float xValue, float yValue, AxisDependency axis, long duration);
+//        ArrayList<ILineDataSet> datasets = new ArrayList<>();
+//        datasets.add(set1);
+//        datasets.add(set2);
+//        LineData lineData = new LineData(datasets);
+//
+////        lineData.setValueTextColors();
+//        lineChart.setData(lineData);
+//        lineChart.getLegend().setTextColor(Color.WHITE);
+//        lineChart.getLegend().setTextSize(12);
+//        lineChart.setAutoScaleMinMaxEnabled(true);
+//        lineChart.setBorderColor(Color.WHITE);
+//        lineChart.setGridBackgroundColor(Color.YELLOW);
+//        lineChart.getLegend().setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+//        lineChart.getLegend().setDirection(Legend.LegendDirection.LEFT_TO_RIGHT);
+//
+//        lineChart.getLineData().setValueTextSize(0);
+//        lineChart.getXAxis().setTextColor(Color.WHITE);
+//        lineChart.getXAxis().setTextSize(12);
+//        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+//        lineChart.getAxisLeft().setTextColor(Color.WHITE);
+//        //lineChart.getLegend().setYOffset(0);
+//        lineChart.getAxisRight().setDrawLabels(false);
+//        lineChart.getAxisRight().setTextSize(12);
+//        lineChart.getDescription().setText("");
 
     }
 
+    @Override
+    public void signInSuccess(FirebaseUser currentUser) {
+        updateUI(currentUser);
+    }
+
+    @Override
+    public void signInFailure() {
+
+    }
 }

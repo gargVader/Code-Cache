@@ -79,7 +79,7 @@ public class HomeFragment extends Fragment {
                 .get(EventViewModel.class);
 
         eventViewModel.getEventsFromFirebaseAndStore();
-        eventViewModel.getAllContests().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
+        eventViewModel.getAllEvents().observe(getViewLifecycleOwner(), new Observer<List<Event>>() {
             @Override
             public void onChanged(List<Event> eventList) {
 //                Utils.sort(eventList);

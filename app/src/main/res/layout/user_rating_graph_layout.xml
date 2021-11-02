@@ -10,10 +10,10 @@
         style="@style/textStyleRegular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/_10sdp"
-        android:drawableStart="@drawable/rating_graph_icon"
-        android:paddingTop="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_10sdp"
+        android:drawableStart="@drawable/rating_graph_icon"
+        android:drawablePadding="@dimen/_10sdp"
+        android:paddingTop="@dimen/_4sdp"
         android:text="Rating Graph"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,14 +22,12 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/ratingGraph"
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/_4sdp"
         android:layout_height="@dimen/_220sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:layout_marginBottom="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text"
-        android:layout_marginHorizontal="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/title_text" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

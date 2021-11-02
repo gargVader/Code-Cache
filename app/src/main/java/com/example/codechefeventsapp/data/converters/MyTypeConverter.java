@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp.data;
+package com.example.codechefeventsapp.data.converters;
 
 import androidx.room.TypeConverter;
 

@@ -5,7 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.codechefeventsapp.data.MyTypeConverter;
+import com.example.codechefeventsapp.data.converters.MyTypeConverter;
 import com.google.firebase.firestore.Exclude;
 import com.google.gson.annotations.SerializedName;
 
@@ -33,9 +33,6 @@ public class Event implements Serializable {
     String eventLongDescription;
     @SerializedName("eventImageUrl")
     String eventImageUrl;
-    @TypeConverters(MyTypeConverter.class)
-    @SerializedName("eventAttendees")
-    Set<User> eventAttendees;
     @PrimaryKey(autoGenerate = false)
     @NonNull
     private String id;
@@ -131,30 +128,5 @@ public class Event implements Serializable {
 
     public void setEventLongDescription(String eventLongDescription) {
         this.eventLongDescription = eventLongDescription;
-    }
-
-    public Set<User> getEventAttendees() {
-        return eventAttendees;
-    }
-
-    public void setEventAttendees(Set<User> eventAttendees) {
-        this.eventAttendees = eventAttendees;
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id='" + id + '\'' +
-                ", eventTitle='" + eventTitle + '\'' +
-                ", eventLocation='" + eventLocation + '\'' +
-                ", eventStartTimeStamp='" + eventStartTimeStamp + '\'' +
-                ", eventEndTimeStamp='" + eventEndTimeStamp + '\'' +
-                ", eventJoinLink='" + eventJoinLink + '\'' +
-                ", eventRecLink='" + eventRecLink + '\'' +
-                ", eventShortDescription='" + eventShortDescription + '\'' +
-                ", eventLongDescription='" + eventLongDescription + '\'' +
-                ", eventImageUrl='" + eventImageUrl + '\'' +
-                ", eventAttendees=" + eventAttendees +
-                '}';
     }
 }

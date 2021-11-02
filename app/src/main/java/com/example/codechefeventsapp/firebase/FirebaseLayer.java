@@ -1,4 +1,4 @@
-package com.example.codechefeventsapp;
+package com.example.codechefeventsapp.firebase;
 
 import static com.example.codechefeventsapp.activities.MainActivity.TAG;
 
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Singleton Class for all Firebase Operations
+ * Singleton Class for all Firebase Operations related to Firestore
  */
 public class FirebaseLayer {
 

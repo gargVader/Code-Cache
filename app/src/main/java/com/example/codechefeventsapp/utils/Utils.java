@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.example.codechefeventsapp.data.models.Event;
+import com.github.mikephil.charting.data.Entry;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,6 +35,13 @@ public class Utils {
 
     public static String[] vibrantLightColorList = {"#ffeead", "#93cfb3", "#fd7a7a", "#faca5f",
             "#1ba798", "#6aa9ae", "#ffbf27", "#d93947"};
+
+    // Request Codes
+    public static int RC_SIGN_IN = 1;
+
+    // Shared Pref Keys
+    public static final String KEY_STAT_DATA_FETCHED_ONCE = "stat_data_fetched_once";
+    public static final String KEY_CF_HANDLE = "cf_handle";
 
     public static String getDate(String eventTimeStamp) {
         Date date = new Date(Long.parseLong(eventTimeStamp) * 1000);
@@ -207,11 +215,6 @@ public class Utils {
                 .into(imageView);
     }
 
-    public static class Constants {
-        public static String userEmail = "xyz@gmail.com";
-        //public static GoogleSignInAccount account;
-    }
-
     static class SortByTimeStamp implements Comparator<Event> {
 
         boolean reverse = false;
@@ -230,6 +233,14 @@ public class Utils {
             } else {
                 return e1.getEventStartTimeStamp().compareTo(e2.getEventStartTimeStamp());
             }
+        }
+    }
+
+    public static class SortByEntryX implements Comparator<Entry> {
+
+        @Override
+        public int compare(Entry o1, Entry o2) {
+            return Float.compare(o1.getX(), o2.getX());
         }
     }
 

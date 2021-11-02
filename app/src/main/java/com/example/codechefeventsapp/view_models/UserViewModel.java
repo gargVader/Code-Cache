@@ -6,7 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.data.models.User;
+import com.example.codechefeventsapp.data.models.cf.CfContest;
+import com.example.codechefeventsapp.data.models.cf.CfSubmission;
 import com.example.codechefeventsapp.data.repositories.UserRepository;
 
 import org.jetbrains.annotations.NotNull;
@@ -14,39 +15,28 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class UserViewModel extends AndroidViewModel {
-    private final LiveData<List<User>> user;
-    private final LiveData<List<User>> allUsers;
+
+    private final LiveData<List<CfContest>> cfUserContests;
+    private final LiveData<List<CfSubmission>> cfUserSubmissions;
     private final UserRepository repository;
 
     public UserViewModel(@NonNull @NotNull Application application) {
         super(application);
         repository = new UserRepository(application);
-        user = repository.getUser();
-        allUsers = repository.getAllUsers();
+        cfUserContests = repository.getAllCfUserContest();
+        cfUserSubmissions = repository.getAllCfUserSubmissions();
     }
 
-    public void insert(User user) {
-        repository.insert(user);
+    public LiveData<List<CfContest>> getAllCfUserContest(){
+        return cfUserContests;
     }
 
-    public void update(User user) {
-        repository.update(user);
+    public LiveData<List<CfSubmission>> getAllCfUserSubmissions(){
+        return cfUserSubmissions;
     }
 
-    public void delete(User user) {
-        repository.delete(user);
+    public void getUserCfDetailsAndStore(String handle) {
+        repository.makeCFAPICallAndStore(handle);
     }
 
-    public void deleteAll() {
-        repository.deleteAll();
-    }
-
-
-    public LiveData<List<User>> getUser() {
-        return user;
-    }
-
-    public LiveData<List<User>> getAllUsers() {
-        return allUsers;
-    }
 }

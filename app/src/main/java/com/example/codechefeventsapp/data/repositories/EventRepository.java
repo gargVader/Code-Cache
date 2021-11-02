@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.codechefeventsapp.FirebaseLayer;
+import com.example.codechefeventsapp.firebase.FirebaseLayer;
 import com.example.codechefeventsapp.data.dao.EventDao;
 import com.example.codechefeventsapp.data.database.AppDatabase;
 import com.example.codechefeventsapp.data.models.Event;
