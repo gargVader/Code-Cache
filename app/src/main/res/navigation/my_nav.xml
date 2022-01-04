@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.codechefeventsapp.fragments.HomeFragment"
-        android:label="Codechef IEMK"
+        android:label="Code Cache"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/contestFragment"

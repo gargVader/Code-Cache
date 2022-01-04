@@ -39,6 +39,7 @@ import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.models.cf.CfContest;
 import com.example.codechefeventsapp.firebase.FirebaseSignIn;
 import com.example.codechefeventsapp.fragments.styling.LineChartStyling;
+import com.example.codechefeventsapp.utils.SharedPref;
 import com.example.codechefeventsapp.utils.Utils;
 import com.example.codechefeventsapp.view_models.UserViewModel;
 import com.github.mikephil.charting.charts.LineChart;
@@ -67,6 +68,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -87,8 +90,6 @@ public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFireba
     LinearLayout handleLinearLayout;
     TextView cfHandle;
     String handle = "";
-    SharedPreferences sharedPreferences;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,8 +119,7 @@ public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFireba
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
-        handle = sharedPreferences.getString(KEY_CF_HANDLE, "");
+        handle = SharedPref.getInstance(getActivity()).getString(KEY_CF_HANDLE, "");
         initProfileLayout();
         initViewModel();
     }
@@ -159,12 +159,9 @@ public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFireba
                 ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()))
                 .get(UserViewModel.class);
 
-        if (!sharedPreferences.getBoolean(KEY_STAT_DATA_FETCHED_ONCE, false)) {
+        if (!SharedPref.getInstance(getActivity()).getBoolean(KEY_STAT_DATA_FETCHED_ONCE, false)) {
             userViewModel.getUserCfDetailsAndStore(handle);
-        } else {
-            sharedPreferences.edit()
-                    .putBoolean(KEY_STAT_DATA_FETCHED_ONCE, true)
-                    .apply();
+            SharedPref.getInstance(getActivity()).putBoolean(KEY_STAT_DATA_FETCHED_ONCE, true);
         }
 
         userViewModel.getAllCfUserContest().observe(getViewLifecycleOwner(), new Observer<List<CfContest>>() {
@@ -177,6 +174,8 @@ public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFireba
     }
 
     void updateGraph(List<CfContest> cfContests) {
+        ((TextView) getView().findViewById(R.id.problems_num_codechef)).setText("45");
+        ((TextView) getView().findViewById(R.id.problems_num_codeforces)).setText("543");
         if (cfContests == null || cfContests.size() == 0) return;
         ArrayList<Entry> ratings = new ArrayList<>();
 
@@ -303,7 +302,7 @@ public class ProfileFragment extends Fragment implements FirebaseSignIn.OnFireba
                         handle = text;
                         userViewModel.getUserCfDetailsAndStore(text);
                         cfHandle.setText(handle);
-                        sharedPreferences.edit().putString(KEY_CF_HANDLE, handle).apply();
+                        SharedPref.getInstance(getActivity()).putString(KEY_CF_HANDLE, handle);
                     } else {
                         cfHandle.setText("Your Codeforces Handle");
                     }

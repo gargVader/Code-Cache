@@ -26,12 +26,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alan.alansdk.button.AlanButton;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.adapters.ContestAdapter;
 import com.example.codechefeventsapp.data.models.Contest;
 import com.example.codechefeventsapp.view_models.ContestViewModel;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,8 @@ public class ContestFragment extends Fragment {
     SharedPreferences.Editor editor;
     boolean[] isSiteSelected;
     ProgressBar progressBar;
+
+    AlanButton alanButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,6 +81,7 @@ public class ContestFragment extends Fragment {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(contest.getContestUrl())));
             }
         });
+
     }
 
     private void initViewModel() {

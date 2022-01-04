@@ -1,9 +1,12 @@
 package com.example.codechefeventsapp.utils;
 
+import static com.example.codechefeventsapp.activities.MainActivity.TAG;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -95,26 +98,28 @@ public class Utils {
         Date date = null;
         try {
             date = inputFormat.parse(time);
+            String formattedDate = outputFormat.format(date);
+            return formattedDate;
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        String formattedDate = outputFormat.format(date);
-        return formattedDate;
+        return time;
 
     }
 
     public static boolean isContestLive(String startTime, String endTime) {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        Date start = null, end = null;
-        try {
-            start = inputFormat.parse(startTime);
-            end = inputFormat.parse(endTime);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Date now = new Date();
-
-        return now.after(start) && now.before(end);
+        return false;
+//        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//        Date start = null, end = null;
+//        try {
+//            start = inputFormat.parse(startTime);
+//            end = inputFormat.parse(endTime);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        Date now = new Date();
+//
+//        return now.after(start) && now.before(end);
     }
 
     private static String getDaysAgo(String secondsString) {

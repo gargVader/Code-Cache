@@ -12,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Set;
 
+
 @Entity(tableName = "event_table")
 public class Event implements Serializable {
 
@@ -22,9 +23,9 @@ public class Event implements Serializable {
     @SerializedName("eventStartTimeStamp")
     String eventStartTimeStamp;
     @SerializedName("eventEndTimeStamp")
-    String eventEndTimeStamp;
+    String eventEndTimeStamp; // Not used
     @SerializedName("eventJoinLink")
-    String eventJoinLink;
+    String eventJoinLink; // Not used
     @SerializedName("eventRecLink")
     String eventRecLink;
     @SerializedName("eventShortDescription")

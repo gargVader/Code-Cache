@@ -84,4 +84,7 @@ dependencies {
     // Lottie Files
     implementation "com.airbnb.android:lottie:3.4.0"
 
+    // Alan
+    implementation 'app.alan:sdk:4.12.0'
+
 }

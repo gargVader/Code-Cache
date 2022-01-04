@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.example.codechefeventsapp.data.models.Event;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -122,6 +123,7 @@ public class FirebaseLayer {
     }
 
     public void registerUserForEvent(String userId, String eventId) {
+        // Get the document
         eventRegCollection.document(eventId).get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
@@ -131,11 +133,12 @@ public class FirebaseLayer {
                             eventRegMap = new HashMap<>();
                         }
                         eventRegMap.put(userId, true);
+                        // set the data in document
                         eventRegCollection.document(eventId).set(eventRegMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Log.d(TAG, "onSuccess: Registered");
-                                firebaseRegistrationListener.onRegistrationSuccess();
+                                firebaseRegistrationListener.onRegistrationSuccess(eventId);
                             }
                         });
                     }
@@ -161,7 +164,7 @@ public class FirebaseLayer {
     }
 
     public interface FirebaseRegistrationListener {
-        void onRegistrationSuccess();
+        void onRegistrationSuccess(String eventId);
         void onRegistrationFailure();
     }
 

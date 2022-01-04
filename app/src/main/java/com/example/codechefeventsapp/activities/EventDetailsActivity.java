@@ -27,6 +27,7 @@ import com.example.codechefeventsapp.firebase.FirebaseLayer;
 import com.example.codechefeventsapp.R;
 import com.example.codechefeventsapp.data.models.Event;
 import com.example.codechefeventsapp.firebase.FirebaseSignIn;
+import com.example.codechefeventsapp.utils.SharedPref;
 import com.example.codechefeventsapp.utils.Utils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -170,7 +171,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
 
     /*************** Callbacks for FirebaseLayer *********************/
     @Override
-    public void onRegistrationSuccess() {
+    public void onRegistrationSuccess(String eventId) {
         Log.d(TAG, "onRegistrationSuccess: ");
         animationView.setVisibility(View.VISIBLE);
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
@@ -206,6 +207,7 @@ public class EventDetailsActivity extends AppCompatActivity implements ShakeDete
             }
         });
 
+        SharedPref.getInstance(this).putBoolean(eventId, true);
         animationView.playAnimation();
     }
 

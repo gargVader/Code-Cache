@@ -30,5 +30,12 @@ public class SharedPref {
         return sharedPreferences.getString(key, def);
     }
 
+    public void putBoolean(String key, boolean value){
+        sharedPreferences.edit().putBoolean(key, value).apply();
+    }
+    public void putString(String key, String value){
+        sharedPreferences.edit().putString(key, value).apply();
+    }
+
 
 }
